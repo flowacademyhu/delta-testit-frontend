@@ -1,0 +1,14 @@
+<button mat-button>Home</button>
+<button mat-button [matMenuTriggerFor]="users">Users</button>
+<mat-menu #users="matMenu">
+  <button mat-menu-item>New User</button>
+  <button mat-menu-item>Admins</button>
+  <button mat-menu-item>Mentors</button>
+  <button mat-menu-item>Students</button>
+</mat-menu>
+<button mat-button [matMenuTriggerFor]="tests">Tests</button>
+<mat-menu #tests="matMenu">
+  <button mat-menu-item>Q&A</button>
+  <button mat-menu-item>New Test</button>
+  <button mat-menu-item>Results</button>
+</mat-menu>
