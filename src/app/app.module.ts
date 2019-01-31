@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatMenuModule, MatToolbarModule, MatIconModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +19,7 @@ import { QuestionListComponent } from './questions/question-list/question-list.c
 import { ResultComponent } from './results/result/result.component';
 import { ResultEditCreateComponent } from './results/result-edit-create/result-edit-create.component';
 import { ResultListComponent } from './results/result-list/result-list.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -34,11 +37,17 @@ import { ResultListComponent } from './results/result-list/result-list.component
     QuestionListComponent,
     ResultComponent,
     ResultEditCreateComponent,
-    ResultListComponent
+    ResultListComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
