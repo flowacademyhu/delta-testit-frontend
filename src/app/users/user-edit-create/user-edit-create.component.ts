@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserModel } from '../../models/user.model';
 
 @Component({
   selector: 'app-user-edit-create',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-edit-create.component.scss']
 })
 export class UserEditCreateComponent implements OnInit {
+
+  public user: UserModel;
 
   constructor() { }
 
