@@ -63,6 +63,8 @@ import { HeaderComponent } from './header/header.component';
     MatSelectModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, LandingComponent],
+  entryComponents: [LandingComponent]
+    
 })
 export class AppModule { }
