@@ -1,7 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatMenuModule, MatToolbarModule, MatIconModule } from '@angular/material';
+import { MatButtonModule,
+  MatMenuModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +28,7 @@ import { ResultComponent } from './results/result/result.component';
 import { ResultEditCreateComponent } from './results/result-edit-create/result-edit-create.component';
 import { ResultListComponent } from './results/result-list/result-list.component';
 import { HeaderComponent } from './header/header.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -42,14 +51,22 @@ import { HeaderComponent } from './header/header.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [UserService],
+  bootstrap: [AppComponent],
+  entryComponents: [AppComponent]
+
 })
 export class AppModule { }
