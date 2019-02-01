@@ -14,16 +14,16 @@ const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'users/list', component: UserListComponent },
   { path: 'users/edit', component: UserEditCreateComponent },
-  { path: 'users/edit/:id', component: UserEditCreateComponent },
+  { path: 'edit/:id', component: UserEditCreateComponent },
   { path: 'questions/list', component: QuestionListComponent },
   { path: 'questions/edit', component: QuestionEditCreateComponent },
-  { path: 'questions/edit/:id', component: QuestionEditCreateComponent },
+  { path: 'edit/:id', component: QuestionEditCreateComponent },
   { path: 'tests/list', component: TestListComponent },
-  { path: 'tests/edit', component: TestEditCreateComponent },
-  { path: 'tests/edit/:id', component: TestEditCreateComponent },
+  { path: 'edit', component: TestEditCreateComponent },
+  { path: 'edit/:id', component: TestEditCreateComponent },
   { path: 'results/list', component: ResultListComponent },
-  { path: 'results/edit', component: ResultEditCreateComponent },
-  { path: 'results/edit/:id', component: ResultEditCreateComponent }
+  { path: 'edit', component: ResultEditCreateComponent },
+  { path: 'edit/:id', component: ResultEditCreateComponent }
 ];
 
 @NgModule({
