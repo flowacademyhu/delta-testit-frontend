@@ -26,14 +26,14 @@ export class QuestionEditCreateComponent implements OnInit {
     if (!this.isCreateMode()) {
       this.questionService.editQuestion(this.question).subscribe((result) => {
         alert('Mentés sikeres');
-        this.router.navigate(['list']);
+        this.router.navigate(['questions/list']);
       }, (error) => {
         console.log('Error', error);
       });
     } else {
       this.questionService.createQuestion(this.question).subscribe((result) => {
         alert('Mentés sikeres');
-        this.router.navigate(['list']);
+        this.router.navigate(['questions/list']);
       }, (error) => {
         console.log('Error', error);
       });
@@ -42,7 +42,7 @@ export class QuestionEditCreateComponent implements OnInit {
 
   delete() {
     this.questionService.deleteQuestion(this.question.id).subscribe((result) => {
-      this.router.navigate(['list']);
+      this.router.navigate(['questions/list']);
     }, error => console.log('Error', error));
   }
 

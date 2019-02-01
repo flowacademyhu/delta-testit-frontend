@@ -34,7 +34,7 @@ export class UserComponent implements OnInit {
 
   delete() {
     this.userService.deleteUser(this.user.id).subscribe((result) => {
-      this.userDelete.next(this.user);
+      this.userDelete.next(Object.assign({}, this.user));
     }, error => console.log('Error', error));
   }
 

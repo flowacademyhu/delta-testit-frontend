@@ -27,7 +27,7 @@ export class UserService {
   }
 
   deleteUser(id: number) {
-    return this.httpClient.delete('http://localhost:8080/user/' + id);
+    return this.httpClient.delete('http://localhost:8080/users/' + id);
   }
 }
 
