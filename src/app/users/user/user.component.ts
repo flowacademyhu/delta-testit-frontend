@@ -22,6 +22,11 @@ export class UserComponent implements OnInit {
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/edit_icon.svg')
     );
 
+    this.matIconRegistry.addSvgIcon(
+      'delete',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/delete_icon.svg')
+    );
+
   }
 
   ngOnInit() {
