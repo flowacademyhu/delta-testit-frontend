@@ -9,7 +9,8 @@ import { MatButtonModule,
   MatIconModule,
   MatFormFieldModule,
   MatInputModule,
-  MatSelectModule } from '@angular/material';
+  MatSelectModule,
+  MatCheckboxModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -53,6 +54,7 @@ import { UserService } from './services/user.service';
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -62,7 +64,7 @@ import { UserService } from './services/user.service';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    ReactiveFormsModule
+    MatCheckboxModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent],

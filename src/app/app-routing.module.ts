@@ -12,12 +12,12 @@ import { ResultEditCreateComponent } from './results/result-edit-create/result-e
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
-  { path: 'list', component: UserListComponent },
+  { path: 'users/list', component: UserListComponent },
   { path: 'edit', component: UserEditCreateComponent },
   { path: 'edit/:id', component: UserEditCreateComponent },
   { path: 'questions/list', component: QuestionListComponent },
-  { path: 'questions/edit', component: QuestionEditCreateComponent },
-  { path: 'questions/edit/:id', component: QuestionEditCreateComponent },
+  { path: 'edit', component: QuestionEditCreateComponent },
+  { path: 'edit/:id', component: QuestionEditCreateComponent },
   { path: 'tests/list', component: TestListComponent },
   { path: 'tests/edit', component: TestEditCreateComponent },
   { path: 'tests/edit/:id', component: TestEditCreateComponent },
