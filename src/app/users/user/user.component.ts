@@ -16,7 +16,7 @@ export class UserComponent implements OnInit {
 
   @Output() userDelete = new EventEmitter<UserModel>();
 
-  constructor(private userService: UserService, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) { 
+  constructor(private userService: UserService, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
     this.matIconRegistry.addSvgIcon(
       'edit',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/edit_icon.svg')
