@@ -22,6 +22,11 @@ export class UserComponent implements OnInit {
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/edit_icon.svg')
     );
 
+    this.matIconRegistry.addSvgIcon(
+      'delete',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/delete_icon.svg')
+    );
+
   }
 
   ngOnInit() {
@@ -29,7 +34,7 @@ export class UserComponent implements OnInit {
 
   delete() {
     this.userService.deleteUser(this.user.id).subscribe((result) => {
-      this.userDelete.next(this.user);
+      this.userDelete.next(Object.assign({}, this.user));
     }, error => console.log('Error', error));
   }
 

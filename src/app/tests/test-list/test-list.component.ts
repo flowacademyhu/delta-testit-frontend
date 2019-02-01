@@ -16,7 +16,7 @@ export class TestListComponent implements OnInit {
   ngOnInit() {
     this.testService.getAll().subscribe(tests => {
       this.tests = tests;
-      console.log('Users: ' + tests);
+      console.log('Tests: ' + tests);
     });
   }
 

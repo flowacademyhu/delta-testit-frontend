@@ -1,7 +1,7 @@
 <mat-toolbar class="navbar">
   <mat-toolbar-row>
-    <span class="navbar-icon navbar-font"><mat-icon svgIcon="home"></mat-icon></span>
-    <span><button mat-button [matMenuTriggerFor]="users" class="navbar-font">Users</button>
+    <span class="navbar-icon navbar-font"><mat-icon routerLink="/" svgIcon="home"></mat-icon></span>
+    <span><button mat-button [matMenuTriggerFor]="users"  class="navbar-font">Users</button>
       <mat-menu #users="matMenu">
         <button routerLink="/users/edit" mat-menu-item>New User</button>
         <button mat-menu-item>Admins</button>
@@ -11,7 +11,9 @@
       <span><button mat-button [matMenuTriggerFor]="tests" class="navbar-font">Tests</button>
         <mat-menu #tests="matMenu">
           <button mat-menu-item>Q&A</button>
-          <button routerLink="tests/edit" mat-menu-item>New Test</button>
+          <button routerLink="/tests/edit" mat-menu-item>New Test</button>
+          <button routerLink="/questions/list" mat-menu-item>Q&A</button>
+          <button mat-menu-item>New Test</button>
           <button mat-menu-item>Results</button>
         </mat-menu></span>
     <span class="example-spacer"></span>

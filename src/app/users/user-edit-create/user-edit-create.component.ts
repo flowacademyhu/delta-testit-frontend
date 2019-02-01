@@ -26,14 +26,14 @@ export class UserEditCreateComponent implements OnInit {
     if (!this.isCreateMode()) {
       this.userService.editUser(this.user).subscribe((result) => {
         alert('Mentés sikeres');
-        this.router.navigate(['list']);
+        this.router.navigate(['users/list']);
       }, (error) => {
         console.log('Error', error);
       });
     } else {
       this.userService.createUser(this.user).subscribe((result) => {
         alert('Mentés sikeres');
-        this.router.navigate(['list']);
+        this.router.navigate(['users/list']);
       }, (error) => {
         console.log('Error', error);
       });
@@ -42,7 +42,7 @@ export class UserEditCreateComponent implements OnInit {
 
   delete() {
     this.userService.deleteUser(this.user.id).subscribe((result) => {
-      this.router.navigate(['list']);
+      this.router.navigate(['users/list']);
     }, error => console.log('Error', error));
   }
 
