@@ -6,8 +6,9 @@ import { UserModel } from '../../models/user.model';
   templateUrl: './user-edit-create.component.html',
   styleUrls: ['./user-edit-create.component.scss']
 })
-export class UserEditCreateComponent implements OnInit {
 
+export class UserEditCreateComponent implements OnInit {
+  
   public user: UserModel;
 
   constructor() { }
