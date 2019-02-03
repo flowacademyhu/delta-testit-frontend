@@ -23,7 +23,7 @@ export class TestService {
   }
 
   editTest(test: TestModel): Observable<any> {
-    return this.httpClient.put('http://localhost:8080/tests' + test.id, test);
+    return this.httpClient.put('http://localhost:8080/tests/' + test.id, test);
   }
 
   deleteTest(id: number) {
