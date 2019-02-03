@@ -1,3 +1,13 @@
-<p>
-  test-edit-create works!
-</p>
+<div class="container">
+  <mat-form-field>
+    <input type="text" id="testName" name="testName" matInput placeholder="Testname" >
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" id="to" name="to" matInput placeholder="To: group or student" >
+  </mat-form-field>
+  
+</div>
+<button mat-flat-button color="primary">Add question</button>
+
+<button mat-flat-button (click)="save()">Save</button>

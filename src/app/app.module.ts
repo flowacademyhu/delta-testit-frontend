@@ -9,7 +9,8 @@ import { MatButtonModule,
   MatIconModule,
   MatFormFieldModule,
   MatInputModule,
-  MatSelectModule } from '@angular/material';
+  MatSelectModule,
+  MatCheckboxModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { ResultComponent } from './results/result/result.component';
 import { ResultEditCreateComponent } from './results/result-edit-create/result-edit-create.component';
 import { ResultListComponent } from './results/result-list/result-list.component';
 import { HeaderComponent } from './header/header.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { HeaderComponent } from './header/header.component';
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -61,11 +64,11 @@ import { HeaderComponent } from './header/header.component';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    ReactiveFormsModule
+    MatCheckboxModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent],
-  //entryComponents: [AppComponent]
+  entryComponents: [AppComponent]
 
 })
 export class AppModule { }
