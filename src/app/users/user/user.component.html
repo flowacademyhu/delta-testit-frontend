@@ -1,3 +1,6 @@
 <p>
-    {{ user.lastName }} {{ user.firstName }} - <a [routerLink]="'/users/edit/' + user.id"><mat-icon svgIcon="edit"></mat-icon></a><mat-icon (click)="delete()" svgIcon="delete"></mat-icon>
+    {{ user.lastName }} {{ user.firstName }} -
+    <a [routerLink]="'user/users/edit/' + user.id">
+        <mat-icon svgIcon="edit"></mat-icon></a>
+        <mat-icon (click)="delete()" svgIcon="delete"></mat-icon>
 </p>

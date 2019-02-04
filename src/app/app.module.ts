@@ -1,3 +1,4 @@
+import { CustomMaterialModule } from './material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -64,7 +65,8 @@ import { UserService } from './services/user.service';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    CustomMaterialModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent],

@@ -9,25 +9,28 @@ import { TestListComponent } from './tests/test-list/test-list.component';
 import { TestEditCreateComponent } from './tests/test-edit-create/test-edit-create.component';
 import { ResultListComponent } from './results/result-list/result-list.component';
 import { ResultEditCreateComponent } from './results/result-edit-create/result-edit-create.component';
+import { UserComponent } from './users/user/user.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
-  { path: 'users/list', component: UserListComponent },
-  { path: 'users/edit', component: UserEditCreateComponent },
-  { path: 'users/edit/:id', component: UserEditCreateComponent },
-  { path: 'questions/list', component: QuestionListComponent },
-  { path: 'questions/edit', component: QuestionEditCreateComponent },
-  { path: 'questions/edit/:id', component: QuestionEditCreateComponent },
-  { path: 'tests/list', component: TestListComponent },
-  { path: 'tests/edit', component: TestEditCreateComponent },
-  { path: 'tests/edit/:id', component: TestEditCreateComponent },
-  { path: 'results/list', component: ResultListComponent },
-  { path: 'results/edit', component: ResultEditCreateComponent },
-  { path: 'results/edit/:id', component: ResultEditCreateComponent }
+  { path: 'user', component: UserComponent },
+  { path: 'user/users/list', component: UserListComponent },
+  { path: 'user/users/edit', component: UserEditCreateComponent },
+  { path: 'user/users/edit/:id', component: UserEditCreateComponent },
+  { path: 'user/questions/list', component: QuestionListComponent },
+  { path: 'user/questions/edit', component: QuestionEditCreateComponent },
+  { path: 'user/questions/edit/:id', component: QuestionEditCreateComponent },
+  { path: 'user/tests/list', component: TestListComponent },
+  { path: 'user/tests/edit', component: TestEditCreateComponent },
+  { path: 'user/tests/edit/:id', component: TestEditCreateComponent },
+  { path: 'user/results/list', component: ResultListComponent },
+  { path: 'user/results/edit', component: ResultEditCreateComponent },
+  { path: 'user/results/edit/:id', component: ResultEditCreateComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }
