@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { QuestionModel } from 'src/app/models/question.model';
 import { QuestionService } from 'src/app/services/question.service';
+import { AnswerModel } from 'src/app/models/answer.model';
+import { SubjectModel } from 'src/app/models/subject.model';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -12,20 +14,36 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class QuestionComponent implements OnInit {
   @Input() question: QuestionModel;
 
+  @Input() answer: AnswerModel;
+
+  @Input() subject: SubjectModel;
+
   @Output() questionDelete = new EventEmitter<QuestionModel>();
-  constructor(private userService: QuestionService, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+
+  public dataSource;
+  displayedColumns: string[] = ['id', 'subjectid', 'text', 'type', 'value', 'status', 'edit'];
+
+  constructor(private questionService: QuestionService, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
     this.matIconRegistry.addSvgIcon(
       'edit',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/edit_icon.svg')
     );
 
+    this.matIconRegistry.addSvgIcon(
+      'delete',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/delete_icon.svg')
+    );
+
   }
 
   ngOnInit() {
+    this.questionService.getAll().subscribe(questions => {
+      this.dataSource = questions;
+    });
   }
 
   delete() {
-    this.userService.deleteQuestion(this.question.id).subscribe((result) => {
+    this.questionService.deleteQuestion(this.question.id).subscribe((result) => {
       this.questionDelete.next(this.question);
     }, error => console.log('Error', error));
   }

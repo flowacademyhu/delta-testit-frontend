@@ -16,6 +16,10 @@ export class UserComponent implements OnInit {
 
   @Output() userDelete = new EventEmitter<UserModel>();
 
+  public dataSource;
+
+  displayedColumns: string[] = ['id', 'lastName', 'firstName', 'email', 'role', 'edit'];
+
   constructor(private userService: UserService, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
     this.matIconRegistry.addSvgIcon(
       'edit',
@@ -30,6 +34,9 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userService.getAll().subscribe(users => {
+      this.dataSource = users;
+    });
   }
 
   delete() {

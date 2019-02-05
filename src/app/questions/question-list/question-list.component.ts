@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionModel } from 'src/app/models/question.model';
 import { QuestionService } from 'src/app/services/question.service';
+import { AnswerModel } from 'src/app/models/answer.model';
 
 @Component({
   selector: 'app-question-list',
@@ -9,7 +10,8 @@ import { QuestionService } from 'src/app/services/question.service';
 })
 export class QuestionListComponent implements OnInit {
 
-  questions: QuestionModel[] = [];
+  public questions: QuestionModel[] = [];
+  public answers: AnswerModel[] = [];
 
   constructor(private questionService: QuestionService) { }
 

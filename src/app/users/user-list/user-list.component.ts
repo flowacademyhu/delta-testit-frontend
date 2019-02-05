@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { UserModel } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 
@@ -9,7 +9,7 @@ import { UserService } from '../../services/user.service';
 })
 export class UserListComponent implements OnInit {
 
-  users: UserModel[] = [];
+  public users: UserModel[] = [];
 
   constructor(private userService: UserService) { }
 
