@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { UserModel } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+import {MatPaginator, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-user',
@@ -15,6 +16,8 @@ export class UserComponent implements OnInit {
   @Input() user: UserModel;
 
   @Output() userDelete = new EventEmitter<UserModel>();
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   public dataSource;
 
@@ -35,8 +38,10 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getAll().subscribe(users => {
-      this.dataSource = users;
+      this.dataSource = new MatTableDataSource<UserModel>(users);
+      this.dataSource.paginator = this.paginator;
     });
+
   }
 
   delete() {

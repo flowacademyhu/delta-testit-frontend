@@ -11,7 +11,8 @@ import { MatButtonModule,
   MatInputModule,
   MatSelectModule,
   MatCheckboxModule,
-  MatTableModule} from '@angular/material';
+  MatTableModule,
+  MatPaginatorModule} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -66,7 +67,8 @@ import { UserService } from './services/user.service';
     MatInputModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent],
