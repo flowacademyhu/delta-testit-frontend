@@ -24,7 +24,7 @@ export class QuestionComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   public dataSource;
-  displayedColumns: string[] = ['id', 'subjectid', 'text', 'type', 'value', 'status', 'edit'];
+  displayedColumns: string[] = ['id', 'subject', 'text', 'type', 'value', 'status', 'edit'];
 
   constructor(private questionService: QuestionService, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
     this.matIconRegistry.addSvgIcon(
