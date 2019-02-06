@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TestModel } from '../../models/test.model';
+import { TestService } from '../../services/test.service';
 
 @Component({
   selector: 'app-test-list',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestListComponent implements OnInit {
 
-  constructor() { }
+  tests: TestModel[] = [];
+
+  constructor(private testService: TestService) { }
 
   ngOnInit() {
+    this.testService.getAll().subscribe(tests => {
+      this.tests = tests;
+      console.log('Tests: ' + tests);
+    });
   }
 
 }

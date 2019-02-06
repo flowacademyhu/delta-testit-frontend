@@ -10,7 +10,11 @@ import { MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
   MatSelectModule,
-  MatCheckboxModule } from '@angular/material';
+  MatCheckboxModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatDatepickerModule,
+  MatNativeDateModule} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +33,7 @@ import { ResultComponent } from './results/result/result.component';
 import { ResultEditCreateComponent } from './results/result-edit-create/result-edit-create.component';
 import { ResultListComponent } from './results/result-list/result-list.component';
 import { HeaderComponent } from './header/header.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -63,9 +68,18 @@ import { HeaderComponent } from './header/header.component';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  exports: [
+    MatDatepickerModule,
+    MatNativeDateModule],
+  providers: [UserService],
+  bootstrap: [AppComponent],
+  entryComponents: [AppComponent]
+
 })
 export class AppModule { }
