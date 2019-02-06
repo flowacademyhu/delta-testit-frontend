@@ -26,7 +26,11 @@ export class QuestionComponent implements OnInit {
   public dataSource;
   displayedColumns: string[] = ['id', 'subjectid', 'text', 'type', 'value', 'status', 'edit'];
 
-  constructor(private questionService: QuestionService, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+  constructor(
+    private questionService: QuestionService, 
+    private matIconRegistry: MatIconRegistry, 
+    private domSanitizer: DomSanitizer,
+    ) {
     this.matIconRegistry.addSvgIcon(
       'edit',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/edit_icon.svg')
