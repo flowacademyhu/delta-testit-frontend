@@ -16,9 +16,11 @@ export class TestEditCreateComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      this.testService.getTest(params.id).subscribe((result: TestModel) => {
-        this.test = result ? result : {} as TestModel;
-      });
+      if (params.id) {
+        this.testService.getTest(params.id).subscribe((result: TestModel) => {
+          this.test = result ? result : {} as TestModel;
+        });
+      }
     });
   }
 
