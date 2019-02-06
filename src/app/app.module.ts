@@ -12,7 +12,9 @@ import { MatButtonModule,
   MatSelectModule,
   MatCheckboxModule,
   MatTableModule,
-  MatPaginatorModule} from '@angular/material';
+  MatPaginatorModule,
+  MatDatepickerModule,
+  MatNativeDateModule} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -68,8 +70,13 @@ import { UserService } from './services/user.service';
     MatSelectModule,
     MatCheckboxModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
+  exports: [
+    MatDatepickerModule,
+    MatNativeDateModule],
   providers: [UserService],
   bootstrap: [AppComponent],
   entryComponents: [AppComponent]

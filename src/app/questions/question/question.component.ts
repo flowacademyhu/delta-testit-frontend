@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { QuestionModel } from 'src/app/models/question.model';
 import { QuestionService } from 'src/app/services/question.service';
 import { AnswerModel } from 'src/app/models/answer.model';
 import { SubjectModel } from 'src/app/models/subject.model';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+import {MatPaginator, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-question',
@@ -19,6 +20,8 @@ export class QuestionComponent implements OnInit {
   @Input() subject: SubjectModel;
 
   @Output() questionDelete = new EventEmitter<QuestionModel>();
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   public dataSource;
   displayedColumns: string[] = ['id', 'subjectid', 'text', 'type', 'value', 'status', 'edit'];
@@ -38,7 +41,8 @@ export class QuestionComponent implements OnInit {
 
   ngOnInit() {
     this.questionService.getAll().subscribe(questions => {
-      this.dataSource = questions;
+      this.dataSource = new MatTableDataSource<QuestionModel>(questions);
+      this.dataSource.paginator = this.paginator;
     });
   }
 
