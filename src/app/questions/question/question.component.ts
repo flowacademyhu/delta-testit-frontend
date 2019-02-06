@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angu
 import { QuestionModel } from 'src/app/models/question.model';
 import { QuestionService } from 'src/app/services/question.service';
 import { AnswerModel } from 'src/app/models/answer.model';
-import { MatIconRegistry } from '@angular/material';
+import { MatIconRegistry, MatSort } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import { Subject } from 'src/app/models/question.model';
@@ -22,6 +22,7 @@ export class QuestionComponent implements OnInit {
   @Output() questionDelete = new EventEmitter<QuestionModel>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   public dataSource;
   displayedColumns: string[] = ['id', 'subject', 'text', 'type', 'value', 'status', 'edit'];
@@ -43,7 +44,12 @@ export class QuestionComponent implements OnInit {
     this.questionService.getAll().subscribe(questions => {
       this.dataSource = new MatTableDataSource<QuestionModel>(questions);
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   delete() {

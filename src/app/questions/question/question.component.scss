@@ -5,3 +5,25 @@ table {
 .new {
   width: 100%;
 }
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+  padding-top: 10px;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.grid-container {
+  display: inline-grid;
+  grid-template-columns: 30% 70%;
+}
+
+.grid-item {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 8px;
+}
+
