@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionModel } from 'src/app/models/question.model';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { QuestionService } from 'src/app/services/question.service';
+import { SubjectModel } from 'src/app/models/subject.model';
 
 @Component({
   selector: 'app-question-edit-create',
@@ -12,13 +13,17 @@ export class QuestionEditCreateComponent implements OnInit {
 
   public question: QuestionModel = {} as QuestionModel;
 
+  public subject: SubjectModel = {} as SubjectModel;
+
   constructor(private router: Router, private route: ActivatedRoute, private questionService: QuestionService) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      this.questionService.getQuestion(params.id).subscribe((result: QuestionModel) => {
-        this.question = result ? result : {} as QuestionModel;
-      });
+      if (params.id) {
+        this.questionService.getQuestion(params.id).subscribe((result: QuestionModel) => {
+          this.question = result ? result : {} as QuestionModel;
+        });
+      }
     });
   }
 
