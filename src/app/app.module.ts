@@ -14,7 +14,8 @@ import { MatButtonModule,
   MatTableModule,
   MatPaginatorModule,
   MatDatepickerModule,
-  MatNativeDateModule} from '@angular/material';
+  MatNativeDateModule, 
+  MatSortModule} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -73,6 +74,7 @@ import { UserService } from './services/user.service';
     MatPaginatorModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSortModule
   ],
   exports: [
     MatDatepickerModule,

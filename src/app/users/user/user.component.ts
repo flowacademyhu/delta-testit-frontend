@@ -3,7 +3,7 @@ import { UserModel } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
-import {MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-user',
@@ -18,6 +18,7 @@ export class UserComponent implements OnInit {
   @Output() userDelete = new EventEmitter<UserModel>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   public dataSource;
 
@@ -40,6 +41,7 @@ export class UserComponent implements OnInit {
     this.userService.getAll().subscribe(users => {
       this.dataSource = new MatTableDataSource<UserModel>(users);
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
 
   }
