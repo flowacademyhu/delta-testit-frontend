@@ -1,7 +1,7 @@
 enum Role {
-  admin,
-  mentor,
-  student
+  STUDENT,
+  MENTOR,
+  ADMIN
 }
 
 export class UserModel {
