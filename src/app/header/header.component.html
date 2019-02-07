@@ -1,6 +1,6 @@
 <mat-toolbar class="navbar">
   <mat-toolbar-row>
-    <span class="navbar-icon navbar-font"><mat-icon routerLink="/user/" svgIcon="home"></mat-icon></span>
+    <span class="navbar-icon navbar-font"><mat-icon routerLink="/" svgIcon="home"></mat-icon></span>
     <span><button mat-button [matMenuTriggerFor]="users" class="navbar-font">Users</button>
       <mat-menu #users="matMenu">
         <button routerLink="users/edit" mat-menu-item>New User</button>
@@ -15,8 +15,9 @@
           <button mat-menu-item>Results</button>
         </mat-menu></span>
     <span class="spacer"></span>
-    <span class="navbar-right navbar-icon navbar-font"><mat-icon svgIcon="search"></mat-icon></span>
+    <span class="navbar-right navbar-icon navbar-font"><mat-icon svgIcon="search"></mat-icon>
+      <input matInput search placeholder="Search"></span>
     <span class="navbar-right navbar-font">|</span>
-    <span class="navbar-right navbar-font">Logout</span>
+    <button class="navbar-right navbar-font" mat-button (click)="onLogout()">Logout</button>
   </mat-toolbar-row>
 </mat-toolbar>

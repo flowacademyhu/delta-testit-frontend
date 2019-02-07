@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LandingComponent } from './landing/landing.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { UserEditCreateComponent } from './users/user-edit-create/user-edit-create.component';
 import { QuestionListComponent } from './questions/question-list/question-list.component';
@@ -9,13 +8,38 @@ import { TestListComponent } from './tests/test-list/test-list.component';
 import { TestEditCreateComponent } from './tests/test-edit-create/test-edit-create.component';
 import { ResultListComponent } from './results/result-list/result-list.component';
 import { ResultEditCreateComponent } from './results/result-edit-create/result-edit-create.component';
-import { UserComponent } from './users/user/user.component';
+import { LoginComponent } from './login/login.component';
+import { LoginLayoutComponent } from './layouts/login-layout.component';
 import { HomeComponent } from './home/home.component';
+import { HomeLayoutComponent } from './layouts/home-layout.component';
+import { AuthGuard } from './auth/auth.guard';
+
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LandingComponent },
-  { path: 'user/users/list', component: UserListComponent },
+  {
+    path: '',
+    component: HomeLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: HomeComponent
+      }
+    ]
+  },
+  {
+    path: '',
+    component: LoginLayoutComponent,
+    children: [
+      {
+        path: 'login',
+        component: LoginComponent
+      }
+    ]
+  },
+  { path: '**', redirectTo: '' },
+
+  { path: 'users/list', component: UserListComponent },
   { path: 'user/users/edit', component: UserEditCreateComponent },
   { path: 'user/users/edit/:id', component: UserEditCreateComponent },
   { path: 'user/questions/list', component: QuestionListComponent },

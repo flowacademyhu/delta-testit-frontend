@@ -23,7 +23,7 @@ import { MatButtonModule,
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LandingComponent } from './landing/landing.component';
+import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { UserComponent } from './users/user/user.component';
 import { UserEditCreateComponent } from './users/user-edit-create/user-edit-create.component';
@@ -40,12 +40,17 @@ import { ResultListComponent } from './results/result-list/result-list.component
 import { HeaderComponent } from './header/header.component';
 import { UserService } from './services/user.service';
 import { HomeLayoutComponent } from './layouts/home-layout.component';
+import { LoginLayoutComponent } from './layouts/login-layout.component';
+import { AuthGuard } from './auth/auth.guard';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingComponent,
+    LoginComponent,
+    LoginLayoutComponent,
     HomeComponent,
+    HomeLayoutComponent,
     UserComponent,
     UserEditCreateComponent,
     UserListComponent,
@@ -60,7 +65,6 @@ import { HomeLayoutComponent } from './layouts/home-layout.component';
     ResultListComponent,
     HeaderComponent,
     DialogContent,
-    HomeLayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +93,7 @@ import { HomeLayoutComponent } from './layouts/home-layout.component';
   exports: [
     MatDatepickerModule,
     MatNativeDateModule],
-  providers: [UserService],
+  providers: [UserService, AuthService, AuthGuard],
   bootstrap: [AppComponent],
   entryComponents: [AppComponent, DialogContent]
 
