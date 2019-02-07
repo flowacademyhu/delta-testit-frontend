@@ -25,11 +25,10 @@ export class QuestionEditCreateComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      if (params.id) {
+      if (!params.id) return
         this.questionService.getQuestion(params.id).subscribe((result: QuestionModel) => {
           this.question = result ? result : {} as QuestionModel;
         });
-      }
     });
   }
 
