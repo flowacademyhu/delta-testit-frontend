@@ -10,10 +10,11 @@ import { TestEditCreateComponent } from './tests/test-edit-create/test-edit-crea
 import { ResultListComponent } from './results/result-list/result-list.component';
 import { ResultEditCreateComponent } from './results/result-edit-create/result-edit-create.component';
 import { UserComponent } from './users/user/user.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: '', component: LandingComponent },
-  { path: 'user', component: UserComponent },
+  { path: '', component: HomeComponent },
+  { path: 'login', component: LandingComponent },
   { path: 'user/users/list', component: UserListComponent },
   { path: 'user/users/edit', component: UserEditCreateComponent },
   { path: 'user/users/edit/:id', component: UserEditCreateComponent },

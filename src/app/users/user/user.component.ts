@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { UserModel } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+import {MatPaginator, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-user',
@@ -16,7 +17,16 @@ export class UserComponent implements OnInit {
 
   @Output() userDelete = new EventEmitter<UserModel>();
 
-  constructor(private userService: UserService, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  public dataSource;
+
+  displayedColumns: string[] = ['id', 'lastName', 'firstName', 'email', 'role', 'edit'];
+
+  constructor(
+    private userService: UserService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer) {
     this.matIconRegistry.addSvgIcon(
       'edit',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/edit_icon.svg')
@@ -30,6 +40,11 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userService.getAll().subscribe(users => {
+      this.dataSource = new MatTableDataSource<UserModel>(users);
+      this.dataSource.paginator = this.paginator;
+    });
+
   }
 
   delete() {

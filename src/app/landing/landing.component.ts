@@ -1,34 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from './../auth/auth.service';
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss']
 })
-export class LandingComponent implements OnInit {
-  // emailFormControl = new FormControl('', [
-  //   Validators.required,
-  //   Validators.email,
-  // ]);
+export class LoginComponent implements OnInit {
+  form: FormGroup;                    // {1}
+  private formSubmitAttempt: boolean; // {2}
 
-  constructor(private router: Router) { }
-
-  username: string;
-  password: string;
+  constructor(
+    private fb: FormBuilder,         // {3}
+    private authService: AuthService // {4}
+  ) {}
 
   ngOnInit() {
+    this.form = this.fb.group({     // {5}
+      userName: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 
-  login() : void {
-    if (this.username == 'admin' && this.password == 'admin') {
-     this.router.navigate(['user']);
-    } else {
-      alert("Invalid credentials");
+  isFieldInvalid(field: string) { // {6}
+    return (
+      (!this.form.get(field).valid && this.form.get(field).touched) ||
+      (this.form.get(field).untouched && this.formSubmitAttempt)
+    );
+  }
+
+  onSubmit() {
+    if (this.form.valid) {
+      this.authService.login(this.form.value); // {7}
     }
+    this.formSubmitAttempt = true;             // {8}
   }
-
 }
-

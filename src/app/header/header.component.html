@@ -3,18 +3,18 @@
     <span class="navbar-icon navbar-font"><mat-icon routerLink="/user/" svgIcon="home"></mat-icon></span>
     <span><button mat-button [matMenuTriggerFor]="users" class="navbar-font">Users</button>
       <mat-menu #users="matMenu">
-        <button routerLink="user/users/edit" mat-menu-item>New User</button>
+        <button routerLink="users/edit" mat-menu-item>New User</button>
         <button mat-menu-item>Admins</button>
         <button mat-menu-item>Mentors</button>
-        <button routerLink="user/users/list" mat-menu-item>Students</button>
+        <button routerLink="users/list" mat-menu-item>Students</button>
       </mat-menu></span>
       <span><button mat-button [matMenuTriggerFor]="tests" class="navbar-font">Tests</button>
         <mat-menu #tests="matMenu">
-          <button routerLink="user/questions/list" mat-menu-item>Q&A</button>
-          <button routerLink="user/tests/edit" mat-menu-item>New Test</button>
+          <button routerLink="questions/list" mat-menu-item>Question</button>
+          <button routerLink="tests/edit" mat-menu-item>New Test</button>
           <button mat-menu-item>Results</button>
         </mat-menu></span>
-    <span class="example-spacer"></span>
+    <span class="spacer"></span>
     <span class="navbar-right navbar-icon navbar-font"><mat-icon svgIcon="search"></mat-icon></span>
     <span class="navbar-right navbar-font">|</span>
     <span class="navbar-right navbar-font">Logout</span>
