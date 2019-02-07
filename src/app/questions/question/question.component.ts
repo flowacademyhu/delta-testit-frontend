@@ -4,7 +4,7 @@ import { QuestionService } from 'src/app/services/question.service';
 import { AnswerModel } from 'src/app/models/answer.model';
 import { MatIconRegistry, MatSort } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
-import {MatPaginator, MatTableDataSource} from '@angular/material';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { Subject } from 'src/app/models/question.model';
 
 @Component({
@@ -30,7 +30,7 @@ export class QuestionComponent implements OnInit {
   constructor(
     private questionService: QuestionService, 
     private matIconRegistry: MatIconRegistry, 
-    private domSanitizer: DomSanitizer,
+    private domSanitizer: DomSanitizer
     ) {
     this.matIconRegistry.addSvgIcon(
       'edit',

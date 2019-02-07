@@ -1,3 +1,4 @@
+import { AnswerModel } from './../../models/answer.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { QuestionModel } from 'src/app/models/question.model';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -15,9 +16,13 @@ export class QuestionEditCreateComponent implements OnInit {
   public question: QuestionModel = {} as QuestionModel;
 
   public subject: SubjectModel = {} as SubjectModel;
+  
+  public answer: AnswerModel = {} as AnswerModel;
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private questionService: QuestionService) { }
+  constructor( private router: Router,
+    private route: ActivatedRoute,
+    private questionService: QuestionService) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {

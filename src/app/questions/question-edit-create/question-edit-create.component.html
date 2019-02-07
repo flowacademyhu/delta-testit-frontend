@@ -34,12 +34,11 @@
 
   <div class="grid-container">
     <mat-form-field>
-      <input class="grid-item"
+      <input class="grid-item" [(ngModel)]="answer.text"
         type="text"
-        id="answer1"
-        name="answer1"
-        matInput
-        placeholder="Answer 1">
+        id="answer"
+        name="answer"
+        matInput placeholder="Answer 1">
       <span class="spacer"></span>
     </mat-form-field>
     <mat-checkbox class="grid-item"> </mat-checkbox>
