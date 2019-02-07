@@ -42,7 +42,7 @@
         placeholder="Answer 1">
       <span class="spacer"></span>
     </mat-form-field>
-    <mat-checkbox class="grid-item"> </mat-checkbox>
+    <mat-checkbox class="grid-item" (change)="checkValue($event)" value="isCorrect" [(ngModel)]="answer.isCorrect"> </mat-checkbox>
   </div>
 
   <mat-form-field>

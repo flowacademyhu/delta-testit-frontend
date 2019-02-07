@@ -21,6 +21,7 @@ export class QuestionEditCreateComponent implements OnInit {
   public answer: AnswerModel = {} as AnswerModel;
 
 
+
   constructor(private router: Router, private route: ActivatedRoute, private questionService: QuestionService,
     private answerService: AnswerService) { }
 
@@ -32,6 +33,12 @@ export class QuestionEditCreateComponent implements OnInit {
         });
       }
     });
+  }
+
+  checkValue(event: any) {
+    this.answer.isCorrect = event.checked;
+    console.log('isCorrect: ' + this.answer.isCorrect);
+    console.log(event.checked);
   }
 
   save() {
