@@ -21,7 +21,7 @@ export class TestEditCreateComponent implements OnInit {
   @Input() question: QuestionModel = {} as QuestionModel;
   public dataSource;
   public selection;
-  displayedColumns: string[] = ['id', 'text'];
+  displayedColumns: string[] = ['select', 'id', 'text'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
