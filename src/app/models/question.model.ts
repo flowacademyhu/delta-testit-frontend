@@ -1,4 +1,4 @@
-enum Subject {
+export enum Subject {
   Linux = 1,
   Progalamok = 2,
   Progtetelek = 3,

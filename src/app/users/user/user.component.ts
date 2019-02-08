@@ -23,7 +23,10 @@ export class UserComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'lastName', 'firstName', 'email', 'role', 'edit'];
 
-  constructor(private userService: UserService, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+  constructor(
+    private userService: UserService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer) {
     this.matIconRegistry.addSvgIcon(
       'edit',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/edit_icon.svg')

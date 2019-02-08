@@ -27,7 +27,7 @@ export class TestService {
   }
 
   deleteTest(id: number) {
-    return this.httpClient.delete('http://localhost:8080/test/' + id);
+    return this.httpClient.delete('http://localhost:8080/tests/' + id);
   }
 
 }
