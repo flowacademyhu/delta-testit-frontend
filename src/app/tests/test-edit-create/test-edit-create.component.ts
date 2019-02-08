@@ -6,6 +6,8 @@ import { MatDialog, MatTableDataSource, MatPaginator } from '@angular/material';
 import { QuestionModel } from 'src/app/models/question.model';
 import { QuestionService } from 'src/app/services/question.service';
 import { SelectionModel } from '@angular/cdk/collections';
+import { TestQuestionModel } from 'src/app/models/testquestion.model';
+import { TestquestionService } from 'src/app/services/testquestion.service';
 
 
 
@@ -19,8 +21,12 @@ export class TestEditCreateComponent implements OnInit {
 
   public test: TestModel = {} as TestModel;
   @Input() question: QuestionModel = {} as QuestionModel;
+  public testQuestion: TestQuestionModel = {} as TestQuestionModel;
+  public questions: QuestionModel[] = [];
+
   public dataSource;
   public selection;
+
   displayedColumns: string[] = ['select', 'id', 'text'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -30,6 +36,7 @@ export class TestEditCreateComponent implements OnInit {
     private route: ActivatedRoute,
     private testService: TestService,
     private questionService: QuestionService,
+    private testQuestionService: TestquestionService,
     public dialog: MatDialog
     ) { }
 
@@ -49,6 +56,10 @@ export class TestEditCreateComponent implements OnInit {
       }
     });
 
+    this.questionService.getAll().subscribe(questions => {
+      this.questions = questions;
+    });
+
 
   }
 
@@ -63,6 +74,13 @@ export class TestEditCreateComponent implements OnInit {
     this.isAllSelected() ?
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));
+
+  }
+
+  checkValue(event: any) {
+    this.question.id = event.checked;
+    console.log('id: ' + this.question.id);
+    console.log(event.checked);
   }
 
   save() {
@@ -75,8 +93,9 @@ export class TestEditCreateComponent implements OnInit {
       });
     } else {
       this.testService.createTest(this.test).subscribe((result) => {
+        this.testQuestion.testId = result.id;
         alert('Mentés sikeres');
-        this.router.navigate(['tests/list']);
+          this.router.navigate(['tests/list']);
       }, (error) => {
         console.log('Error', error);
       });
