@@ -18,4 +18,4 @@ https://github.com/flowacademyhu/delta-testit-api
 
 ## Run
 - To run the Web API we recommend using nodemon (npm install nodemon --save)
-- To run Angular using ng serve -o
+- To run Angular use ng serve -o command
