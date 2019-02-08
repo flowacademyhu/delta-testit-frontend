@@ -17,7 +17,7 @@ export class QuestionEditCreateComponent implements OnInit {
   public question: QuestionModel = {} as QuestionModel;
 
   public subject: SubjectModel = {} as SubjectModel;
-  
+
   public answer: AnswerModel = {} as AnswerModel;
 
   constructor(private router: Router, private route: ActivatedRoute, private questionService: QuestionService,
@@ -26,10 +26,16 @@ export class QuestionEditCreateComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       if (!params.id) return
-        this.questionService.getQuestion(params.id).subscribe((result: QuestionModel) => {
-          this.question = result ? result : {} as QuestionModel;
-        });
+      this.questionService.getQuestion(params.id).subscribe((result: QuestionModel) => {
+        this.question = result ? result : {} as QuestionModel;
+      });
     });
+  }
+
+  checkValue(event: any) {
+    this.answer.isCorrect = event.checked;
+    console.log('isCorrect: ' + this.answer.isCorrect);
+    console.log(event.checked);
   }
 
   save() {
