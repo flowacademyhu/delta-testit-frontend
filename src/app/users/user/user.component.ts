@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 import { UserModel } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { MatIconRegistry } from '@angular/material';
@@ -11,7 +11,7 @@ import {MatPaginator, MatTableDataSource} from '@angular/material';
   styleUrls: ['./user.component.scss']
 })
 
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, AfterViewInit {
 
   @Input() user: UserModel;
 
@@ -41,7 +41,6 @@ export class UserComponent implements OnInit {
       this.dataSource = new MatTableDataSource<UserModel>(users);
       this.dataSource.paginator = this.paginator;
     });
-
   }
 
   delete() {
