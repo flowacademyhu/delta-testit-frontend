@@ -35,7 +35,6 @@
   </mat-form-field>
 
   <div *ngIf="question.type == 'moretrue'" class="grid-container">
-    
     <mat-form-field>
       <input [(ngModel)]="answer.text" class="grid-item"
         type="text"
@@ -47,7 +46,7 @@
     <mat-checkbox class="grid-item" (change)="checkValue($event)" value="isCorrect" [(ngModel)]="answer.isCorrect"> </mat-checkbox>
   
   <div class="button-container">
-  <button mat-mini-fab color="accent">+</button>
+  <button (click)="onAddNewAnswer()" mat-mini-fab color="accent">+</button>
   </div>
 </div>
 

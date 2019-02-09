@@ -20,6 +20,8 @@ export class QuestionEditCreateComponent implements OnInit {
   public subject: SubjectModel = {} as SubjectModel;
 
   public answer: AnswerModel = {} as AnswerModel;
+  
+  public answerModelArray: AnswerModel[] = [];
 
   // formArray = this.formBuilder.group({
   //    aliases: this.formBuilder.array([
@@ -59,8 +61,8 @@ export class QuestionEditCreateComponent implements OnInit {
     console.log(event.checked);
   }
 
-  onAdd() {
-    this.answer.push(AnswerModel);
+  onAddNewAnswer() {
+    this.answerModelArray.push(this.answer);
   }
 
   save() {
