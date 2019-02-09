@@ -22,3 +22,12 @@
   justify-content: center;
   padding-bottom: 8px;
 }
+
+.button-container {
+  display: inline-grid;
+  grid-template-columns: 100%;
+}
+
+.mat-mini-fab {
+  box-shadow: none !important;
+}

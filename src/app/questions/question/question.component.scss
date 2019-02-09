@@ -2,7 +2,13 @@ table {
   width: 100%;
 }
 
-.new {
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.container > * {
   width: 100%;
 }
 
@@ -18,12 +24,13 @@ th.mat-sort-header-sorted {
 
 .grid-container {
   display: inline-grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 100%;
+  padding: 0 0 0 20px;
 }
 
 .grid-item {
   display: flex;
   justify-content: center;
-  padding-bottom: 8px;
+  padding: 0 0 8px 20px;
 }
 

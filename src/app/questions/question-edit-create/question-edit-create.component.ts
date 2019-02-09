@@ -5,6 +5,7 @@ import { QuestionService } from 'src/app/services/question.service';
 import { SubjectModel } from 'src/app/models/subject.model';
 import { AnswerService } from 'src/app/services/answer.service';
 import { AnswerModel } from 'src/app/models/answer.model';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -20,8 +21,28 @@ export class QuestionEditCreateComponent implements OnInit {
 
   public answer: AnswerModel = {} as AnswerModel;
 
-  constructor(private router: Router, private route: ActivatedRoute, private questionService: QuestionService,
-    private answerService: AnswerService) { }
+  // formArray = this.formBuilder.group({
+  //    aliases: this.formBuilder.array([
+  //      this.formBuilder.control(AnswerModel)
+  //    ]) 
+  //  });
+
+  // formArray = new FormArray([new FormControl('SF')]);
+  // this.myGroup = new FormGroup({
+  //   AnswerModel: this.formArray
+  // });
+
+  // get aliases() {
+  //   return this.formArray.get('aliases') as FormArray;
+  // }
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private questionService: QuestionService,
+    private answerService: AnswerService,
+    private formBuilder: FormBuilder
+    ) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -36,6 +57,10 @@ export class QuestionEditCreateComponent implements OnInit {
     this.answer.isCorrect = event.checked;
     console.log('isCorrect: ' + this.answer.isCorrect);
     console.log(event.checked);
+  }
+
+  onAdd() {
+    this.answer.push(AnswerModel);
   }
 
   save() {

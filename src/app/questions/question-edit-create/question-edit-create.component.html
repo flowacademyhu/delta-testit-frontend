@@ -1,5 +1,5 @@
-<div class="container">
-  <h1>Add question & answer</h1>
+<h1>Add question & answer</h1>
+  <div class="container">
   <mat-form-field>
     <input type="text"
       id="question"
@@ -22,27 +22,34 @@
       <mat-option value="8">Angular</mat-option>
     </mat-select>
   </mat-form-field>
-
+  <div class="button-container">
+  <button mat-mini-fab color="accent">+</button>
+  </div>
+<br>
   <mat-form-field>
     <mat-select placeholder="Type"
       [(ngModel)]="question.type">
-      <mat-option value="onetrue">Egy választós</mat-option>
-      <mat-option value="moretrue">Több választós</mat-option>
+      <mat-option value="moretrue">Egy vagy több választós</mat-option>
       <mat-option value="freeform">Szabad szöveges</mat-option>
     </mat-select>
   </mat-form-field>
 
-  <div class="grid-container">
+  <div *ngIf="question.type == 'moretrue'" class="grid-container">
+    
     <mat-form-field>
       <input [(ngModel)]="answer.text" class="grid-item"
         type="text"
         id="answer"
         name="answer"
-        matInput placeholder="Answer 1">
+        matInput placeholder="Answer">
       <span class="spacer"></span>
     </mat-form-field>
     <mat-checkbox class="grid-item" (change)="checkValue($event)" value="isCorrect" [(ngModel)]="answer.isCorrect"> </mat-checkbox>
+  
+  <div class="button-container">
+  <button mat-mini-fab color="accent">+</button>
   </div>
+</div>
 
   <mat-form-field>
     <mat-select placeholder="Points"
@@ -63,5 +70,5 @@
   </mat-form-field>
 </div>
 
-<button mat-flat-button
+<button mat-flat-button color="primary"
   (click)="save()">Save</button>

@@ -7,7 +7,7 @@ export class AnswerModel {
     public isCorrect: boolean,
     public picture: string,
     public createdAt: Date,
-    public updatedAt: Date
+    public updatedAt: Date,
   ) {
   }
 }

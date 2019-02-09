@@ -2,17 +2,18 @@
   Question: {{ question.questionText }}  <a [routerLink]="'/questions/edit/' + question.id"><mat-icon svgIcon="edit"></mat-icon></a>
 </p> -->
 
+<h1>Questions</h1>
+
+<button mat-flat-button color="primary" routerLink="/questions/edit">New</button>
 <div class="grid-container">
-    <button class="new grid-item"
-            mat-flat-button
-            routerLink="/questions/edit">New</button>
-        <mat-form-field>
-            <input matInput class="grid-item"
-                (keyup)="applyFilter($event.target.value)"
-                placeholder="Filter">
-        </mat-form-field>
+    <mat-form-field>
+        <input matInput
+        (keyup)="applyFilter($event.target.value)"
+        placeholder="Filter">
+    </mat-form-field>
 </div>
 
+<div class="container">
 <table mat-table
     [dataSource]="dataSource"
     matSort
@@ -93,3 +94,5 @@
 
 <mat-paginator [pageSizeOptions]="[5, 10, 20]"
     showFirstLastButtons></mat-paginator>
+
+</div>
