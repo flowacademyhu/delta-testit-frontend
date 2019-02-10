@@ -61,7 +61,7 @@ export class TestEditCreateComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(DialogContent);
+    const dialogRef = this.dialog.open(DialogTestContent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -74,4 +74,4 @@ export class TestEditCreateComponent implements OnInit {
   templateUrl: 'test-edit-create-dialog-component.html'
 })
 
-export class DialogContent {}
+export class DialogTestContent {}

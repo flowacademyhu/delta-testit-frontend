@@ -19,5 +19,5 @@ export class UserModel {
     public updatedAt: Date
   ) {
   }
-
+  
 }

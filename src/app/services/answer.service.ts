@@ -10,7 +10,19 @@ export class AnswerService {
 
   constructor(private httpClient: HttpClient) {}
 
-  createAnswer(answer: AnswerModel): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/answer', answer);
+  createAnswer(answer1: AnswerModel, answer2: AnswerModel, answer3: AnswerModel): Observable<any> {
+    if (answer1) {
+      return this.httpClient.post('http://localhost:8080/answer', answer1)
+    }
+    if (answer2) {
+      return this.httpClient.post('http://localhost:8080/answer', answer2)
+    }
+    if (answer3) {
+      return this.httpClient.post('http://localhost:8080/answer', answer3)
+    }
+  }
+
+  getAll(): Observable<any> {
+    return this.httpClient.get('http://localhost:8080/answer');
   }
 }
