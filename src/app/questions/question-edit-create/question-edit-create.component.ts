@@ -26,12 +26,6 @@ export class QuestionEditCreateComponent implements OnInit {
   
   public answerModelArray: AnswerModel[] = [];
 
-  public subjects = [
-    {id: 1, name: 'Linux'},
-    {id: 2, name: 'Java'},
-    {id: 3, name: 'Git'},
-  ];
-
   // formArray = new FormArray([new FormControl('SF')]);
   // this.myGroup = new FormGroup({
     //   AnswerModel: this.formArray
