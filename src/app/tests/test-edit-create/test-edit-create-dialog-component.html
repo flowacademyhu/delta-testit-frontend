@@ -1,14 +1,13 @@
 <h2 mat-dialog-title>Questions</h2>
 <mat-dialog-content class="mat-typography">
   
-  <!-- <mat-card *ngFor="let question of questions; let index = i">
-    <mat-checkbox value={{question.id}}
+  <mat-card *ngFor="let question of questions; let index = i">
+    <mat-checkbox value="{{question.id}}"
       (change)="checkValue($event)"
-      [(ngModel)]="testQuestion.questionId"
       >
     </mat-checkbox>{{question.text}}
-  </mat-card> -->
-
+  </mat-card>
+{{selected}}
  
   
 

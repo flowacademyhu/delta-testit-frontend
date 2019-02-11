@@ -81,11 +81,6 @@ export class TestEditCreateComponent implements OnInit {
 
   }
 
-  checkValue(event: any) {
-    this.question.id = event.checked;
-    console.log('id: ' + this.question.id);
-    console.log(event.checked);
-  }
 
   save() {
     if (!this.isCreateMode()) {
@@ -143,16 +138,37 @@ export class TestEditCreateComponent implements OnInit {
 export class DialogContentComponent implements OnInit {
 
   public questions: QuestionModel[] = [];
+  public selectedQuestions: QuestionModel[] = [];
 
   constructor(
     public dialog: MatDialog,
-    private formBuilder: FormBuilder
+    private questionService: QuestionService
   ) {
   }
 
   ngOnInit() {
-
+    this.questionService.getAll().subscribe(questions => {
+      this.questions = questions;
+    });
   }
 
+  checkValue(event: any) {
+    console.log(event.source.value);
+    this.selectedQuestions.push(event.source.value);
+  }
+
+
+
 }
+
+function removeDuplicates(arr) {
+  const unique_array = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (unique_array.indexOf(arr[i]) === -1) {
+      unique_array.push(arr[i]);
+    }
+  }
+  return unique_array;
+}
+
 
