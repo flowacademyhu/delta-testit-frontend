@@ -28,7 +28,7 @@ import { UserComponent } from './users/user/user.component';
 import { UserEditCreateComponent } from './users/user-edit-create/user-edit-create.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { TestComponent } from './tests/test/test.component';
-import { TestEditCreateComponent, DialogContent } from './tests/test-edit-create/test-edit-create.component';
+import { TestEditCreateComponent, DialogContentComponent } from './tests/test-edit-create/test-edit-create.component';
 import { TestListComponent } from './tests/test-list/test-list.component';
 import { QuestionComponent } from './questions/question/question.component';
 import { QuestionEditCreateComponent } from './questions/question-edit-create/question-edit-create.component';
@@ -57,7 +57,7 @@ import { UserService } from './services/user.service';
     ResultEditCreateComponent,
     ResultListComponent,
     HeaderComponent,
-    DialogContent
+    DialogContentComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +87,7 @@ import { UserService } from './services/user.service';
     MatNativeDateModule],
   providers: [UserService],
   bootstrap: [AppComponent],
-  entryComponents: [AppComponent, DialogContent]
+  entryComponents: [AppComponent, DialogContentComponent]
 
 })
 export class AppModule { }

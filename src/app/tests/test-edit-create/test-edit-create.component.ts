@@ -31,14 +31,14 @@ export class TestEditCreateComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor (
+  constructor(
     private router: Router,
     private route: ActivatedRoute,
     private testService: TestService,
     private questionService: QuestionService,
     private testQuestionService: TestquestionService,
     public dialog: MatDialog
-    ) { }
+  ) { }
 
   ngOnInit() {
 
@@ -72,8 +72,8 @@ export class TestEditCreateComponent implements OnInit {
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
 
   }
 
@@ -95,7 +95,7 @@ export class TestEditCreateComponent implements OnInit {
       this.testService.createTest(this.test).subscribe((result) => {
         this.testQuestion.testId = result.id;
         alert('Mentés sikeres');
-          this.router.navigate(['tests/list']);
+        this.router.navigate(['tests/list']);
       }, (error) => {
         console.log('Error', error);
       });
@@ -113,7 +113,7 @@ export class TestEditCreateComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(DialogContent);
+    const dialogRef = this.dialog.open(DialogContentComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -122,8 +122,33 @@ export class TestEditCreateComponent implements OnInit {
 }
 
 @Component({
-  selector: 'test-edit-create-dialog-component',
-  templateUrl: 'test-edit-create-dialog-component.html'
+  selector: 'app-test-edit-create-dialog-component',
+  templateUrl: 'test-edit-create-dialog-component.html',
+  styleUrls: ['./test-edit-create.component.scss']
 })
+export class DialogContentComponent implements OnInit {
 
-export class DialogContent {}
+  public dataSource;
+  public selection;
+  displayedColumns: string[] = ['select', 'id', 'text'];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private testService: TestService,
+    private questionService: QuestionService,
+    private testQuestionService: TestquestionService,
+    public dialog: MatDialog
+  ) { }
+
+  ngOnInit(): void {
+    this.questionService.getAll().subscribe(questions => {
+      this.dataSource = new MatTableDataSource<QuestionModel>(questions);
+      this.selection = new SelectionModel<QuestionModel>(true, []);
+      this.dataSource.paginator = this.paginator;
+    });
+
+  }
+}

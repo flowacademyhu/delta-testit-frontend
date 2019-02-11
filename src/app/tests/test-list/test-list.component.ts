@@ -12,7 +12,6 @@ import { QuestionService } from 'src/app/services/question.service';
 export class TestListComponent implements OnInit {
 
   tests: TestModel[] = [];
-  public questions: QuestionModel[] = [];
 
   constructor(private testService: TestService, private questionService: QuestionService) { }
 
@@ -20,10 +19,6 @@ export class TestListComponent implements OnInit {
     this.testService.getAll().subscribe(tests => {
       this.tests = tests;
       console.log('Tests: ' + tests);
-    });
-
-    this.questionService.getAll().subscribe(questions => {
-      this.questions = questions;
     });
   }
 

@@ -11,7 +11,7 @@ import {MatPaginator, MatTableDataSource} from '@angular/material';
   styleUrls: ['./user.component.scss']
 })
 
-export class UserComponent implements OnInit, AfterViewInit {
+export class UserComponent implements OnInit {
 
   @Input() user: UserModel;
 
