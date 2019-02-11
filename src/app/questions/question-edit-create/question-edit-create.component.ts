@@ -34,6 +34,12 @@ export class QuestionEditCreateComponent implements OnInit {
     });
   }
 
+  checkValue(event: any) {
+    this.answer.isCorrect = event.checked;
+    console.log('isCorrect: ' + this.answer.isCorrect);
+    console.log(event.checked);
+  }
+
   save() {
     if (!this.isCreateMode()) {
       this.questionService.editQuestion(this.question).subscribe((result) => {
