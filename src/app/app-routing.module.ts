@@ -13,6 +13,8 @@ import { LoginLayoutComponent } from './layouts/login-layout.component';
 import { HomeComponent } from './home/home.component';
 import { HomeLayoutComponent } from './layouts/home-layout.component';
 import { AuthGuard } from './auth/auth.guard';
+import { SubjectListComponent } from './subjects/subject-list/subject-list.component';
+import { SubjectEditCreateComponent } from './subjects/subject-edit-create/subject-edit-create.component';
 
 
 const routes: Routes = [
@@ -78,8 +80,20 @@ const routes: Routes = [
         component: ResultEditCreateComponent
       },
       {
-        path: 'user/results/edit/:id',
+        path: 'results/edit/:id',
         component: ResultEditCreateComponent
+      },
+      {
+        path: 'subjects/list',
+        component: SubjectListComponent
+      },
+      {
+        path: 'subjects/edit',
+        component: SubjectEditCreateComponent
+      },
+      {
+        path: 'subjects/edit/:id',
+        component: SubjectEditCreateComponent
       }
     ]
   },
@@ -93,7 +107,7 @@ const routes: Routes = [
       }
     ]
   },
-  { path: '**', redirectTo: '' },  
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({

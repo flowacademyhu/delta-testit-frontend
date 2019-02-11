@@ -43,6 +43,9 @@ import { HomeLayoutComponent } from './layouts/home-layout.component';
 import { LoginLayoutComponent } from './layouts/login-layout.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
+import { SubjectComponent } from './subjects/subject/subject.component';
+import { SubjectListComponent } from './subjects/subject-list/subject-list.component';
+import { SubjectEditCreateComponent } from './subjects/subject-edit-create/subject-edit-create.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +66,9 @@ import { AuthService } from './auth/auth.service';
     ResultComponent,
     ResultEditCreateComponent,
     ResultListComponent,
+    SubjectComponent,
+    SubjectEditCreateComponent,
+    SubjectListComponent,
     HeaderComponent,
     DialogContent,
   ],
