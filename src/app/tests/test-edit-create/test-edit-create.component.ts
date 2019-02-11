@@ -8,6 +8,7 @@ import { QuestionService } from 'src/app/services/question.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { TestQuestionModel } from 'src/app/models/testquestion.model';
 import { TestquestionService } from 'src/app/services/testquestion.service';
+import { FormBuilder, FormGroup, FormControl, FormArray, ValidatorFn } from '@angular/forms';
 
 
 
@@ -23,6 +24,7 @@ export class TestEditCreateComponent implements OnInit {
   @Input() question: QuestionModel = {} as QuestionModel;
   public testQuestion: TestQuestionModel = {} as TestQuestionModel;
   public questions: QuestionModel[] = [];
+  form: FormGroup;
 
   public dataSource;
   public selection;
@@ -37,8 +39,10 @@ export class TestEditCreateComponent implements OnInit {
     private testService: TestService,
     private questionService: QuestionService,
     private testQuestionService: TestquestionService,
-    public dialog: MatDialog
-  ) { }
+    public dialog: MatDialog,
+  ) {
+
+  }
 
   ngOnInit() {
 
@@ -119,7 +123,17 @@ export class TestEditCreateComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+
+  submit() {
+    const selectedQuestionIds = this.form.value.questions
+      .map((v, i) => v ? this.questions[i].id : null)
+      .filter(v => v !== null);
+
+    console.log(selectedQuestionIds);
+  }
 }
+
+
 
 @Component({
   selector: 'app-test-edit-create-dialog-component',
@@ -128,27 +142,17 @@ export class TestEditCreateComponent implements OnInit {
 })
 export class DialogContentComponent implements OnInit {
 
-  public dataSource;
-  public selection;
-  displayedColumns: string[] = ['select', 'id', 'text'];
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  public questions: QuestionModel[] = [];
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private testService: TestService,
-    private questionService: QuestionService,
-    private testQuestionService: TestquestionService,
-    public dialog: MatDialog
-  ) { }
+    public dialog: MatDialog,
+    private formBuilder: FormBuilder
+  ) {
+  }
 
-  ngOnInit(): void {
-    this.questionService.getAll().subscribe(questions => {
-      this.dataSource = new MatTableDataSource<QuestionModel>(questions);
-      this.selection = new SelectionModel<QuestionModel>(true, []);
-      this.dataSource.paginator = this.paginator;
-    });
+  ngOnInit() {
 
   }
+
 }
+
