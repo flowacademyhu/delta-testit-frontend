@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule,
   MatMenuModule,
   MatToolbarModule,
@@ -89,7 +90,8 @@ import { AuthService } from './auth/auth.service';
     MatNativeDateModule,
     MatDialogModule,
     MatSortModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FlexLayoutModule
   ],
   exports: [
     MatDatepickerModule,
