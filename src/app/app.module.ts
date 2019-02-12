@@ -60,15 +60,9 @@ import { SubjectEditCreateComponent } from './subjects/subject-edit-create/subje
     QuestionComponent,
     QuestionEditCreateComponent,
     QuestionListComponent,
-<<<<<<< HEAD
-=======
-    ResultComponent,
-    ResultEditCreateComponent,
-    ResultListComponent,
     SubjectComponent,
     SubjectEditCreateComponent,
     SubjectListComponent,
->>>>>>> feature/t10-subject
     HeaderComponent,
     DialogContentComponent
   ],
