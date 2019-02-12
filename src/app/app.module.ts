@@ -34,9 +34,6 @@ import { TestListComponent } from './tests/test-list/test-list.component';
 import { QuestionComponent } from './questions/question/question.component';
 import { QuestionEditCreateComponent } from './questions/question-edit-create/question-edit-create.component';
 import { QuestionListComponent } from './questions/question-list/question-list.component';
-import { ResultComponent } from './results/result/result.component';
-import { ResultEditCreateComponent } from './results/result-edit-create/result-edit-create.component';
-import { ResultListComponent } from './results/result-list/result-list.component';
 import { HeaderComponent } from './header/header.component';
 import { UserService } from './services/user.service';
 import { HomeLayoutComponent } from './layouts/home-layout.component';
@@ -60,9 +57,6 @@ import { AuthService } from './auth/auth.service';
     QuestionComponent,
     QuestionEditCreateComponent,
     QuestionListComponent,
-    ResultComponent,
-    ResultEditCreateComponent,
-    ResultListComponent,
     HeaderComponent,
     DialogContentComponent
   ],
