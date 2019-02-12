@@ -20,7 +20,6 @@ export class QuestionEditCreateComponent implements OnInit {
   public question: QuestionModel = {} as QuestionModel;
   public answer: AnswerModel = {} as AnswerModel;
   public subjects: SubjectModel[] = [];
-  
 
   public subject: SubjectModel = {} as SubjectModel;
 
@@ -40,11 +39,11 @@ export class QuestionEditCreateComponent implements OnInit {
   // this.myGroup = new FormGroup({
     //   AnswerModel: this.formArray
     // });
-    
+
     // get aliases() {
       //   return this.formArray.get('aliases') as FormArray;
       // }
-      
+
   formAnswer = new FormGroup({
     answers: new FormArray([])
   });
@@ -133,18 +132,4 @@ export class QuestionEditCreateComponent implements OnInit {
     return !this.question.id;
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(DialogQuestionContent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
 }
-
-@Component({
-  selector: 'question-edit-create-dialog-component',
-  templateUrl: 'question-edit-create-dialog-component.html'
-})
-
-export class DialogQuestionContent {}

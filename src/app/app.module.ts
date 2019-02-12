@@ -1,7 +1,7 @@
 import { CustomMaterialModule } from './material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -29,20 +29,20 @@ import { UserComponent } from './users/user/user.component';
 import { UserEditCreateComponent } from './users/user-edit-create/user-edit-create.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { TestComponent } from './tests/test/test.component';
-import { TestEditCreateComponent, DialogTestContent } from './tests/test-edit-create/test-edit-create.component';
+import { TestEditCreateComponent, DialogContentComponent } from './tests/test-edit-create/test-edit-create.component';
 import { TestListComponent } from './tests/test-list/test-list.component';
 import { QuestionComponent } from './questions/question/question.component';
-import { QuestionEditCreateComponent, DialogQuestionContent } from './questions/question-edit-create/question-edit-create.component';
+import { QuestionEditCreateComponent } from './questions/question-edit-create/question-edit-create.component';
 import { QuestionListComponent } from './questions/question-list/question-list.component';
-import { ResultComponent } from './results/result/result.component';
-import { ResultEditCreateComponent } from './results/result-edit-create/result-edit-create.component';
-import { ResultListComponent } from './results/result-list/result-list.component';
 import { HeaderComponent } from './header/header.component';
 import { UserService } from './services/user.service';
 import { HomeLayoutComponent } from './layouts/home-layout.component';
 import { LoginLayoutComponent } from './layouts/login-layout.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
+import { SubjectComponent } from './subjects/subject/subject.component';
+import { SubjectListComponent } from './subjects/subject-list/subject-list.component';
+import { SubjectEditCreateComponent } from './subjects/subject-edit-create/subject-edit-create.component';
 
 @NgModule({
   declarations: [
@@ -60,12 +60,11 @@ import { AuthService } from './auth/auth.service';
     QuestionComponent,
     QuestionEditCreateComponent,
     QuestionListComponent,
-    ResultComponent,
-    ResultEditCreateComponent,
-    ResultListComponent,
+    SubjectComponent,
+    SubjectEditCreateComponent,
+    SubjectListComponent,
     HeaderComponent,
-    DialogTestContent,
-    DialogQuestionContent
+    DialogContentComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +95,7 @@ import { AuthService } from './auth/auth.service';
     MatNativeDateModule],
   providers: [UserService, AuthService, AuthGuard],
   bootstrap: [AppComponent],
-  entryComponents: [AppComponent, DialogTestContent, DialogQuestionContent]
+  entryComponents: [AppComponent, DialogContentComponent]
 
 })
 export class AppModule { }

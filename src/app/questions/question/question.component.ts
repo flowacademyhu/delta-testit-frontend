@@ -28,8 +28,8 @@ export class QuestionComponent implements OnInit {
   displayedColumns: string[] = ['id', 'subject', 'text', 'type', 'value', 'status', 'edit'];
 
   constructor(
-    private questionService: QuestionService, 
-    private matIconRegistry: MatIconRegistry, 
+    private questionService: QuestionService,
+    private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
     ) {
     this.matIconRegistry.addSvgIcon(
