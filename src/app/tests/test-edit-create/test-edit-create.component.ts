@@ -3,6 +3,9 @@ import { TestModel } from 'src/app/models/test.model';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TestService } from 'src/app/services/test.service';
 import { MatDialog } from '@angular/material';
+import { Subject } from 'rxjs';
+import { SubjectModel } from 'src/app/models/subject.model';
+import { SubjectService } from 'src/app/services/subject.service';
 
 
 @Component({
