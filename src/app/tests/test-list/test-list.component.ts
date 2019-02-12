@@ -11,14 +11,13 @@ import { QuestionService } from 'src/app/services/question.service';
 })
 export class TestListComponent implements OnInit {
 
-  tests: TestModel[] = [];
+  public tests: TestModel[] = [];
 
   constructor(private testService: TestService, private questionService: QuestionService) { }
 
   ngOnInit() {
     this.testService.getAll().subscribe(tests => {
       this.tests = tests;
-      console.log('Tests: ' + tests);
     });
   }
 

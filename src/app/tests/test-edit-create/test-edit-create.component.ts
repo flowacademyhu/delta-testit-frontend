@@ -2,13 +2,11 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { TestModel } from 'src/app/models/test.model';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TestService } from 'src/app/services/test.service';
-import { MatDialog, MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatDialog, MatTableDataSource, MatPaginator, MatDialogRef } from '@angular/material';
 import { QuestionModel } from 'src/app/models/question.model';
 import { QuestionService } from 'src/app/services/question.service';
 import { SelectionModel } from '@angular/cdk/collections';
-import { TestQuestionModel } from 'src/app/models/testquestion.model';
-import { TestquestionService } from 'src/app/services/testquestion.service';
-import { FormBuilder, FormGroup, FormControl, FormArray, ValidatorFn } from '@angular/forms';
+
 
 
 
@@ -22,9 +20,7 @@ export class TestEditCreateComponent implements OnInit {
 
   public test: TestModel = {} as TestModel;
   @Input() question: QuestionModel = {} as QuestionModel;
-  public testQuestion: TestQuestionModel = {} as TestQuestionModel;
   public questions: QuestionModel[] = [];
-  form: FormGroup;
 
   public dataSource;
   public selection;
@@ -38,7 +34,6 @@ export class TestEditCreateComponent implements OnInit {
     private route: ActivatedRoute,
     private testService: TestService,
     private questionService: QuestionService,
-    private testQuestionService: TestquestionService,
     public dialog: MatDialog,
   ) {
 
@@ -92,7 +87,6 @@ export class TestEditCreateComponent implements OnInit {
       });
     } else {
       this.testService.createTest(this.test).subscribe((result) => {
-        this.testQuestion.testId = result.id;
         alert('Mentés sikeres');
         this.router.navigate(['tests/list']);
       }, (error) => {
@@ -115,16 +109,11 @@ export class TestEditCreateComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogContentComponent);
 
     dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.test.questions = result;
+      }
       console.log(`Dialog result: ${result}`);
     });
-  }
-
-  submit() {
-    const selectedQuestionIds = this.form.value.questions
-      .map((v, i) => v ? this.questions[i].id : null)
-      .filter(v => v !== null);
-
-    console.log(selectedQuestionIds);
   }
 }
 
@@ -142,7 +131,8 @@ export class DialogContentComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    public dialogRef: MatDialogRef<DialogContentComponent>
   ) {
   }
 
@@ -150,6 +140,7 @@ export class DialogContentComponent implements OnInit {
     this.questionService.getAll().subscribe(questions => {
       this.questions = questions;
     });
+
   }
 
   checkValue(event: any) {
@@ -157,18 +148,6 @@ export class DialogContentComponent implements OnInit {
     this.selectedQuestions.push(event.source.value);
   }
 
-
-
-}
-
-function removeDuplicates(arr) {
-  const unique_array = [];
-  for (let i = 0; i < arr.length; i++) {
-    if (unique_array.indexOf(arr[i]) === -1) {
-      unique_array.push(arr[i]);
-    }
-  }
-  return unique_array;
 }
 
 

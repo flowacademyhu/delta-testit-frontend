@@ -2,7 +2,7 @@
 <mat-dialog-content class="mat-typography">
   
   <mat-card *ngFor="let question of questions; let index = i">
-    <mat-checkbox value="{{question.id}}"
+    <mat-checkbox [value]="question"
       (change)="checkValue($event)"
       >
     </mat-checkbox>{{question.text}}
@@ -16,7 +16,7 @@
   <button mat-button
     mat-dialog-close>Cancel</button>
   <button mat-button
-    [mat-dialog-close]="true"
+    [mat-dialog-close]="selectedQuestions"
     cdkFocusInitial
      >Save</button>
 </mat-dialog-actions>
