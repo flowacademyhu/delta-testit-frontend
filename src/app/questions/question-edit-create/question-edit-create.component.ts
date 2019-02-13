@@ -7,6 +7,7 @@ import { AnswerService } from 'src/app/services/answer.service';
 import { AnswerModel } from 'src/app/models/answer.model';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material';
+import { SubjectService } from 'src/app/services/subject.service';
 
 
 @Component({
@@ -17,24 +18,13 @@ import { MatDialog } from '@angular/material';
 export class QuestionEditCreateComponent implements OnInit {
 
   public question: QuestionModel = {} as QuestionModel;
+  public answer: AnswerModel = {} as AnswerModel;
+  public subjects: SubjectModel[] = [];
 
   public subject: SubjectModel = {} as SubjectModel;
 
-  public answer1: AnswerModel = {} as AnswerModel;
-  public answer2: AnswerModel = {} as AnswerModel;
-  public answer3: AnswerModel = {} as AnswerModel;
-  
   public answerModelArray: AnswerModel[] = [];
 
-  // formArray = new FormArray([new FormControl('SF')]);
-  // this.myGroup = new FormGroup({
-    //   AnswerModel: this.formArray
-    // });
-    
-    // get aliases() {
-      //   return this.formArray.get('aliases') as FormArray;
-      // }
-      
   formAnswer = new FormGroup({
     answers: new FormArray([])
   });
@@ -44,6 +34,7 @@ export class QuestionEditCreateComponent implements OnInit {
     private route: ActivatedRoute,
     private questionService: QuestionService,
     private answerService: AnswerService,
+    private subjectService: SubjectService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog
     ) { }
@@ -55,25 +46,12 @@ export class QuestionEditCreateComponent implements OnInit {
         this.question = result ? result : {} as QuestionModel;
       });
     });
+
+    this.subjectService.getAll().subscribe(subjects => {
+      this.subjects = subjects;
+    });
   }
 
-  checkValue1(event: any) {
-    this.answer1.isCorrect = event.checked;
-    console.log('isCorrect: ' + this.answer1.isCorrect);
-    console.log(event.checked);
-  }
-
-  checkValue2(event: any) {
-    this.answer2.isCorrect = event.checked;
-    console.log('isCorrect: ' + this.answer2.isCorrect);
-    console.log(event.checked);
-  }
-
-  checkValue3(event: any) {
-    this.answer3.isCorrect = event.checked;
-    console.log('isCorrect: ' + this.answer3.isCorrect);
-    console.log(event.checked);
-  }
 
   onAddNewAnswer(answer: AnswerModel) {
     this.answers.push(new FormControl(answer));
@@ -97,14 +75,9 @@ export class QuestionEditCreateComponent implements OnInit {
       });
     } else {
       this.questionService.createQuestion(this.question).subscribe((result) => {
-        this.answer1.questionId = result.id;
-        this.answer2.questionId = result.id;
-        this.answer3.questionId = result.id;
-        this.answerService.createAnswer(this.answer1, this.answer2, this.answer3).subscribe((answerSave) => {
-          alert('Mentés sikeres' + '\n' +
-          this.answer1.text + ' ' + this.answer1.isCorrect + '\n' +
-          this.answer2.text + ' ' + this.answer2.isCorrect + '\n' +
-          this.answer3.text + ' ' + this.answer3.isCorrect);
+        this.answer.questionId = result.id;
+        this.answerService.createAnswer(this.answer).subscribe((answerSave) => {
+          alert('Mentés sikeres');
           this.router.navigate(['questions/list']);
         });
       }, (error) => {
@@ -123,18 +96,4 @@ export class QuestionEditCreateComponent implements OnInit {
     return !this.question.id;
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(DialogQuestionContent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
 }
-
-@Component({
-  selector: 'question-edit-create-dialog-component',
-  templateUrl: 'question-edit-create-dialog-component.html'
-})
-
-export class DialogQuestionContent {}

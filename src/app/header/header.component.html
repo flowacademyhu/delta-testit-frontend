@@ -4,15 +4,13 @@
     <span><button mat-button [matMenuTriggerFor]="users" class="navbar-font">Users</button>
       <mat-menu #users="matMenu">
         <button routerLink="/users/edit" mat-menu-item>New User</button>
-        <button mat-menu-item>Admins</button>
-        <button mat-menu-item>Mentors</button>
-        <button routerLink="/users/list" mat-menu-item>Students</button>
+        <button routerLink="/users/list" mat-menu-item>Users list</button>
       </mat-menu></span>
       <span><button mat-button [matMenuTriggerFor]="tests" class="navbar-font">Tests</button>
         <mat-menu #tests="matMenu">
+          <button routerLink="/subjects/list" mat-menu-item>Subject</button>
           <button routerLink="/questions/list" mat-menu-item>Question</button>
-          <button routerLink="/tests/edit" mat-menu-item>New Test</button>
-          <button mat-menu-item>Results</button>
+          <button routerLink="/tests/list" mat-menu-item>Test</button>
         </mat-menu></span>
     <span class="spacer"></span>
     <button class="navbar-right navbar-font" mat-button (click)="onLogout()">Logout</button>

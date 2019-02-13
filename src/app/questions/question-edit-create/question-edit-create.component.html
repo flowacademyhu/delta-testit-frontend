@@ -6,19 +6,9 @@
 
   <mat-form-field>
     <mat-select placeholder="Subject" [(ngModel)]="question.subjectId">
-      <mat-option value="1">Linux</mat-option>
-      <mat-option value="2">Progalapok</mat-option>
-      <mat-option value="3">Progtételek</mat-option>
-      <mat-option value="4">Git</mat-option>
-      <mat-option value="5">Java</mat-option>
-      <mat-option value="6">Express</mat-option>
-      <mat-option value="7">NodeJs</mat-option>
-      <mat-option value="8">Angular</mat-option>
+      <mat-option *ngFor="let subject of subjects; let index = i" value={{subject.id}}>{{subject.name}}</mat-option>
     </mat-select>
   </mat-form-field>
-  <div class="button-container">
-    <button (click)="openDialog()" mat-mini-fab color="accent">+</button>
-  </div>
   <br>
   <mat-form-field>
     <mat-select placeholder="Type" [(ngModel)]="question.type">
