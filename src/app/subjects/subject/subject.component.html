@@ -39,7 +39,7 @@
                 *matCellDef="let subject"> <a [routerLink]="'/subjects/edit/' + subject.id">
                     <mat-icon svgIcon="edit"></mat-icon>
                 </a>
-                <mat-icon (click)="delete()"
+                <mat-icon (click)="delete(subject.id)"
                     svgIcon="delete"></mat-icon>
             </td>
         </ng-container>

@@ -16,9 +16,9 @@ import {
 
 @NgModule({
   imports: [
-  CommonModule, 
+  CommonModule,
   MatToolbarModule,
-  MatButtonModule, 
+  MatButtonModule,
   MatCardModule,
   MatInputModule,
   MatDialogModule,
@@ -29,12 +29,12 @@ import {
   ],
   exports: [
   CommonModule,
-   MatToolbarModule, 
-   MatButtonModule, 
-   MatCardModule, 
-   MatInputModule, 
-   MatDialogModule, 
-   MatTableModule, 
+   MatToolbarModule,
+   MatButtonModule,
+   MatCardModule,
+   MatInputModule,
+   MatDialogModule,
+   MatTableModule,
    MatMenuModule,
    MatIconModule,
    MatProgressSpinnerModule,

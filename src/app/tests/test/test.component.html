@@ -68,11 +68,19 @@
         *matCellDef="let test"> {{test.result}} </td>
 </ng-container>
 
+<ng-container matColumnDef="start">
+  <th mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header>  </th>
+  <td mat-cell
+      *matCellDef="let test"> <button [routerLink]="'/exam/edit/' + test.id" mat-flat-button color="primary">Start</button> </td>
+</ng-container>
+
   <ng-container matColumnDef="edit">
       <th mat-header-cell
           *matHeaderCellDef> </th>
       <td mat-cell
-          *matCellDef="let question"> <a [routerLink]="'/tests/edit/' + question.id">
+          *matCellDef="let test"> <a [routerLink]="'/tests/edit/' + test.id">
               <mat-icon svgIcon="edit"></mat-icon>
           </a>
       </td>

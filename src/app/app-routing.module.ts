@@ -14,6 +14,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { Role } from './models/role';
 import { SubjectListComponent } from './subjects/subject-list/subject-list.component';
 import { SubjectEditCreateComponent } from './subjects/subject-edit-create/subject-edit-create.component';
+import { StudentTestComponent } from './tests/student-test/student-test.component';
 
 
 const routes: Routes = [
@@ -83,6 +84,10 @@ const routes: Routes = [
       {
         path: 'subjects/edit/:id',
         component: SubjectEditCreateComponent
+      },
+      {
+        path: 'exam/edit/:id',
+        component: StudentTestComponent
       }
     ]
   },
