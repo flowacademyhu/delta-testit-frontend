@@ -30,7 +30,9 @@ const routes: Routes = [
       },
       {
         path: 'users/list',
-        component: UserListComponent
+        component: UserListComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Admin, Role.Mentor]}
       },
       {
         path: 'users/edit',
@@ -39,12 +41,9 @@ const routes: Routes = [
         data: {role: [Role.Admin, Role.Mentor]}
       },
       {
-        path: 'users/edit',
-        component: UserEditCreateComponent
-      },
-      {
         path: 'users/edit/:id',
-        component: UserEditCreateComponent
+        component: UserEditCreateComponent,
+        data: {role: [Role.Admin, Role.Mentor]}
       },
       {
         path: 'users/edit/:id',
