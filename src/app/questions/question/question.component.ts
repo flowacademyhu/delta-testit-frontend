@@ -5,6 +5,8 @@ import { AnswerModel } from 'src/app/models/answer.model';
 import { MatIconRegistry, MatSort } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
+
+
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',

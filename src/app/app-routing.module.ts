@@ -34,7 +34,9 @@ const routes: Routes = [
       },
       {
         path: 'users/edit',
-        component: UserEditCreateComponent
+        component: UserEditCreateComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Admin, Role.Mentor]}
       },
       {
         path: 'users/edit',

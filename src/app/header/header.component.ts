@@ -3,6 +3,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
 import { Observable } from 'rxjs';
 import { AuthService } from './../auth/auth.service';
+import { User } from '../auth/user';
+import { Router } from '@angular/router';
+import { UserModel } from '../models/user.model';
 
 
 @Component({
@@ -12,12 +15,14 @@ import { AuthService } from './../auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  isLoggedIn$: Observable<boolean>; 
+  isLoggedIn$: Observable<boolean>;
+  currentUser: UserModel;
 
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
     ) {
     this.matIconRegistry.addSvgIcon(
       'home',
@@ -28,6 +33,8 @@ export class HeaderComponent implements OnInit {
       'search',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/search_icon.svg')
     );
+
+    this.authService.currentUser.subscribe(x => this.currentUser = x);
   }
 
   ngOnInit() {
@@ -36,6 +43,7 @@ export class HeaderComponent implements OnInit {
 
   onLogout(){
     this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
 }
