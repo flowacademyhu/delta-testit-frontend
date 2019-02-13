@@ -5,8 +5,6 @@ import { AnswerModel } from 'src/app/models/answer.model';
 import { MatIconRegistry, MatSort } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
-import { Subject } from 'src/app/models/question.model';
-
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -16,8 +14,6 @@ export class QuestionComponent implements OnInit {
   @Input() question: QuestionModel;
 
   @Input() answer: AnswerModel;
-
-  @Input() type: Subject;
 
   @Output() questionDelete = new EventEmitter<QuestionModel>();
 
@@ -45,6 +41,10 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  private loadData() {
     this.questionService.getAll().subscribe(questions => {
       this.dataSource = new MatTableDataSource<QuestionModel>(questions);
       this.dataSource.paginator = this.paginator;
@@ -56,9 +56,10 @@ export class QuestionComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  delete() {
-    this.questionService.deleteQuestion(this.question.id).subscribe((result) => {
+  delete(id: number) {
+    this.questionService.deleteQuestion(id).subscribe((result) => {
       this.questionDelete.next(this.question);
+      this.loadData();
     }, error => console.log('Error', error));
   }
 

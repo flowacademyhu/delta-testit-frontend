@@ -12,12 +12,11 @@ export class UserModel {
     public lastName: string,
     public email: string,
     public picture: string,
-    public encryptedPassword: string,
+    public password: string,
     public groupId: number,
     public lastLoginAt: Date,
     public createdAt: Date,
     public updatedAt: Date
   ) {
   }
-  
 }

@@ -23,7 +23,6 @@ export class UserEditCreateComponent implements OnInit {
       }
     });
   }
-  
 
   save() {
     if (!this.isCreateMode()) {

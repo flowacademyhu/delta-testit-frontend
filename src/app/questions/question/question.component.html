@@ -81,7 +81,7 @@
             *matCellDef="let question"> <a [routerLink]="'/questions/edit/' + question.id">
                 <mat-icon svgIcon="edit"></mat-icon>
             </a>
-            <mat-icon (click)="delete()"
+            <mat-icon (click)="delete(question.id)"
                 svgIcon="delete"></mat-icon>
         </td>
     </ng-container>

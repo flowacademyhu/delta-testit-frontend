@@ -13,6 +13,10 @@
   </mat-form-field>
 
   <mat-form-field>
+    <input type="text" id="encryptedPassword" name="encryptedPassword"  matInput placeholder="Password" [(ngModel)]="user.password">
+  </mat-form-field>
+
+  <mat-form-field>
     <mat-select placeholder="Role" [(ngModel)]="user.role">
       <mat-option value="STUDENT">STUDENT</mat-option>
       <mat-option value="MENTOR">MENTOR</mat-option>

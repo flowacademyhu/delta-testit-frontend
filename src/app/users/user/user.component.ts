@@ -41,6 +41,10 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  private loadData() {
     this.userService.getAll().subscribe(users => {
       this.dataSource = new MatTableDataSource<UserModel>(users);
       this.dataSource.paginator = this.paginator;
@@ -52,9 +56,10 @@ export class UserComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  delete() {
-    this.userService.deleteUser(this.user.id).subscribe((result) => {
+  delete(id: number) {
+    this.userService.deleteUser(id).subscribe((result) => {
       this.userDelete.next(this.user);
+      this.loadData();
     }, error => console.log('Error', error));
   }
 

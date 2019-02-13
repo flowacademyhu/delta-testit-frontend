@@ -39,6 +39,10 @@ export class SubjectComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  private loadData() {
     this.subjectService.getAll().subscribe(subjects => {
       this.dataSource = new MatTableDataSource<SubjectModel>(subjects);
       this.dataSource.paginator = this.paginator;
@@ -50,9 +54,10 @@ export class SubjectComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  delete() {
-    this.subjectService.deleteSubject(this.subject.id).subscribe((result) => {
+  delete(id: number) {
+    this.subjectService.deleteSubject(id).subscribe((result) => {
       this.subjectDelete.next(this.subject);
+      this.loadData();
     }, error => console.log('Error', error));
   }
 
