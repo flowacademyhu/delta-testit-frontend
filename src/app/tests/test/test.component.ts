@@ -3,6 +3,7 @@ import { TestModel } from 'src/app/models/test.model';
 import { TestService } from 'src/app/services/test.service';
 import { MatIconRegistry, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-test',
@@ -23,6 +24,8 @@ export class TestComponent implements OnInit {
 
 
   constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private testService: TestService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer) {
