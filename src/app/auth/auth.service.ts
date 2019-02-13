@@ -1,47 +1,62 @@
-import { UserService } from 'src/app/services/user.service';
+import { Observable } from 'rxjs';
 import { Injectable, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { User } from './user';
-import { UserModel } from '../models/user.model';
 import { HttpClient } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { UserModel } from './../models/user.model';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @Injectable()
 export class AuthService {
-  private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-  public userModel: UserModel;
+  private currentUserSubject: BehaviorSubject<UserModel>;
+  public currentUser: Observable<UserModel>;
+  private loggedIn = new BehaviorSubject<boolean>(false);
 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
   }
 
+  get currentUserValue(): UserModel {
+    return this.currentUserSubject.value;
+}
+
   constructor(
     private router: Router,
-    private userService: UserService,
     private httpClient: HttpClient
+  ) { 
+    this.currentUserSubject = new BehaviorSubject<UserModel>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable();
+  }
 
-  ) {}
-
-  login(user: User) {
-    return this.httpClient.post<{token: string}>('http://localhost:8080/users/login', {email: user.email, password: user.password})
-      .pipe(map(result => {
-          console.log(result);
-          if (result && result.token) {
-            localStorage.setItem('access_token', JSON.stringify(result.token));
-            console.log(result.token);
-            this.loggedIn.next(true);
-            this.router.navigate(['/user']);
+  login(userLogin: User) {
+    return this.httpClient.post<UserModel>('http://localhost:8080/users/login', {
+      email: userLogin.email,
+      password: userLogin.password
+    })
+      .pipe(
+        map(user => {
+          const helper = new JwtHelperService();
+          const decodedToken = helper.decodeToken(user.token);
+          if (user && user.token) {
+            console.log(user);
+            localStorage.setItem('currentUser', JSON.stringify(decodedToken));
+            this.currentUserSubject.next(decodedToken.data);
+            // this.loggedIn.next(true);
+            console.log(user.token);
           }
-          return result;
+          
+          return user;
         })
       );
   }
 
   logout() {
-    this.loggedIn.next(false);
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+    // this.loggedIn.next(false);
     this.router.navigate(['/login']);
   }
 }

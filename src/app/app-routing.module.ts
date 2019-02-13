@@ -13,6 +13,7 @@ import { LoginLayoutComponent } from './layouts/login-layout.component';
 import { HomeComponent } from './home/home.component';
 import { HomeLayoutComponent } from './layouts/home-layout.component';
 import { AuthGuard } from './auth/auth.guard';
+import { Role } from './models/role';
 
 
 const routes: Routes = [
@@ -23,7 +24,9 @@ const routes: Routes = [
     children: [
       {
         path: 'user',
-        component: HomeComponent
+        component: HomeComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Admin, Role.Mentor, Role.Student]}
       },
       {
         path: 'users/list',
