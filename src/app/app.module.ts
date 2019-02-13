@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { FlexLayoutModule } from '@angular/flex-layout';
+
 import { MatButtonModule,
   MatMenuModule,
   MatToolbarModule,
@@ -22,7 +22,8 @@ import { MatButtonModule,
   MatNativeDateModule,
   MatDialogModule,
   MatSortModule,
-  MatExpansionModule} from '@angular/material';
+  MatExpansionModule,
+  MatStepperModule} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,6 +47,7 @@ import { AuthService } from './auth/auth.service';
 import { SubjectComponent } from './subjects/subject/subject.component';
 import { SubjectListComponent } from './subjects/subject-list/subject-list.component';
 import { SubjectEditCreateComponent } from './subjects/subject-edit-create/subject-edit-create.component';
+import { StudentTestComponent } from './tests/student-test/student-test.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,7 @@ import { SubjectEditCreateComponent } from './subjects/subject-edit-create/subje
     TestComponent,
     TestEditCreateComponent,
     TestListComponent,
+    StudentTestComponent,
     QuestionComponent,
     QuestionEditCreateComponent,
     QuestionListComponent,
@@ -92,7 +95,9 @@ import { SubjectEditCreateComponent } from './subjects/subject-edit-create/subje
     MatDialogModule,
     MatSortModule,
     MatExpansionModule,
-    FlexLayoutModule
+    BrowserAnimationsModule,
+    MatNativeDateModule,
+    MatStepperModule
   ],
   exports: [
     MatDatepickerModule,
