@@ -11,12 +11,9 @@ import { LoginLayoutComponent } from './layouts/login-layout.component';
 import { HomeComponent } from './home/home.component';
 import { HomeLayoutComponent } from './layouts/home-layout.component';
 import { AuthGuard } from './auth/auth.guard';
-<<<<<<< HEAD
 import { Role } from './models/role';
-=======
 import { SubjectListComponent } from './subjects/subject-list/subject-list.component';
 import { SubjectEditCreateComponent } from './subjects/subject-edit-create/subject-edit-create.component';
->>>>>>> 1768186a580067975a054515556573dcd5796d54
 
 
 const routes: Routes = [

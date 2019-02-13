@@ -1,8 +1,10 @@
+import { ErrorInterceptor } from './auth/error.interceptor';
+import { JwtInterceptor } from './auth/jwt.interceptor';
 import { CustomMaterialModule } from './material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -95,7 +97,10 @@ import { SubjectEditCreateComponent } from './subjects/subject-edit-create/subje
   exports: [
     MatDatepickerModule,
     MatNativeDateModule],
-  providers: [UserService, AuthService, AuthGuard],
+  providers: [UserService, AuthService, AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
   entryComponents: [AppComponent, DialogContentComponent]
 

@@ -2,7 +2,6 @@ import { Observable } from 'rxjs';
 import { Injectable, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { User } from './user';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { UserModel } from './../models/user.model';
@@ -31,7 +30,7 @@ export class AuthService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  login(userLogin: User) {
+  login(userLogin: UserModel) {
     return this.httpClient.post<UserModel>('http://localhost:8080/users/login', {
       email: userLogin.email,
       password: userLogin.password
@@ -44,7 +43,6 @@ export class AuthService {
             console.log(user);
             localStorage.setItem('currentUser', JSON.stringify(decodedToken));
             this.currentUserSubject.next(decodedToken.data);
-            // this.loggedIn.next(true);
             console.log(user.token);
           }
           
@@ -56,7 +54,6 @@ export class AuthService {
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-    // this.loggedIn.next(false);
     this.router.navigate(['/login']);
   }
 }
