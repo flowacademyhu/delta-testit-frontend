@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule,
   MatMenuModule,
   MatToolbarModule,
@@ -88,7 +89,8 @@ import { SubjectEditCreateComponent } from './subjects/subject-edit-create/subje
     MatNativeDateModule,
     MatDialogModule,
     MatSortModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FlexLayoutModule
   ],
   exports: [
     MatDatepickerModule,

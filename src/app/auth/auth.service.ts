@@ -1,29 +1,62 @@
-import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Injectable, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { User } from './user';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { UserModel } from './../models/user.model';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 @Injectable()
 export class AuthService {
-  private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private currentUserSubject: BehaviorSubject<UserModel>;
+  public currentUser: Observable<UserModel>;
+  private loggedIn = new BehaviorSubject<boolean>(false);
 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
   }
 
-  constructor(
-    private router: Router
-  ) {}
+  get currentUserValue(): UserModel {
+    return this.currentUserSubject.value;
+}
 
-  login(user: User) {
-    if (user.email !== '' && user.password !== '' ) {
-      this.loggedIn.next(true);
-      this.router.navigate(['/user']);
-    }
+  constructor(
+    private router: Router,
+    private httpClient: HttpClient
+  ) { 
+    this.currentUserSubject = new BehaviorSubject<UserModel>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable();
+  }
+
+  login(userLogin: User) {
+    return this.httpClient.post<UserModel>('http://localhost:8080/users/login', {
+      email: userLogin.email,
+      password: userLogin.password
+    })
+      .pipe(
+        map(user => {
+          const helper = new JwtHelperService();
+          const decodedToken = helper.decodeToken(user.token);
+          if (user && user.token) {
+            console.log(user);
+            localStorage.setItem('currentUser', JSON.stringify(decodedToken));
+            this.currentUserSubject.next(decodedToken.data);
+            // this.loggedIn.next(true);
+            console.log(user.token);
+          }
+          
+          return user;
+        })
+      );
   }
 
   logout() {
-    this.loggedIn.next(false);
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+    // this.loggedIn.next(false);
     this.router.navigate(['/login']);
   }
 }

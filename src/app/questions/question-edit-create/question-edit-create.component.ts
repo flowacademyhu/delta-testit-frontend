@@ -23,26 +23,7 @@ export class QuestionEditCreateComponent implements OnInit {
 
   public subject: SubjectModel = {} as SubjectModel;
 
-  // public answer1: AnswerModel = {} as AnswerModel;
-  // public answer2: AnswerModel = {} as AnswerModel;
-  // public answer3: AnswerModel = {} as AnswerModel;
-
   public answerModelArray: AnswerModel[] = [];
-
-  // public subjects = [
-  //   {id: 1, name: 'Linux'},
-  //   {id: 2, name: 'Java'},
-  //   {id: 3, name: 'Git'},
-  // ];
-
-  // formArray = new FormArray([new FormControl('SF')]);
-  // this.myGroup = new FormGroup({
-    //   AnswerModel: this.formArray
-    // });
-
-    // get aliases() {
-      //   return this.formArray.get('aliases') as FormArray;
-      // }
 
   formAnswer = new FormGroup({
     answers: new FormArray([])
@@ -71,23 +52,6 @@ export class QuestionEditCreateComponent implements OnInit {
     });
   }
 
-  // checkValue1(event: any) {
-  //   this.answer1.isCorrect = event.checked;
-  //   console.log('isCorrect: ' + this.answer1.isCorrect);
-  //   console.log(event.checked);
-  // }
-
-  // checkValue2(event: any) {
-  //   this.answer2.isCorrect = event.checked;
-  //   console.log('isCorrect: ' + this.answer2.isCorrect);
-  //   console.log(event.checked);
-  // }
-
-  // checkValue3(event: any) {
-  //   this.answer3.isCorrect = event.checked;
-  //   console.log('isCorrect: ' + this.answer3.isCorrect);
-  //   console.log(event.checked);
-  // }
 
   onAddNewAnswer(answer: AnswerModel) {
     this.answers.push(new FormControl(answer));

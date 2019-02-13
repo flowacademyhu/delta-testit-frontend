@@ -1,8 +1,5 @@
-enum Role {
-  STUDENT,
-  MENTOR,
-  ADMIN
-}
+import { Role } from './role';
+
 
 export class UserModel {
   constructor(
@@ -16,7 +13,8 @@ export class UserModel {
     public groupId: number,
     public lastLoginAt: Date,
     public createdAt: Date,
-    public updatedAt: Date
+    public updatedAt: Date,
+    public token: string
   ) {
   }
 }

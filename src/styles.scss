@@ -7,7 +7,7 @@ h1 {
   font-size: 26px;
 }
 
-html, body {
+html, body { 
   height: 100%;
 }
 
@@ -15,4 +15,5 @@ html, body {
   background-color:#54bcb2;
   height: 98vh;
   width: 98vw;
+  position: fixed;
 }
