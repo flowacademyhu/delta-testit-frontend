@@ -1,3 +1,4 @@
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserListComponent } from './users/user-list/user-list.component';
@@ -15,6 +16,7 @@ import { Role } from './models/role';
 import { SubjectListComponent } from './subjects/subject-list/subject-list.component';
 import { SubjectEditCreateComponent } from './subjects/subject-edit-create/subject-edit-create.component';
 import { StudentTestComponent } from './tests/student-test/student-test.component';
+import { StudentComponent } from './student/student.component';
 
 
 const routes: Routes = [
@@ -23,11 +25,18 @@ const routes: Routes = [
     component: HomeLayoutComponent,
     canActivate: [AuthGuard],
     children: [
+      { path: '', redirectTo: '/login', pathMatch: 'full' },
       {
         path: 'user',
         component: HomeComponent,
         canActivate: [AuthGuard],
-        data: {role: [Role.Admin, Role.Mentor, Role.Student]}
+        data: {role: [Role.Admin, Role.Mentor]}
+      },
+      {
+        path: 'student',
+        component: StudentComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Student]}
       },
       {
         path: 'users/list',
@@ -44,11 +53,8 @@ const routes: Routes = [
       {
         path: 'users/edit/:id',
         component: UserEditCreateComponent,
+        canActivate: [AuthGuard],
         data: {role: [Role.Admin, Role.Mentor]}
-      },
-      {
-        path: 'users/edit/:id',
-        component: UserEditCreateComponent
       },
       {
         path: 'questions/list',
@@ -102,7 +108,9 @@ const routes: Routes = [
       }
     ]
   },
-  { path: '**', redirectTo: '' },
+  // { path: '403', component: AccessDeniedComponent },
+  // // TODO redirect to 403
+  { path: '**', redirectTo: '/login' },
 ];
 
 @NgModule({

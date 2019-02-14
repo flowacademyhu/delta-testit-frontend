@@ -1,3 +1,12 @@
-<p>
-  home works!
-</p>
+<div class="container">
+    <h1>Home</h1>
+    <p>You're logged in testIT!</p>
+    <p>Your role is: <strong>{{currentUser.role}}</strong>.</p>
+    <p>This page can be accessed by all authenticated users.</p>
+    <div>
+        Current user from secure api end point:
+        <ul>
+            <li *ngIf="userFromApi">{{userFromApi.firstName}} {{userFromApi.lastName}}</li>
+        </ul>
+    </div>
+</div>

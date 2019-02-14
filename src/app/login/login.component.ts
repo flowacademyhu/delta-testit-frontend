@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Role } from '../models/role';
+import { first } from 'rxjs/operators';
 
 
 @Component({
@@ -16,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,         
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    
   ) {}
 
   ngOnInit() {
@@ -24,6 +27,7 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
+    
   }
 
   isFieldInvalid(field: string) { 
@@ -36,9 +40,15 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       console.log(this.form.value);
-      this.authService.login(this.form.value).subscribe(
-        result => {
-          this.router.navigate(['/user']);
+      this.authService.login(this.form.value).pipe(first())
+      .subscribe(
+        currentUser => {
+          console.log(currentUser);
+          if (currentUser.role === Role.Admin || currentUser.role === Role.Mentor) {
+            this.router.navigate(['/user']);
+          } else {
+            this.router.navigate(['/student']);
+          }
         },
         error => {
           alert('Authentication failed');
@@ -49,4 +59,5 @@ export class LoginComponent implements OnInit {
   }
 
 }
+
 

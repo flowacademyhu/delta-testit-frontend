@@ -8,12 +8,15 @@ h1 {
 }
 
 html, body { 
-  height: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
 }
 
 #maincolor {
   background-color:#54bcb2;
-  height: 98vh;
-  width: 98vw;
+  height: 100vh;
+  width: 100vw;
   position: fixed;
 }

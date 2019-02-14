@@ -1,3 +1,4 @@
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { ErrorInterceptor } from './auth/error.interceptor';
 import { JwtInterceptor } from './auth/jwt.interceptor';
 import { CustomMaterialModule } from './material.module';
@@ -48,6 +49,7 @@ import { SubjectComponent } from './subjects/subject/subject.component';
 import { SubjectListComponent } from './subjects/subject-list/subject-list.component';
 import { SubjectEditCreateComponent } from './subjects/subject-edit-create/subject-edit-create.component';
 import { StudentTestComponent } from './tests/student-test/student-test.component';
+import { StudentComponent } from './student/student.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,9 @@ import { StudentTestComponent } from './tests/student-test/student-test.componen
     SubjectEditCreateComponent,
     SubjectListComponent,
     HeaderComponent,
-    DialogContentComponent
+    DialogContentComponent,
+    AccessDeniedComponent,
+    StudentComponent
   ],
   imports: [
     BrowserModule,

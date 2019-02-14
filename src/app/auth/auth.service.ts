@@ -31,7 +31,7 @@ export class AuthService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  login(userLogin: User) {
+  login(userLogin: UserModel) {
     return this.httpClient.post<UserModel>('http://localhost:8080/users/login', {
       email: userLogin.email,
       password: userLogin.password
@@ -41,13 +41,11 @@ export class AuthService {
           const helper = new JwtHelperService();
           const decodedToken = helper.decodeToken(user.token);
           if (user && user.token) {
-            console.log(user);
             localStorage.setItem('currentUser', JSON.stringify(decodedToken));
             this.currentUserSubject.next(decodedToken.data);
-            console.log(user.token);
           }
           
-          return user;
+          return decodedToken.data;
         })
       );
   }

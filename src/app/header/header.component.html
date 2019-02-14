@@ -1,4 +1,4 @@
-<mat-toolbar class="navbar" *ngIf="currentUser" [ngClass]="{'admin-color': isAdmin, 'student-color': isStudent}">
+<mat-toolbar class="navbar" *ngIf="currentUser" [ngClass]="{'admin-color': (isAdmin || isMentor), 'student-color': isStudent}">
   <mat-toolbar-row>
     <span class="navbar-icon navbar-font"><mat-icon routerLink="/user" svgIcon="home"></mat-icon></span>
     <span><button mat-button [matMenuTriggerFor]="users" class="navbar-font">Users</button>
