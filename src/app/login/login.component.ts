@@ -10,23 +10,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  private form: FormGroup;                    
+  private form: FormGroup;
   private formSubmitAttempt: boolean;
 
   constructor(
-    private formBuilder: FormBuilder,         
+    private router: Router,
+    private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
   ) {}
 
   ngOnInit() {
-    this.form = this.formBuilder.group({     
+    this.form = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
-  isFieldInvalid(field: string) { 
+  isFieldInvalid(field: string) {
     return (
       (!this.form.get(field).valid && this.form.get(field).touched) ||
       (this.form.get(field).untouched && this.formSubmitAttempt)
@@ -36,14 +36,13 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       console.log(this.form.value);
-      this.authService.login(this.form.value).subscribe(
-        result => {
-          this.router.navigate(['/user']);
+      this.authService.login(this.form.value).subscribe( result => {
+        this.router.navigate(['/user']);
         },
         error => {
           alert('Authentication failed');
         }
-      )
+      );
     }
     this.formSubmitAttempt = true;
   }

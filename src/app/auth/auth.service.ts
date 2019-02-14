@@ -25,7 +25,7 @@ export class AuthService {
   constructor(
     private router: Router,
     private httpClient: HttpClient
-  ) { 
+  ) {
     this.currentUserSubject = new BehaviorSubject<UserModel>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -45,7 +45,6 @@ export class AuthService {
             this.currentUserSubject.next(decodedToken.data);
             console.log(user.token);
           }
-          
           return user;
         })
       );

@@ -20,7 +20,7 @@ export class TestComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   public dataSource;
-  displayedColumns: string[] = ['id', 'name', 'subject', 'mentor', 'status', 'result', 'start', 'edit'];
+  displayedColumns: string[] = ['id', 'name', 'subject', 'student', 'status', 'result', 'start', 'edit'];
 
 
   constructor(
