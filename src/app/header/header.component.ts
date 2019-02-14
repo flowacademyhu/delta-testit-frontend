@@ -6,6 +6,7 @@ import { AuthService } from './../auth/auth.service';
 import { User } from '../auth/user';
 import { Router } from '@angular/router';
 import { UserModel } from '../models/user.model';
+import { Role } from '../models/role';
 
 
 @Component({
@@ -39,6 +40,18 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn;
+  }
+
+  get isAdmin() {
+    return this.currentUser && this.currentUser.role === Role.Admin;
+  }
+  
+  get isMentor() {
+    return this.currentUser && this.currentUser.role === Role.Mentor;
+  }
+
+  get isStudent() {
+    return this.currentUser && this.currentUser.role === Role.Student;
   }
 
   onLogout(){
