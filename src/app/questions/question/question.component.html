@@ -4,7 +4,7 @@
 
 <h1>Questions</h1>
 
-<button mat-flat-button color="primary" routerLink="/questions/edit">New</button>
+<button mat-flat-button color="primary" (click)="openQuestionDialog()">New</button>
 <div class="grid-container">
     <mat-form-field>
         <input matInput
@@ -37,7 +37,7 @@
             *matHeaderCellDef
             mat-sort-header> Subject</th>
         <td mat-cell
-            *matCellDef="let question"> {{question.Subject.name}} </td>
+            *matCellDef="let question"> {{!question.Subject?'':question.Subject.name}} </td>
     </ng-container>
 
     <!-- Name Column -->

@@ -2,9 +2,10 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angu
 import { QuestionModel } from 'src/app/models/question.model';
 import { QuestionService } from 'src/app/services/question.service';
 import { AnswerModel } from 'src/app/models/answer.model';
-import { MatIconRegistry, MatSort } from '@angular/material';
+import { MatIconRegistry, MatSort, MatDialog } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { QuestionEditCreateComponent } from '../question-edit-create/question-edit-create.component';
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -26,8 +27,9 @@ export class QuestionComponent implements OnInit {
   constructor(
     private questionService: QuestionService,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
-    ) {
+    private domSanitizer: DomSanitizer,
+    public dialog: MatDialog
+  ) {
     this.matIconRegistry.addSvgIcon(
       'edit',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/edit_icon.svg')
@@ -46,7 +48,8 @@ export class QuestionComponent implements OnInit {
 
   private loadData() {
     this.questionService.getAll().subscribe(questions => {
-      this.dataSource = new MatTableDataSource<QuestionModel>(questions);
+      this.dataSource = new MatTableDataSource<any>(questions);
+      console.log(questions);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
@@ -61,6 +64,14 @@ export class QuestionComponent implements OnInit {
       this.questionDelete.next(this.question);
       this.loadData();
     }, error => console.log('Error', error));
+  }
+
+  openQuestionDialog() {
+    const dialogRef = this.dialog.open(QuestionEditCreateComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
 }

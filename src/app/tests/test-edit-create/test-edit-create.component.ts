@@ -6,7 +6,12 @@ import { MatDialog, MatTableDataSource, MatPaginator, MatDialogRef } from '@angu
 import { QuestionModel } from 'src/app/models/question.model';
 import { QuestionService } from 'src/app/services/question.service';
 import { SelectionModel } from '@angular/cdk/collections';
-
+import { UserModel } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/auth/auth.service';
+import { Role } from 'src/app/models/role';
+import { SubjectService } from 'src/app/services/subject.service';
+import { SubjectModel } from 'src/app/models/subject.model';
+import { forkJoin } from 'rxjs';
 
 
 
@@ -21,9 +26,13 @@ export class TestEditCreateComponent implements OnInit {
   public test: TestModel = {} as TestModel;
   @Input() question: QuestionModel = {} as QuestionModel;
   public questions: QuestionModel[] = [];
+  
 
   public dataSource;
   public selection;
+
+  currentUser: UserModel;
+  // creatorId = this.currentUser.id;
 
   displayedColumns: string[] = ['select', 'id', 'text'];
 
@@ -34,8 +43,10 @@ export class TestEditCreateComponent implements OnInit {
     private route: ActivatedRoute,
     private testService: TestService,
     private questionService: QuestionService,
+    private authService: AuthService,
     public dialog: MatDialog,
   ) {
+    this.authService.currentUser.subscribe(x => this.currentUser = x);
 
   }
 
@@ -58,7 +69,6 @@ export class TestEditCreateComponent implements OnInit {
     this.questionService.getAll().subscribe(questions => {
       this.questions = questions;
     });
-
 
   }
 
@@ -110,11 +120,25 @@ export class TestEditCreateComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.test.questions = result;
+        this.test.questions = result.map(question => question.id);
       }
       console.log(`Dialog result: ${result}`);
     });
   }
+
+
+  get isAdmin() {
+    return this.currentUser && this.currentUser.role === Role.Admin;
+  }
+
+  get isMentor() {
+    return this.currentUser && this.currentUser.role === Role.Mentor;
+  }
+
+  get isStudent() {
+    return this.currentUser && this.currentUser.role === Role.Student;
+  }
+
 }
 
 
@@ -128,17 +152,25 @@ export class DialogContentComponent implements OnInit {
 
   public questions: QuestionModel[] = [];
   public selectedQuestions: QuestionModel[] = [];
+  public subjects: SubjectModel[] = [];
+
+  public selectedSubjectId: number;
 
   constructor(
     public dialog: MatDialog,
     private questionService: QuestionService,
+    private subjectService: SubjectService,
     public dialogRef: MatDialogRef<DialogContentComponent>
   ) {
   }
 
   ngOnInit() {
-    this.questionService.getAll().subscribe(questions => {
+    forkJoin(
+      this.questionService.getAll(),
+      this.subjectService.getAll()
+    ).subscribe(([questions, subjects]) => {
       this.questions = questions;
+      this.subjects = subjects;
     });
 
   }

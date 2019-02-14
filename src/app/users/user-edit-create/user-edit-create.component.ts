@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserModel } from 'src/app/models/user.model';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-user-edit-create',
@@ -11,8 +12,14 @@ import { UserService } from 'src/app/services/user.service';
 export class UserEditCreateComponent implements OnInit {
 
   public user: UserModel = {} as UserModel;
+  public createdUser: UserModel[] = [];
 
-  constructor(private router: Router, private route: ActivatedRoute, private userService: UserService) { }
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    private userService: UserService,
+    public dialog: MatDialog,
+    public dialogRef: MatDialogRef<UserEditCreateComponent>
+    ) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {

@@ -86,7 +86,7 @@ const routes: Routes = [
         component: SubjectEditCreateComponent
       },
       {
-        path: 'exam/edit/:id',
+        path: 'tests/start/:id',
         component: StudentTestComponent
       }
     ]

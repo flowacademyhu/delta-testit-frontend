@@ -5,9 +5,9 @@ export class AnswerModel {
     public subjectId: number,
     public text: string,
     public isCorrect: boolean,
-    public picture: string,
-    public createdAt: Date,
-    public updatedAt: Date,
+    public picture?: string,
+    public createdAt?: Date,
+    public updatedAt?: Date,
   ) {
   }
 }

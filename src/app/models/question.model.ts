@@ -1,4 +1,6 @@
-enum Status {
+import { AnswerModel } from './answer.model';
+
+export enum Status {
   PUBLISHED,
   PROCESSING,
   CLOSED
@@ -13,8 +15,10 @@ export class QuestionModel {
     public type: string,
     public value: number,
     public status: Status,
-    public createdAt: Date,
-    public updatedAt: Date
+    public createdAt?: Date,
+    public updatedAt?: Date,
+
+    public answers?: AnswerModel[]
   ) {
   }
 }

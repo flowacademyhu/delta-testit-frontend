@@ -107,7 +107,7 @@ import { StudentTestComponent } from './tests/student-test/student-test.componen
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AppComponent, DialogContentComponent]
+  entryComponents: [AppComponent, DialogContentComponent, UserEditCreateComponent, SubjectEditCreateComponent]
 
 })
 export class AppModule { }

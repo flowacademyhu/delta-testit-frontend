@@ -3,7 +3,7 @@
     <span class="navbar-icon navbar-font"><mat-icon routerLink="/user" svgIcon="home"></mat-icon></span>
     <span><button mat-button [matMenuTriggerFor]="users" class="navbar-font">Users</button>
       <mat-menu #users="matMenu">
-        <button routerLink="/users/edit" mat-menu-item>New User</button>
+        <button (click)="openUserDialog()" mat-menu-item>New User</button>
         <button routerLink="/users/list" mat-menu-item>Users list</button>
       </mat-menu></span>
       <span><button mat-button [matMenuTriggerFor]="tests" class="navbar-font">Tests</button>
