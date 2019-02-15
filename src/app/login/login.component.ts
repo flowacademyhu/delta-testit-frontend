@@ -12,25 +12,23 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  private form: FormGroup;                    
+  private form: FormGroup;
   private formSubmitAttempt: boolean;
 
   constructor(
-    private formBuilder: FormBuilder,         
-    private authService: AuthService,
     private router: Router,
-    
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
-    this.form = this.formBuilder.group({     
+    this.form = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
-    
   }
 
-  isFieldInvalid(field: string) { 
+  isFieldInvalid(field: string) {
     return (
       (!this.form.get(field).valid && this.form.get(field).touched) ||
       (this.form.get(field).untouched && this.formSubmitAttempt)
@@ -53,7 +51,7 @@ export class LoginComponent implements OnInit {
         error => {
           alert('Authentication failed');
         }
-      )
+      );
     }
     this.formSubmitAttempt = true;
   }

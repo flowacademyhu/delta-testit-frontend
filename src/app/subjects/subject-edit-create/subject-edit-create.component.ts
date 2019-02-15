@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SubjectModel } from 'src/app/models/subject.model';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SubjectService } from 'src/app/services/subject.service';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-subject-edit-create',
@@ -11,8 +12,13 @@ import { SubjectService } from 'src/app/services/subject.service';
 export class SubjectEditCreateComponent implements OnInit {
 
   public subject: SubjectModel = {} as SubjectModel;
+  public createdSubject: SubjectModel[] = [];
 
-  constructor(private router: Router, private route: ActivatedRoute, private subjectService: SubjectService) { }
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    private subjectService: SubjectService,
+    public dialog: MatDialog,
+    public dialogRef: MatDialogRef<SubjectEditCreateComponent>) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
