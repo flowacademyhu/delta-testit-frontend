@@ -12,36 +12,32 @@
   <br>
   <mat-form-field>
     <mat-select placeholder="Type" [(ngModel)]="question.type">
-      <mat-option value="moretrue">Egy vagy több választós</mat-option>
+      <mat-option value="onetrue">Egyválasztós</mat-option>
+      <mat-option value="moretrue">Többválasztós</mat-option>
       <mat-option value="freeform">Szabad szöveges</mat-option>
     </mat-select>
   </mat-form-field>
 
   <div *ngIf="question.type == 'moretrue'">
-    <div class="grid-container">
-      <mat-form-field>
-        <input [(ngModel)]="answer1.text" class="grid-item" type="text" id="1" name="1" matInput placeholder="Answer">
-        <span class="spacer"></span>
-      </mat-form-field>
-      <mat-checkbox class="grid-item" (change)="checkValue1($event)" value="isCorrect1" [(ngModel)]="answer1.isCorrect">
-      </mat-checkbox>
-      <mat-form-field>
-        <input [(ngModel)]="answer2.text" class="grid-item" type="text" id="2" name="2" matInput placeholder="Answer">
-        <span class="spacer"></span>
-      </mat-form-field>
-      <mat-checkbox class="grid-item" (change)="checkValue2($event)" value="isCorrect2" [(ngModel)]="answer2.isCorrect">
-      </mat-checkbox>
-      <mat-form-field>
-        <input [(ngModel)]="answer3.text" class="grid-item" type="text" id="3" name="3" matInput placeholder="Answer">
-        <span class="spacer"></span>
-      </mat-form-field>
-      <mat-checkbox class="grid-item" (change)="checkValue3($event)" value="isCorrect3" [(ngModel)]="answer3.isCorrect">
-      </mat-checkbox>
+    <div [formGroup]="formAnswer">
+      <div formArrayName="answers">
+        <div *ngFor="let answer of answers.controls; let i = index">
+          <div class="grid-container">
+            <mat-form-field>
+              <input [formControlName]="i" class="grid-item" type="text" id="answer"
+                name="answer" matInput placeholder="Answer">
+              <span class="spacer"></span>
+            </mat-form-field>
+            <mat-checkbox class="grid-item" [formControlName]="i" (change)="checkValue($event)" value="isCorrect">
+            </mat-checkbox>
+          </div>
+        </div>
+      </div>
     </div>
     <br>
-    <!-- <div class="button-container">
+    <div class="button-container">
       <button (click)="onAddNewAnswer()" mat-mini-fab color="accent">+</button>
-    </div> -->
+    </div>
   </div>
 
   <br>

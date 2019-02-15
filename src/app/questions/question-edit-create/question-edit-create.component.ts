@@ -23,11 +23,15 @@ export class QuestionEditCreateComponent implements OnInit {
 
   public subject: SubjectModel = {} as SubjectModel;
 
-  public answerModelArray: AnswerModel[] = [];
+  public answersArray: AnswerModel[] = [];
+  public selectedAnswers: AnswerModel[] = [];
 
   formAnswer = new FormGroup({
-    answers: new FormArray([])
+    answers: new FormArray([
+      this.formBuilder.control('')
+    ])
   });
+  
 
   constructor(
     private router: Router,
@@ -52,14 +56,19 @@ export class QuestionEditCreateComponent implements OnInit {
     });
   }
 
-
   onAddNewAnswer(answer: AnswerModel) {
     this.answers.push(new FormControl(answer));
   }
-
-  onAddNewAnswerIsCorrect(answer: AnswerModel) {
-    this.answers.push(new FormControl(answer.isCorrect));
+  
+  checkValue(event: any) {
+    this.answer.isCorrect = event.checked;
+    console.log('isCorrect: ' + this.answer.isCorrect);
+    console.log(event.checked);
   }
+
+  // onAddNewAnswerIsCorrect(answer: AnswerModel) {
+  //   this.answers.push(new FormControl(answer.isCorrect));
+  // }
 
   get answers() {
     return this.formAnswer.get('answers') as FormArray;

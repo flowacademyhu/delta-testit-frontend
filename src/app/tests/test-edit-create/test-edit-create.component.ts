@@ -8,8 +8,6 @@ import { QuestionService } from 'src/app/services/question.service';
 import { SelectionModel } from '@angular/cdk/collections';
 
 
-
-
 @Component({
   selector: 'app-test-edit-create',
   templateUrl: './test-edit-create.component.html',
@@ -73,9 +71,7 @@ export class TestEditCreateComponent implements OnInit {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
-
   }
-
 
   save() {
     if (!this.isCreateMode()) {
@@ -124,6 +120,7 @@ export class TestEditCreateComponent implements OnInit {
   templateUrl: 'test-edit-create-dialog-component.html',
   styleUrls: ['./test-edit-create.component.scss']
 })
+
 export class DialogContentComponent implements OnInit {
 
   public questions: QuestionModel[] = [];

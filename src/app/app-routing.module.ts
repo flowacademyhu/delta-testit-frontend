@@ -58,43 +58,63 @@ const routes: Routes = [
       },
       {
         path: 'questions/list',
-        component: QuestionListComponent
+        component: QuestionListComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Admin, Role.Mentor]}
       },
       {
         path: 'questions/edit',
-        component: QuestionEditCreateComponent
+        component: QuestionEditCreateComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Admin, Role.Mentor]}
       },
       {
         path: 'questions/edit/:id',
-        component: QuestionEditCreateComponent
+        component: QuestionEditCreateComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Admin, Role.Mentor]}
       },
       {
         path: 'tests/list',
-        component: TestListComponent
+        component: TestListComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Admin, Role.Mentor]}
       },
       {
         path: 'tests/edit',
-        component: TestEditCreateComponent
+        component: TestEditCreateComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Admin, Role.Mentor]}
       },
       {
         path: 'tests/edit/:id',
-        component: TestEditCreateComponent
+        component: TestEditCreateComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Admin, Role.Mentor]}
       },
       {
         path: 'subjects/list',
-        component: SubjectListComponent
+        component: SubjectListComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Admin, Role.Mentor]}
       },
       {
         path: 'subjects/edit',
-        component: SubjectEditCreateComponent
+        component: SubjectEditCreateComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Admin, Role.Mentor]}
       },
       {
         path: 'subjects/edit/:id',
-        component: SubjectEditCreateComponent
+        component: SubjectEditCreateComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Admin, Role.Mentor]}
       },
       {
         path: 'exam/edit/:id',
-        component: StudentTestComponent
+        component: StudentTestComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Admin, Role.Mentor, Role.Student]}
       }
     ]
   },
@@ -108,7 +128,7 @@ const routes: Routes = [
       }
     ]
   },
-  // { path: '403', component: AccessDeniedComponent },
+  { path: '403', component: AccessDeniedComponent },
   // // TODO redirect to 403
   { path: '**', redirectTo: '/login' },
 ];
