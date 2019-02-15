@@ -8,8 +8,6 @@ import { Router } from '@angular/router';
 import { UserModel } from '../models/user.model';
 import { Role } from '../models/role';
 import { UserEditCreateComponent } from '../users/user-edit-create/user-edit-create.component';
-import { SubjectEditCreateComponent } from '../subjects/subject-edit-create/subject-edit-create.component';
-import { SubjectComponent } from '../subjects/subject/subject.component';
 
 
 @Component({
@@ -28,7 +26,7 @@ export class HeaderComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     public dialog: MatDialog
-  ) {
+    ) {
     this.matIconRegistry.addSvgIcon(
       'home',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/home_icon.svg')
@@ -37,11 +35,6 @@ export class HeaderComponent implements OnInit {
     this.matIconRegistry.addSvgIcon(
       'search',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/search_icon.svg')
-    );
-
-    this.matIconRegistry.addSvgIcon(
-      'account',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/account_icon.svg')
     );
 
     this.authService.currentUser.subscribe(x => this.currentUser = x);
@@ -54,6 +47,7 @@ export class HeaderComponent implements OnInit {
   get isAdmin() {
     return this.currentUser && this.currentUser.role === Role.Admin;
   }
+  
   get isMentor() {
     return this.currentUser && this.currentUser.role === Role.Mentor;
   }
@@ -62,14 +56,14 @@ export class HeaderComponent implements OnInit {
     return this.currentUser && this.currentUser.role === Role.Student;
   }
 
-  onLogout() {
+  onLogout(){
     this.authService.logout();
     this.router.navigate(['/login']);
   }
 
   openUserDialog() {
     const dialogRef = this.dialog.open(UserEditCreateComponent);
-
+ 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });

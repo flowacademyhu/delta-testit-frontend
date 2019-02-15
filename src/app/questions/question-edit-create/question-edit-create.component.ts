@@ -57,14 +57,15 @@ export class QuestionEditCreateComponent implements OnInit {
   }
 
   onAddNewAnswer(answer: AnswerModel) {
-    this.answers.push(new FormControl(answer));
+    this.answers.push(new FormControl(''));
+    console.log(this.answers);
   }
   
   checkValue(event: any) {
     this.answer.isCorrect = event.checked;
     console.log('isCorrect: ' + this.answer.isCorrect);
-    console.log(event.checked);
   }
+
 
   // onAddNewAnswerIsCorrect(answer: AnswerModel) {
   //   this.answers.push(new FormControl(answer.isCorrect));

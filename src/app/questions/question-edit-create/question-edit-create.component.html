@@ -14,18 +14,17 @@
     <mat-select placeholder="Type" [(ngModel)]="question.type">
       <mat-option value="onetrue">Egyválasztós</mat-option>
       <mat-option value="moretrue">Többválasztós</mat-option>
-      <mat-option value="freeform">Szabad szöveges</mat-option>
     </mat-select>
   </mat-form-field>
 
-  <div *ngIf="question.type == 'moretrue'">
+  <div *ngIf="question.type == 'onetrue' || question.type == 'moretrue'">
     <div [formGroup]="formAnswer">
       <div formArrayName="answers">
         <div *ngFor="let answer of answers.controls; let i = index">
           <div class="grid-container">
             <mat-form-field>
-              <input [formControlName]="i" class="grid-item" type="text" id="answer"
-                name="answer" matInput placeholder="Answer">
+              <input [formControlName]="i" class="grid-item" type="text" id="answer" name="answer" matInput
+                placeholder="Answer">
               <span class="spacer"></span>
             </mat-form-field>
             <mat-checkbox class="grid-item" [formControlName]="i" (change)="checkValue($event)" value="isCorrect">
@@ -34,12 +33,10 @@
         </div>
       </div>
     </div>
-    <br>
     <div class="button-container">
       <button (click)="onAddNewAnswer()" mat-mini-fab color="accent">+</button>
     </div>
   </div>
-
   <br>
   <mat-form-field>
     <mat-select placeholder="Points" [(ngModel)]="question.value">
@@ -56,6 +53,6 @@
       <mat-option value="CLOSED">CLOSED</mat-option>
     </mat-select>
   </mat-form-field>
-</div>
 
-<button mat-flat-button color="primary" (click)="save()">Save</button>
+  <button mat-flat-button color="primary" (click)="save()">Save</button>
+</div>

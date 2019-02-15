@@ -21,8 +21,9 @@ import { forkJoin } from 'rxjs';
 
 export class TestEditCreateComponent implements OnInit {
 
-  public test: TestModel = {} as TestModel;
   @Input() question: QuestionModel = {} as QuestionModel;
+  
+  public test: TestModel = {} as TestModel;
   public questions: QuestionModel[] = [];
   
 
