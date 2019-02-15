@@ -98,7 +98,7 @@ const routes: Routes = [
         path: 'tests/list',
         component: TestListComponent,
         canActivate: [AuthGuard],
-        data: {role: [Role.Admin, Role.Mentor]}
+        data: {role: [Role.Admin, Role.Mentor, Role.Student]}
       },
       {
         path: 'tests/edit',

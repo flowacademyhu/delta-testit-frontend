@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 import { UserModel } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
-import { MatIconRegistry } from '@angular/material';
+import { MatIconRegistry, MatDialog } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { UserEditCreateComponent } from '../user-edit-create/user-edit-create.component';
 
 @Component({
   selector: 'app-user',
@@ -20,6 +21,8 @@ export class UserComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+
+
   public dataSource;
 
   displayedColumns: string[] = ['id', 'lastName', 'firstName', 'email', 'role', 'edit'];
@@ -27,7 +30,8 @@ export class UserComponent implements OnInit {
   constructor(
     private userService: UserService,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer) {
+    private domSanitizer: DomSanitizer,
+    public dialog: MatDialog) {
     this.matIconRegistry.addSvgIcon(
       'edit',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/edit_icon.svg')
@@ -61,6 +65,15 @@ export class UserComponent implements OnInit {
       this.userDelete.next(this.user);
       this.loadData();
     }, error => console.log('Error', error));
+  }
+
+  openUserDialog() {
+
+    const dialogRef = this.dialog.open(UserEditCreateComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
 }

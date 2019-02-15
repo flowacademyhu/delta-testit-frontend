@@ -9,7 +9,7 @@ export class TestModel {
     public id: number,
     public name: string,
     public userId: number,
-    public creatorId: number,
+    public creator: string,
     public answerId: number,
     public time: number,
     public createdAt: Date,

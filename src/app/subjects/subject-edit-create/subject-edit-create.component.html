@@ -4,6 +4,6 @@
     <input type="text" id="name" name="name"  matInput placeholder="Name" [(ngModel)]="subject.name">
   </mat-form-field>
 </div>
-<button mat-flat-button [mat-dialog-close]="createdSubject">Save</button> 
+<button mat-flat-button mat-dialog-close="save()">Save</button> 
 <button mat-flat-button (click)="delete(subject.id)">Delete</button> 
 <button mat-dialog-close mat-flat-button color="secondary">Back</button>

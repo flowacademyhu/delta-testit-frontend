@@ -22,7 +22,7 @@ export class GroupComponent implements OnInit {
 
   public dataSource;
 
-  displayedColumns: string[] = ['id', 'name', 'description', 'edit'];
+  displayedColumns: string[] = ['id', 'name', 'description'];
 
   constructor(
     private router: Router,

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { UserModel } from 'src/app/models/user.model';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Role } from 'src/app/models/role';
 import { GroupService } from 'src/app/services/group.service';
@@ -20,7 +20,8 @@ export class UserEditCreateComponent implements OnInit {
   public groups: GroupModel[] = [];
   currentUser: UserModel;
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
     private authService: AuthService,

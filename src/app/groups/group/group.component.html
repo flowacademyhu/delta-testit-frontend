@@ -40,19 +40,7 @@
             <td mat-cell
                 *matCellDef="let group"> {{group.description}} </td>
         </ng-container>
-
-        <ng-container matColumnDef="edit">
-            <th mat-header-cell
-                *matHeaderCellDef> </th>
-            <td mat-cell
-                *matCellDef="let group"> <a [routerLink]="'/groups/edit/' + group.id">
-                    <mat-icon svgIcon="edit"></mat-icon>
-                </a>
-                <mat-icon (click)="delete(group.id)"
-                    svgIcon="delete"></mat-icon>
-            </td>
-        </ng-container>
-
+        
         <tr mat-header-row
             *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row
