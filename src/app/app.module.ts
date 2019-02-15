@@ -24,7 +24,8 @@ import { MatButtonModule,
   MatDialogModule,
   MatSortModule,
   MatExpansionModule,
-  MatStepperModule} from '@angular/material';
+  MatStepperModule,
+  MatRadioModule} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,6 +50,11 @@ import { SubjectComponent } from './subjects/subject/subject.component';
 import { SubjectListComponent } from './subjects/subject-list/subject-list.component';
 import { SubjectEditCreateComponent } from './subjects/subject-edit-create/subject-edit-create.component';
 import { StudentTestComponent } from './tests/student-test/student-test.component';
+import { GroupComponent } from './groups/group/group.component';
+import { GroupEditCreateComponent } from './groups/group-edit-create/group-edit-create.component';
+import { GroupListComponent } from './groups/group-list/group-list.component';
+import { TimerDirective } from './directives/timer.directive';
+import { TimePipe } from './pipes/time.pipe';
 import { StudentComponent } from './student/student.component';
 
 @NgModule({
@@ -73,8 +79,13 @@ import { StudentComponent } from './student/student.component';
     SubjectListComponent,
     HeaderComponent,
     DialogContentComponent,
-    AccessDeniedComponent,
-    StudentComponent
+    GroupComponent,
+    GroupEditCreateComponent,
+    GroupListComponent,
+    TimerDirective,
+    TimePipe,
+    StudentComponent,
+    AccessDeniedComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +112,8 @@ import { StudentComponent } from './student/student.component';
     MatExpansionModule,
     BrowserAnimationsModule,
     MatNativeDateModule,
-    MatStepperModule
+    MatStepperModule,
+    MatRadioModule
   ],
   exports: [
     MatDatepickerModule,
@@ -111,7 +123,7 @@ import { StudentComponent } from './student/student.component';
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AppComponent, DialogContentComponent]
+  entryComponents: [AppComponent, DialogContentComponent, UserEditCreateComponent, SubjectEditCreateComponent]
 
 })
 export class AppModule { }

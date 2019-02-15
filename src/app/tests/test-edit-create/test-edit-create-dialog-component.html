@@ -1,15 +1,20 @@
 <h2 mat-dialog-title>Questions</h2>
+
+
 <mat-dialog-content class="mat-typography">
-  
-  <mat-card *ngFor="let question of questions; let index = i">
-    <mat-checkbox [value]="question"
-      (change)="checkValue($event)"
-      >
-    </mat-checkbox>{{question.text}}
-  </mat-card>
-{{selected}}
- 
-  
+
+  <mat-select placeholder="Subject" [(ngModel)]="selectedSubjectId">
+    <mat-option *ngFor="let subject of subjects"
+      [value]="subject.id">{{subject.name}}</mat-option>
+  </mat-select>
+
+  <div *ngFor="let question of questions">
+      <mat-card *ngIf="question.subjectId === selectedSubjectId">
+        <mat-checkbox [value]="question"
+          (change)="checkValue($event)">
+        </mat-checkbox>{{question.text}}
+      </mat-card>
+  </div>
 
 </mat-dialog-content>
 <mat-dialog-actions align="end">
@@ -17,6 +22,5 @@
     mat-dialog-close>Cancel</button>
   <button mat-button
     [mat-dialog-close]="selectedQuestions"
-    cdkFocusInitial
-     >Save</button>
+    cdkFocusInitial>Save</button>
 </mat-dialog-actions>

@@ -16,6 +16,8 @@ import { Role } from './models/role';
 import { SubjectListComponent } from './subjects/subject-list/subject-list.component';
 import { SubjectEditCreateComponent } from './subjects/subject-edit-create/subject-edit-create.component';
 import { StudentTestComponent } from './tests/student-test/student-test.component';
+import { GroupListComponent } from './groups/group-list/group-list.component';
+import { GroupEditCreateComponent } from './groups/group-edit-create/group-edit-create.component';
 import { StudentComponent } from './student/student.component';
 
 
@@ -53,6 +55,24 @@ const routes: Routes = [
       {
         path: 'users/edit/:id',
         component: UserEditCreateComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Admin, Role.Mentor]}
+      },
+      {
+        path: 'groups/list',
+        component: GroupListComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Admin, Role.Mentor]}
+      },
+      {
+        path: 'groups/edit',
+        component: GroupEditCreateComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Admin, Role.Mentor]}
+      },
+      {
+        path: 'groups/edit/:id',
+        component: GroupEditCreateComponent,
         canActivate: [AuthGuard],
         data: {role: [Role.Admin, Role.Mentor]}
       },
@@ -111,7 +131,7 @@ const routes: Routes = [
         data: {role: [Role.Admin, Role.Mentor]}
       },
       {
-        path: 'exam/edit/:id',
+        path: 'tests/start/:id',
         component: StudentTestComponent,
         canActivate: [AuthGuard],
         data: {role: [Role.Admin, Role.Mentor, Role.Student]}

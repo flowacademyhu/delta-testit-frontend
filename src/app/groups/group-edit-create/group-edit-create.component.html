@@ -1,0 +1,13 @@
+<h1>Add new group</h1>
+<div class="container">
+  <mat-form-field>
+    <input type="text" id="name" name="name"  matInput placeholder="Group name" [(ngModel)]="group.name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" id="description" name="description"  matInput placeholder="Description" [(ngModel)]="group.description">
+  </mat-form-field>
+</div>
+<button mat-flat-button color="primary" [mat-dialog-close]="createdUser">Save</button> 
+<button mat-flat-button color="primary" (click)="delete()">Delete</button> 
+<button mat-dialog-close mat-flat-button color="primary">Back</button>
