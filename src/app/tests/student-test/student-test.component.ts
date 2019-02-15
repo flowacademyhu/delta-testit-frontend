@@ -19,6 +19,7 @@ import { TimerDirective } from '../../directives/timer.directive';
 })
 export class StudentTestComponent implements OnInit {
   public test: TestModel = {} as TestModel;
+  public selectedAnswers = [];
   currentUser: UserModel;
   timer: number;
 

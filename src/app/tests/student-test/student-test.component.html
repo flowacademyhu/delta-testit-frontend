@@ -1,17 +1,16 @@
-<h1>{{testDTO.name}}</h1>
 <ng-container [counter]="testDTO.time"
   [interval]="1000"
   (value)="count = $event">
-  <span> {{ count}} </span>
+  <span> <h1> {{testDTO.name}} | {{count | time}} </h1> </span>
 </ng-container>
-
+<div class="testbody">
 <mat-horizontal-stepper [linear]="isLinear"
   #stepper>
   <mat-step *ngFor="let question of testDTO.questions">
     <h3>{{question.text}}</h3>
     <mat-radio-group class="radio-group">
       <mat-radio-button class="radio-button"
-        *ngFor="let answer of question.answers">
+        *ngFor="let answer of question.answers" [value]="selectedAnswers">
         {{answer.text}}
       </mat-radio-button>
     </mat-radio-group>
@@ -22,3 +21,4 @@
 </mat-horizontal-stepper>
 <button mat-flat-button
   color="primary">Send</button>
+</div>

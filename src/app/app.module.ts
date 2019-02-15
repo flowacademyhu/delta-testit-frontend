@@ -53,6 +53,7 @@ import { GroupComponent } from './groups/group/group.component';
 import { GroupEditCreateComponent } from './groups/group-edit-create/group-edit-create.component';
 import { GroupListComponent } from './groups/group-list/group-list.component';
 import { TimerDirective } from './directives/timer.directive';
+import { TimePipe } from './pipes/time.pipe';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { TimerDirective } from './directives/timer.directive';
     GroupComponent,
     GroupEditCreateComponent,
     GroupListComponent,
-    TimerDirective
+    TimerDirective,
+    TimePipe
   ],
   imports: [
     BrowserModule,
