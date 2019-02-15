@@ -1,18 +1,23 @@
 <mat-toolbar class="navbar">
   <mat-toolbar-row>
     <span class="navbar-icon navbar-font"><mat-icon routerLink="/user" svgIcon="home"></mat-icon></span>
-    <span><button mat-button [matMenuTriggerFor]="users" class="navbar-font">Users</button>
+    <span *ngIf="isMentor || isAdmin"><button mat-button [matMenuTriggerFor]="users" class="navbar-font">Users</button>
       <mat-menu #users="matMenu">
-        <button (click)="openUserDialog()" mat-menu-item>New User</button>
+        <button (click)="openUserDialog()" mat-menu-item >New User</button>
         <button routerLink="/users/list" mat-menu-item>Users list</button>
+        <button routerLink="/groups/list" mat-menu-item>Groups list</button>
       </mat-menu></span>
-      <span><button mat-button [matMenuTriggerFor]="tests" class="navbar-font">Tests</button>
+      <span *ngIf="isMentor || isAdmin"><button mat-button [matMenuTriggerFor]="tests" class="navbar-font">Tests</button>
         <mat-menu #tests="matMenu">
-          <button routerLink="/subjects/list" mat-menu-item>Subject</button>
+          <button routerLink="/subjects/list" mat-menu-item >Subject</button>
           <button routerLink="/questions/list" mat-menu-item>Question</button>
           <button routerLink="/tests/list" mat-menu-item>Test</button>
         </mat-menu></span>
-    <span class="spacer"></span>
+    <span class="spacer">
+      <span *ngIf="isStudent"><button routerLink="/tests/list" mat-button class="navbar-font">Tests</button>
+      </span>
+    </span>
+    <span class="navbar-icon navbar-font"><mat-icon (click)="openUserDialog()" svgIcon="account"></mat-icon></span><p>|</p>
     <button class="navbar-right navbar-font" mat-button (click)="onLogout()">Logout</button>
     <span class="navbar-right navbar-font"></span>
     <img src="assets/img/flow_logo.png" alt="flow logo" height="40" width="110">

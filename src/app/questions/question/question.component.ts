@@ -22,7 +22,7 @@ export class QuestionComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   public dataSource;
-  displayedColumns: string[] = ['id', 'subject', 'text', 'type', 'value', 'status', 'edit'];
+  displayedColumns: string[] = ['id', 'subject', 'text', 'type', 'value', 'edit'];
 
   constructor(
     private questionService: QuestionService,

@@ -15,6 +15,8 @@ import { Role } from './models/role';
 import { SubjectListComponent } from './subjects/subject-list/subject-list.component';
 import { SubjectEditCreateComponent } from './subjects/subject-edit-create/subject-edit-create.component';
 import { StudentTestComponent } from './tests/student-test/student-test.component';
+import { GroupListComponent } from './groups/group-list/group-list.component';
+import { GroupEditCreateComponent } from './groups/group-edit-create/group-edit-create.component';
 
 
 const routes: Routes = [
@@ -38,16 +40,20 @@ const routes: Routes = [
         component: UserEditCreateComponent
       },
       {
-        path: 'users/edit',
-        component: UserEditCreateComponent
-      },
-      {
         path: 'users/edit/:id',
         component: UserEditCreateComponent
       },
       {
-        path: 'users/edit/:id',
-        component: UserEditCreateComponent
+        path: 'groups/list',
+        component: GroupListComponent
+      },
+      {
+        path: 'groups/edit',
+        component: GroupEditCreateComponent
+      },
+      {
+        path: 'groups/edit/:id',
+        component: GroupEditCreateComponent
       },
       {
         path: 'questions/list',

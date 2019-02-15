@@ -39,6 +39,11 @@ export class HeaderComponent implements OnInit {
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/search_icon.svg')
     );
 
+    this.matIconRegistry.addSvgIcon(
+      'account',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/account_icon.svg')
+    );
+
     this.authService.currentUser.subscribe(x => this.currentUser = x);
   }
 

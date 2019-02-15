@@ -172,7 +172,6 @@ export class DialogContentComponent implements OnInit {
       this.questions = questions;
       this.subjects = subjects;
     });
-
   }
 
   checkValue(event: any) {

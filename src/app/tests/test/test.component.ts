@@ -95,9 +95,9 @@ export class TestComponent implements OnInit {
       filteredTest.id = test.id;
       filteredTest.name = test.name;
       filteredTest.userId = test.User ? test.User.name : '';
+      filteredTest.creatorId = test.User.firstName;
       filteredTest.status = test.status;
       filteredTests.push(filteredTest);
-      console.log('Filtered test:' + filteredTest);
     });
     return filteredTests;
   }

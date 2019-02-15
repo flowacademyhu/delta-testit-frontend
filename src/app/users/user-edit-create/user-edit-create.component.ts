@@ -3,6 +3,10 @@ import { UserModel } from 'src/app/models/user.model';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
+import { AuthService } from 'src/app/auth/auth.service';
+import { Role } from 'src/app/models/role';
+import { GroupService } from 'src/app/services/group.service';
+import { GroupModel } from 'src/app/models/group.model';
 
 @Component({
   selector: 'app-user-edit-create',
@@ -13,13 +17,19 @@ export class UserEditCreateComponent implements OnInit {
 
   public user: UserModel = {} as UserModel;
   public createdUser: UserModel[] = [];
+  public groups: GroupModel[] = [];
+  currentUser: UserModel;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
+    private authService: AuthService,
+    private groupService: GroupService,
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<UserEditCreateComponent>
-    ) { }
+    ) {
+      this.authService.currentUser.subscribe(x => this.currentUser = x);
+     }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -28,6 +38,10 @@ export class UserEditCreateComponent implements OnInit {
           this.user = result ? result : {} as UserModel;
         });
       }
+    });
+
+    this.groupService.getAll().subscribe(groups => {
+      this.groups = groups;
     });
   }
 
@@ -59,4 +73,16 @@ export class UserEditCreateComponent implements OnInit {
     return !this.user.id;
   }
 
+
+  get isAdmin() {
+    return this.currentUser && this.currentUser.role === Role.Admin;
+  }
+
+  get isMentor() {
+    return this.currentUser && this.currentUser.role === Role.Mentor;
+  }
+
+  get isStudent() {
+    return this.currentUser && this.currentUser.role === Role.Student;
+  }
 }

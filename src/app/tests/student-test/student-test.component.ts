@@ -10,6 +10,7 @@ import { ResourceLoader } from '@angular/compiler';
 import { QuestionModel, Status } from 'src/app/models/question.model';
 import { AnswerModel } from 'src/app/models/answer.model';
 import { QuestionService } from 'src/app/services/question.service';
+import { TimerDirective } from '../../directives/timer.directive';
 
 @Component({
   selector: 'app-student-test',
@@ -19,6 +20,7 @@ import { QuestionService } from 'src/app/services/question.service';
 export class StudentTestComponent implements OnInit {
   public test: TestModel = {} as TestModel;
   currentUser: UserModel;
+  timer: number;
 
   isLinear = false;
 
@@ -39,10 +41,10 @@ export class StudentTestComponent implements OnInit {
       picture: '', type: 'FREE',
       value: 12, status: Status.PUBLISHED,
       answers: [
-        { id: 1, questionId: 1, subjectId: 2, text: 'answer 1', isCorrect: null },
-        { id: 2, questionId: 1, subjectId: 2, text: 'answer 2', isCorrect: null },
-        { id: 3, questionId: 1, subjectId: 2, text: 'answer 3', isCorrect: null },
-        { id: 4, questionId: 1, subjectId: 2, text: 'answer 4', isCorrect: null }
+        { id: 1, questionId: 1, subjectId: 2, text: 'answer 5', isCorrect: null },
+        { id: 2, questionId: 1, subjectId: 2, text: 'answer 6', isCorrect: null },
+        { id: 3, questionId: 1, subjectId: 2, text: 'answer 7', isCorrect: null },
+        { id: 4, questionId: 1, subjectId: 2, text: 'answer 8', isCorrect: null }
       ]
     },
     {
@@ -50,20 +52,20 @@ export class StudentTestComponent implements OnInit {
       picture: '', type: 'FREE',
       value: 12, status: Status.PUBLISHED,
       answers: [
-        { id: 1, questionId: 1, subjectId: 2, text: 'answer 1', isCorrect: null },
-        { id: 2, questionId: 1, subjectId: 2, text: 'answer 2', isCorrect: null },
-        { id: 3, questionId: 1, subjectId: 2, text: 'answer 3', isCorrect: null },
-        { id: 4, questionId: 1, subjectId: 2, text: 'answer 4', isCorrect: null }
+        { id: 1, questionId: 1, subjectId: 2, text: 'answer 9', isCorrect: null },
+        { id: 2, questionId: 1, subjectId: 2, text: 'answer 10', isCorrect: null },
+        { id: 3, questionId: 1, subjectId: 2, text: 'answer 11', isCorrect: null },
+        { id: 4, questionId: 1, subjectId: 2, text: 'answer 12', isCorrect: null }
       ]
     }
   ];
 
   testDTO: TestModel = <TestModel>{
-      id: 1,
-      name: 'Teszt',
-      time: 60,
-      questions: this.questions
-    };
+    id: 1,
+    name: 'Teszt',
+    time: 1000,
+    questions: this.questions
+  };
 
 
   constructor(private router: Router,
@@ -82,6 +84,7 @@ export class StudentTestComponent implements OnInit {
       });
     });
 
+    this.startCountdown(10);
   }
 
   get isAdmin() {
@@ -109,4 +112,23 @@ export class StudentTestComponent implements OnInit {
   //   return filteredTests;
   // }
 
+  startCountdown(seconds) {
+    let counter = seconds;
+
+    const interval = setInterval(() => {
+      console.log(counter);
+      counter--;
+
+
+      if (counter < 0) {
+
+        // The code here will run when
+        // the timer has reached zero.
+
+        clearInterval(interval);
+        console.log('Ding!');
+      }
+    }, 1000);
+  }
 }
+
