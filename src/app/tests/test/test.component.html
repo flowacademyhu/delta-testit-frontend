@@ -80,7 +80,9 @@
       *matHeaderCellDef
       mat-sort-header>  </th>
   <td mat-cell
-      *matCellDef="let test"> <button *ngIf="isStudent" [routerLink]="'/tests/start/' + test.id" mat-flat-button color="primary">Start</button> </td>
+      *matCellDef="let test"> 
+      <button *ngIf="isAdmin || isMentor" [routerLink]="'/tests/start/' + test.id" mat-flat-button color="primary">Send</button>
+      <button *ngIf="isStudent" [routerLink]="'/tests/start/' + test.id" mat-flat-button color="primary">Start</button> </td>
 </ng-container>
 
   <ng-container matColumnDef="edit">

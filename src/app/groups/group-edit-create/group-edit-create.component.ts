@@ -50,13 +50,7 @@ export class GroupEditCreateComponent implements OnInit {
       });
     }
   }
-
-  delete() {
-    this.groupService.deleteGroup(this.group.id).subscribe((result) => {
-      this.router.navigate(['groups/list']);
-    }, error => console.log('Error', error));
-  }
-
+  
   isCreateMode(): boolean {
     return !this.group.id;
   }
