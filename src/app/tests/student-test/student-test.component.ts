@@ -84,8 +84,6 @@ export class StudentTestComponent implements OnInit {
         this.test = result;
       });
     });
-
-    this.startCountdown(10);
   }
 
   get isAdmin() {
@@ -98,38 +96,6 @@ export class StudentTestComponent implements OnInit {
 
   get isStudent() {
     return this.currentUser && this.currentUser.role === Role.Student;
-  }
-
-  // filterTest(test: TestModel[]) {
-  //   let filteredTests = [];
-  //   test.map(result => {
-  //     let filteredTest = {};
-
-  //     filteredTest.name = result.name;
-  //     filteredTest.userId = result.User.name;
-  //     filteredTests.push(filteredTest);
-  //     console.log(filteredTest);
-  //   });
-  //   return filteredTests;
-  // }
-
-  startCountdown(seconds) {
-    let counter = seconds;
-
-    const interval = setInterval(() => {
-      console.log(counter);
-      counter--;
-
-
-      if (counter < 0) {
-
-        // The code here will run when
-        // the timer has reached zero.
-
-        clearInterval(interval);
-        console.log('Ding!');
-      }
-    }, 1000);
   }
 }
 

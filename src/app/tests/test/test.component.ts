@@ -1,12 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { TestModel } from 'src/app/models/test.model';
 import { TestService } from 'src/app/services/test.service';
-import { MatIconRegistry, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatIconRegistry, MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserModel } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Role } from 'src/app/models/role';
+import { ResultCreateEditComponent } from 'src/app/results/result-create-edit/result-create-edit.component';
 
 
 @Component({
@@ -36,7 +37,8 @@ export class TestComponent implements OnInit {
     private testService: TestService,
     private authService: AuthService,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer) {
+    private domSanitizer: DomSanitizer,
+    public dialog: MatDialog) {
     this.matIconRegistry.addSvgIcon(
       'edit',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/edit_icon.svg')
@@ -79,11 +81,7 @@ export class TestComponent implements OnInit {
   }
 
   tableDisplayColumn() {
-    if (this.isAdmin || this.isMentor) {
-      this.displayedColumns.push('id', 'name', 'subject', 'student', 'mentor', 'status', 'result', 'start', 'edit');
-    } else {
-      this.displayedColumns.push('id', 'name', 'subject', 'mentor', 'status', 'result', 'start', 'edit');
-    }
+    this.displayedColumns.push('id', 'name', 'subject', 'mentor', 'send', 'edit');
   }
 
   // filterTest(tests: TestModel[]) {
@@ -102,5 +100,13 @@ export class TestComponent implements OnInit {
   //   });
   //   return filteredTests;
   // }
+
+  openTestDialog(test: TestModel) {
+    const dialogRef = this.dialog.open(ResultCreateEditComponent, { data: test });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
 }

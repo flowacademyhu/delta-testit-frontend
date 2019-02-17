@@ -22,7 +22,7 @@ export class GroupComponent implements OnInit {
 
   public dataSource;
 
-  displayedColumns: string[] = ['id', 'name', 'description'];
+  displayedColumns: string[] = ['id', 'name', 'description', 'edit'];
 
   constructor(
     private router: Router,
@@ -65,16 +65,11 @@ export class GroupComponent implements OnInit {
     }, error => console.log('Error', error));
   }
 
-  openGroupDialog() {
-    const dialogRef = this.dialog.open(GroupEditCreateComponent);
+  openGroupDialog(group: GroupModel) {
+    const dialogRef = this.dialog.open(GroupEditCreateComponent, { data: group });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.groupService.createGroup(this.group).subscribe((result) => {
-        alert('Mentés sikeres');
-        this.router.navigate(['groups/list']);
-      }, (error) => {
-        console.log('Error', error);
-      });
+      this.loadData();
       console.log(`Dialog result: ${result}`);
     });
   }

@@ -67,12 +67,13 @@ export class UserComponent implements OnInit {
     }, error => console.log('Error', error));
   }
 
-  openUserDialog() {
+  openUserDialog(user: UserModel) {
 
-    const dialogRef = this.dialog.open(UserEditCreateComponent);
+    const dialogRef = this.dialog.open(UserEditCreateComponent, { data: user });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.loadData();
+      console.log(`>>Dialog result: ${result}`);
     });
   }
 
