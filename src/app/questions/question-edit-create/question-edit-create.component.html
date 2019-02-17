@@ -1,61 +1,65 @@
-<h1>Add question & answer</h1>
-<div class="container">
-  <mat-form-field>
-    <input type="text" id="question" name="question" matInput placeholder="Question" [(ngModel)]="question.text">
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-select placeholder="Subject" [(ngModel)]="question.subjectId">
-      <mat-option *ngFor="let subject of subjects; let index = i" value={{subject.id}}>{{subject.name}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-select placeholder="Type" [(ngModel)]="question.type">
-      <mat-option value="onetrue">Egyválasztós</mat-option>
-      <mat-option value="moretrue">Többválasztós</mat-option>
-      <mat-option value="freeform">Szabad szöveges</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <div *ngIf="question.type == 'moretrue'">
-    <div [formGroup]="formAnswer">
-      <div formArrayName="answers">
-        <div *ngFor="let answer of answers.controls; let i = index">
-          <div class="grid-container">
-            <mat-form-field>
-              <input [formControlName]="i" class="grid-item" type="text" id="answer"
-                name="answer" matInput placeholder="Answer">
-              <span class="spacer"></span>
-            </mat-form-field>
-            <mat-checkbox class="grid-item" [formControlName]="i" (change)="checkValue($event)" value="isCorrect">
-            </mat-checkbox>
+<body>
+    <div class="container">
+        <h1>Add question & answer</h1>
+      <mat-form-field>
+        <input type="text" id="question" name="question" matInput placeholder="Question" [(ngModel)]="question.text">
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-select placeholder="Subject" [(ngModel)]="question.subjectId">
+          <mat-option *ngFor="let subject of subjects; let index = i" value={{subject.id}}>{{subject.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-select placeholder="Type" [(ngModel)]="question.type">
+          <mat-option value="onetrue">Egyválasztós</mat-option>
+          <mat-option value="moretrue">Többválasztós</mat-option>
+          <mat-option value="freeform">Szabad szöveges</mat-option>
+        </mat-select>
+      </mat-form-field>
+    
+      <div *ngIf="question.type == 'moretrue'">
+        <div [formGroup]="formAnswer">
+          <div formArrayName="answers">
+            <div *ngFor="let answer of answers.controls; let i = index">
+              <div class="grid-container">
+                <mat-form-field>
+                  <input [formControlName]="i" class="grid-item" type="text" id="answer"
+                    name="answer" matInput placeholder="Answer">
+                  <span class="spacer"></span>
+                </mat-form-field>
+                <mat-checkbox class="grid-item" [formControlName]="i" (change)="checkValue($event)" value="isCorrect">
+                </mat-checkbox>
+              </div>
+            </div>
           </div>
         </div>
+        <br>
+        <div class="button-container">
+          <button (click)="onAddNewAnswer()" mat-mini-fab color="accent">+</button>
+        </div>
       </div>
+    
+      <br>
+      <mat-form-field>
+        <mat-select placeholder="Points" [(ngModel)]="question.value">
+          <mat-option value="1">1</mat-option>
+          <mat-option value="2">2</mat-option>
+          <mat-option value="3">3</mat-option>
+        </mat-select>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-select placeholder="Status" [(ngModel)]="question.status">
+          <mat-option value="PUBLISHED">PUBLISHED</mat-option>
+          <mat-option value="PROCESSING">PROCESSING</mat-option>
+          <mat-option value="CLOSED">CLOSED</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button  mat-flat-button color="primary" mat-dialog-close="save()">Save</button>
+      <button  mat-flat-button color="primary" mat-dialog-close>Back</button>
+
     </div>
-    <br>
-    <div class="button-container">
-      <button (click)="onAddNewAnswer()" mat-mini-fab color="accent">+</button>
-    </div>
-  </div>
-
-  <br>
-  <mat-form-field>
-    <mat-select placeholder="Points" [(ngModel)]="question.value">
-      <mat-option value="1">1</mat-option>
-      <mat-option value="2">2</mat-option>
-      <mat-option value="3">3</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-select placeholder="Status" [(ngModel)]="question.status">
-      <mat-option value="PUBLISHED">PUBLISHED</mat-option>
-      <mat-option value="PROCESSING">PROCESSING</mat-option>
-      <mat-option value="CLOSED">CLOSED</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-
-<button  mat-flat-button color="primary" mat-dialog-close="save()">Save</button>
+    
+</body>
