@@ -19,7 +19,7 @@ export class QuestionModel {
     public createdAt?: Date,
     public updatedAt?: Date,
 
-    public answers?: AnswerModel[],
+    public answers: AnswerModel[] = [],
     public Subject?: SubjectModel
   ) {
   }

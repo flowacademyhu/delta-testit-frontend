@@ -41,7 +41,7 @@ export class AuthService {
           const helper = new JwtHelperService();
           const decodedToken = helper.decodeToken(user.token);
           if (user && user.token) {
-            localStorage.setItem('currentUser', JSON.stringify(decodedToken));
+            localStorage.setItem('currentUser', JSON.stringify(decodedToken.data));
             this.currentUserSubject.next(decodedToken.data);
           }
           return decodedToken.data;

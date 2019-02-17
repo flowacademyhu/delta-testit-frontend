@@ -14,7 +14,7 @@ export class AnswerService {
     return this.httpClient.get('http://localhost:8080/answers');
   }
 
-  createAnswer(answer: AnswerModel): Observable<any> {
+  createAnswer(answer: AnswerModel[]): Observable<any> {
     return this.httpClient.post('http://localhost:8080/answers', answer);
   }
 }

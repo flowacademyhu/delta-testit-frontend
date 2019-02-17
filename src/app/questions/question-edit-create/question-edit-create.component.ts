@@ -29,12 +29,12 @@ export class QuestionEditCreateComponent implements OnInit {
   formAnswer = new FormGroup({
     answers: new FormArray([
       this.formBuilder.control({
-      text: String,
-      isCorrect: Boolean
+        text: String,
+        isCorrect: Boolean
       })
     ])
   });
-  
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -43,28 +43,33 @@ export class QuestionEditCreateComponent implements OnInit {
     private subjectService: SubjectService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       if (params.id)
-      this.questionService.getQuestion(params.id).subscribe((result: QuestionModel) => {
-        this.question = result ? result : {} as QuestionModel;
-      });
+        this.questionService.getQuestion(params.id).subscribe((result: QuestionModel) => {
+          this.question = result ? result : {} as QuestionModel;
+        });
     });
 
     this.subjectService.getAll().subscribe(subjects => {
       this.subjects = subjects;
     });
+
+    this.answer.text = "";
+    this.answer.isCorrect = false;
+
   }
 
   // onAddNewAnswer(answer: AnswerModel) {
   //   this.answers.push(new FormControl(answer));
   //   console.log('Valaszok tomb: ' + this.formAnswer.value);
   // }
-  
+
   checkValue(event: any) {
     this.answer.isCorrect = event.checked;
+    //this.question.answers = this.answer;
     console.log('isCorrect: ' + this.answer.isCorrect);
   }
 
@@ -73,7 +78,9 @@ export class QuestionEditCreateComponent implements OnInit {
   // }
 
   save() {
-    console.log('Answer model: ' + JSON.stringify(this.answer));
+    this.answersArray.push(this.answer);
+    this.question.answers = this.answersArray;
+    console.log('Answer model: ' + JSON.stringify(this.question.answers));
     if (!this.isCreateMode()) {
       this.questionService.editQuestion(this.question).subscribe((result) => {
         alert('Mentés sikeres');
@@ -82,12 +89,12 @@ export class QuestionEditCreateComponent implements OnInit {
         console.log('Error', error);
       });
     } else {
-      this.questionService.createQuestion(this.question).subscribe(result => {
-        console.log('Result ID: ' + result.id);
-        this.answer.questionId = result.id;
-        this.answerService.createAnswer(this.answer).subscribe((answerSave) => {
-          alert('Mentés sikeres');
-          this.router.navigate(['questions/list']);
+      console.log('QuestionModel with AnswerModel: ' + JSON.stringify(this.question));
+      this.questionService.createQuestion(this.question).subscribe((result) => {
+        this.answer.questionId = this.question.id;
+        this.answerService.createAnswer(this.answersArray).subscribe((answerSave) => {
+           alert('Mentés sikeres');
+           this.router.navigate(['questions/list']);
         });
       }, (error) => {
         console.log('Error', error);

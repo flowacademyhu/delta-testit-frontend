@@ -6,7 +6,7 @@
 
   <mat-form-field>
     <mat-select placeholder="Subject" [(ngModel)]="question.subjectId">
-      <mat-option *ngFor="let subject of subjects; let index = i" value={{subject.id}}>{{subject.name}}</mat-option>
+      <mat-option *ngFor="let subject of subjects; let index = i" value="{{subject.id}}">{{subject.name}}</mat-option>
     </mat-select>
   </mat-form-field>
   <br>
@@ -21,7 +21,7 @@
     <div class="grid-container">
       <mat-form-field>
         <input [(ngModel)]="answer.text" class="grid-item" type="text" id="answer" name="answer" matInput
-          placeholder="Answer 1">
+          placeholder="Answer">
         <span class="spacer"></span>
       </mat-form-field>
       <mat-checkbox class="grid-item" (change)="checkValue($event)" value="isCorrect" [(ngModel)]="answer.isCorrect">
@@ -32,7 +32,7 @@
       <button (click)="onAddNewAnswer()" mat-mini-fab color="accent">+</button>
     </div>
   </div>
-  <p>Form Value: {{ answer | json }}</p>
+  <p>AnswerModel: {{ answer | json }}</p>
 <br>
 <mat-form-field>
   <mat-select placeholder="Points" [(ngModel)]="question.value">
@@ -50,6 +50,4 @@
   </mat-select>
 </mat-form-field>
 
-<mat-dialog-actions align="end"> 
-<button mat-flat-button color="primary" mat-dialog-close="save()">Save</button>
-</mat-dialog-actions>
+<button mat-flat-button color="primary" mat-dialog-close (click)="save()">Save</button>
