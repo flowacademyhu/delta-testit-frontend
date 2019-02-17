@@ -59,7 +59,7 @@
             <th mat-header-cell
                 *matHeaderCellDef> </th>
             <td mat-cell
-                *matCellDef="let user"> <mat-icon (click)="openUserDialog()" svgIcon="edit"></mat-icon>
+                *matCellDef="let user"> <mat-icon (click)="openUserDialog(user)" svgIcon="edit"></mat-icon>
                 <mat-icon (click)="delete(user.id)"
                     svgIcon="delete"></mat-icon>
             </td>

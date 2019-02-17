@@ -1,0 +1,19 @@
+<h1>{{test.name}}</h1>
+
+<mat-form-field>
+  <input type="text" id="userId" name="userId" matInput placeholder="To user/group">
+</mat-form-field>
+
+<p>Time: {{test.time}} </p>
+
+<p>Subject: {{test.TestQuestions[0].Question.Subject.name}}</p>
+
+<p *ngFor="let testQuestion of test?.TestQuestions"> 
+  {{testQuestion?.Question.text}} 
+  <b *ngFor="let answer of testQuestion.Question.Answers"> 
+    {{answer.text}}
+  </b>
+</p>
+
+<button mat-flat-button color="primary">Send</button>
+<button mat-dialog-close mat-flat-button color="primary">Back</button>

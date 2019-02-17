@@ -19,6 +19,9 @@ import { StudentTestComponent } from './tests/student-test/student-test.componen
 import { GroupListComponent } from './groups/group-list/group-list.component';
 import { GroupEditCreateComponent } from './groups/group-edit-create/group-edit-create.component';
 import { StudentComponent } from './student/student.component';
+import { ResultComponent } from './results/result/result.component';
+import { ResultListComponent } from './results/result-list/result-list.component';
+import { ResultCreateEditComponent } from './results/result-create-edit/result-create-edit.component';
 
 
 const routes: Routes = [
@@ -133,6 +136,18 @@ const routes: Routes = [
       {
         path: 'tests/start/:id',
         component: StudentTestComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Admin, Role.Mentor, Role.Student]}
+      },
+      {
+        path: 'results/list',
+        component: ResultListComponent,
+        canActivate: [AuthGuard],
+        data: {role: [Role.Admin, Role.Mentor, Role.Student]}
+      },
+      {
+        path: 'results/edit/:id',
+        component: ResultCreateEditComponent,
         canActivate: [AuthGuard],
         data: {role: [Role.Admin, Role.Mentor, Role.Student]}
       }
