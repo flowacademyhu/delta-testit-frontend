@@ -28,11 +28,13 @@ export class QuestionEditCreateComponent implements OnInit {
 
   formAnswer = new FormGroup({
     answers: new FormArray([
-      this.formBuilder.control('')
+      this.formBuilder.control({
+      text: String,
+      isCorrect: Boolean
+      })
     ])
   });
   
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -45,7 +47,7 @@ export class QuestionEditCreateComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      if (!params.id) return
+      if (params.id)
       this.questionService.getQuestion(params.id).subscribe((result: QuestionModel) => {
         this.question = result ? result : {} as QuestionModel;
       });
@@ -56,26 +58,22 @@ export class QuestionEditCreateComponent implements OnInit {
     });
   }
 
-  onAddNewAnswer(answer: AnswerModel) {
-    this.answers.push(new FormControl(''));
-    console.log(this.answers);
-  }
+  // onAddNewAnswer(answer: AnswerModel) {
+  //   this.answers.push(new FormControl(answer));
+  //   console.log('Valaszok tomb: ' + this.formAnswer.value);
+  // }
   
   checkValue(event: any) {
     this.answer.isCorrect = event.checked;
     console.log('isCorrect: ' + this.answer.isCorrect);
   }
 
-
-  // onAddNewAnswerIsCorrect(answer: AnswerModel) {
-  //   this.answers.push(new FormControl(answer.isCorrect));
+  // get answers() {
+  //    return this.formAnswer.get('answers') as FormArray;
   // }
 
-  get answers() {
-    return this.formAnswer.get('answers') as FormArray;
-  }
-
   save() {
+    console.log('Answer model: ' + JSON.stringify(this.answer));
     if (!this.isCreateMode()) {
       this.questionService.editQuestion(this.question).subscribe((result) => {
         alert('Mentés sikeres');
@@ -84,7 +82,8 @@ export class QuestionEditCreateComponent implements OnInit {
         console.log('Error', error);
       });
     } else {
-      this.questionService.createQuestion(this.question).subscribe((result) => {
+      this.questionService.createQuestion(this.question).subscribe(result => {
+        console.log('Result ID: ' + result.id);
         this.answer.questionId = result.id;
         this.answerService.createAnswer(this.answer).subscribe((answerSave) => {
           alert('Mentés sikeres');

@@ -25,7 +25,6 @@ export class TestEditCreateComponent implements OnInit {
   
   public test: TestModel = {} as TestModel;
   public questions: QuestionModel[] = [];
-  
 
   public dataSource;
   public selection;
@@ -138,8 +137,6 @@ export class TestEditCreateComponent implements OnInit {
 
 }
 
-
-
 @Component({
   selector: 'app-test-edit-create-dialog-component',
   templateUrl: 'test-edit-create-dialog-component.html',
@@ -175,6 +172,8 @@ export class DialogContentComponent implements OnInit {
   checkValue(event: any) {
     console.log(event.source.value);
     this.selectedQuestions.push(event.source.value);
+    console.log(this.selectedQuestions);
+
   }
 
 }

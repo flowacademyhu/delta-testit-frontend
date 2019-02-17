@@ -148,7 +148,7 @@ const routes: Routes = [
       }
     ]
   },
-  { path: '403', component: AccessDeniedComponent },
+  // { path: '403', component: AccessDeniedComponent },
   // // TODO redirect to 403
   { path: '**', redirectTo: '/login' },
 ];
