@@ -91,11 +91,11 @@ export class QuestionEditCreateComponent implements OnInit {
     } else {
       console.log('QuestionModel with AnswerModel: ' + JSON.stringify(this.question));
       this.questionService.createQuestion(this.question).subscribe((result) => {
-        this.answer.questionId = this.question.id;
-        this.answerService.createAnswer(this.answersArray).subscribe((answerSave) => {
-           alert('Mentés sikeres');
-           this.router.navigate(['questions/list']);
-        });
+        this.answer.questionId = result.id;
+        alert('Mentés sikeres');
+        this.router.navigate(['questions/list']);
+        //this.answerService.createAnswer(this.answer).subscribe((answerSave) => {
+        
       }, (error) => {
         console.log('Error', error);
       });
