@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional, Inject } from '@angular/core';
 import { GroupModel } from 'src/app/models/group.model';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { GroupService } from 'src/app/services/group.service';
 
 @Component({
@@ -15,12 +15,15 @@ export class GroupEditCreateComponent implements OnInit {
   public group: GroupModel = {} as GroupModel;
   public createdGroup: GroupModel[] = [];
 
-  constructor(private router: Router,
+  constructor(
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: GroupModel,
+    private router: Router,
     private route: ActivatedRoute,
     private groupService: GroupService,
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<GroupEditCreateComponent>
     ) {
+      this.group = Object.assign({}, data);
      }
 
   ngOnInit() {
@@ -50,7 +53,7 @@ export class GroupEditCreateComponent implements OnInit {
       });
     }
   }
-  
+
   isCreateMode(): boolean {
     return !this.group.id;
   }

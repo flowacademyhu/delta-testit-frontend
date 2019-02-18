@@ -68,16 +68,11 @@ export class SubjectComponent implements OnInit {
     }, error => console.log('Error', error));
   }
 
-  openSubjectDialog() {
-    const dialogRef = this.dialog.open(SubjectEditCreateComponent);
+  openSubjectDialog(subject: SubjectModel) {
+    const dialogRef = this.dialog.open(SubjectEditCreateComponent, { data: subject });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.subjectService.createSubject(this.subject).subscribe((result) => {
-        alert('Mentés sikeres');
-        this.router.navigate(['subjects/list']);
-      }, (error) => {
-        console.log('Error', error);
-      });
+      this.loadData();
       console.log(`Dialog result: ${result}`);
     });
   }

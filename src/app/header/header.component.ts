@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
 import { UserModel } from '../models/user.model';
 import { Role } from '../models/role';
 import { UserEditCreateComponent } from '../users/user-edit-create/user-edit-create.component';
+import { SubjectEditCreateComponent } from '../subjects/subject-edit-create/subject-edit-create.component';
+import { SubjectComponent } from '../subjects/subject/subject.component';
+import { ProfilEditComponent } from '../profil/profil-edit/profil-edit.component';
 
 
 @Component({
@@ -64,6 +67,14 @@ export class HeaderComponent implements OnInit {
   openUserDialog() {
     const dialogRef = this.dialog.open(UserEditCreateComponent);
  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openProfilDialog() {
+    const dialogRef = this.dialog.open(ProfilEditComponent);
+
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });

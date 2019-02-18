@@ -25,7 +25,8 @@ import { MatButtonModule,
   MatSortModule,
   MatExpansionModule,
   MatStepperModule,
-  MatRadioModule} from '@angular/material';
+  MatRadioModule,
+  MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -56,6 +57,10 @@ import { GroupListComponent } from './groups/group-list/group-list.component';
 import { TimerDirective } from './directives/timer.directive';
 import { TimePipe } from './pipes/time.pipe';
 import { StudentComponent } from './student/student.component';
+import { ResultComponent } from './results/result/result.component';
+import { ResultListComponent } from './results/result-list/result-list.component';
+import { ResultCreateEditComponent } from './results/result-create-edit/result-create-edit.component';
+import { ProfilEditComponent } from './profil/profil-edit/profil-edit.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +90,11 @@ import { StudentComponent } from './student/student.component';
     TimerDirective,
     TimePipe,
     StudentComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
+    ResultComponent,
+    ResultListComponent,
+    ResultCreateEditComponent,
+    ProfilEditComponent
   ],
   imports: [
     BrowserModule,
@@ -121,9 +130,10 @@ import { StudentComponent } from './student/student.component';
   providers: [UserService, AuthService, AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false} }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AppComponent, DialogContentComponent, UserEditCreateComponent, SubjectEditCreateComponent]
+  entryComponents: [AppComponent, DialogContentComponent, UserEditCreateComponent, SubjectEditCreateComponent, ProfilEditComponent]
 
 })
 export class AppModule { }

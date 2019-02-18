@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { UserModel } from 'src/app/models/user.model';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -21,6 +21,7 @@ export class UserEditCreateComponent implements OnInit {
   currentUser: UserModel;
 
   constructor(
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: UserModel,
     private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
@@ -29,6 +30,8 @@ export class UserEditCreateComponent implements OnInit {
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<UserEditCreateComponent>
     ) {
+      this.user = Object.assign({}, data);
+
       this.authService.currentUser.subscribe(x => this.currentUser = x);
      }
 
