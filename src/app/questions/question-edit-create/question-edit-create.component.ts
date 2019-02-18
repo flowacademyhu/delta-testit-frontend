@@ -1,12 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { QuestionModel } from 'src/app/models/question.model';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { QuestionService } from 'src/app/services/question.service';
 import { SubjectModel } from 'src/app/models/subject.model';
 import { AnswerService } from 'src/app/services/answer.service';
 import { AnswerModel } from 'src/app/models/answer.model';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { FormBuilder } from '@angular/forms';
+import { MatIconRegistry, MatDialog } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 import { SubjectService } from 'src/app/services/subject.service';
 
 
@@ -17,23 +18,16 @@ import { SubjectService } from 'src/app/services/subject.service';
 })
 export class QuestionEditCreateComponent implements OnInit {
 
+  @Input() answer: AnswerModel = {} as AnswerModel;
+  @Output() answerDelete = new EventEmitter<AnswerModel>();
+
   public question: QuestionModel = {} as QuestionModel;
-  public answer: AnswerModel = {} as AnswerModel;
-  public subjects: SubjectModel[] = [];
-
+  
   public subject: SubjectModel = {} as SubjectModel;
-
-  public answersArray: AnswerModel[] = [];
-  public selectedAnswers: AnswerModel[] = [];
-
-  formAnswer = new FormGroup({
-    answers: new FormArray([
-      this.formBuilder.control({
-        text: String,
-        isCorrect: Boolean
-      })
-    ])
-  });
+  public subjects: SubjectModel[] = [];
+  
+  //public answer: AnswerModel = {} as AnswerModel;
+  public answers: AnswerModel[] = [];
 
   constructor(
     private router: Router,
@@ -42,8 +36,15 @@ export class QuestionEditCreateComponent implements OnInit {
     private answerService: AnswerService,
     private subjectService: SubjectService,
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
-  ) { }
+    public dialog: MatDialog,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
+  ) {
+    this.matIconRegistry.addSvgIcon(
+      'delete',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/delete_icon.svg')
+    );
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -56,30 +57,24 @@ export class QuestionEditCreateComponent implements OnInit {
     this.subjectService.getAll().subscribe(subjects => {
       this.subjects = subjects;
     });
-
-    this.answer.text = "";
-    this.answer.isCorrect = false;
-
   }
 
-  // onAddNewAnswer(answer: AnswerModel) {
-  //   this.answers.push(new FormControl(answer));
-  //   console.log('Valaszok tomb: ' + this.formAnswer.value);
-  // }
+  onAddNewAnswer() {
+    this.answers.push(new AnswerModel());
+    console.log('Valaszok tomb: ' + this.answer);
+  }
+
+  onDeleteLastAnswer(answer: AnswerModel) {
+    this.answers.pop();
+  }
 
   checkValue(event: any) {
     this.answer.isCorrect = event.checked;
-    //this.question.answers = this.answer;
     console.log('isCorrect: ' + this.answer.isCorrect);
   }
 
-  // get answers() {
-  //    return this.formAnswer.get('answers') as FormArray;
-  // }
-
   save() {
-    this.answersArray.push(this.answer);
-    this.question.answers = this.answersArray;
+    this.question.answers = this.answers;
     console.log('Answer model: ' + JSON.stringify(this.question.answers));
     if (!this.isCreateMode()) {
       this.questionService.editQuestion(this.question).subscribe((result) => {
@@ -94,8 +89,6 @@ export class QuestionEditCreateComponent implements OnInit {
         this.answer.questionId = result.id;
         alert('Mentés sikeres');
         this.router.navigate(['questions/list']);
-        //this.answerService.createAnswer(this.answer).subscribe((answerSave) => {
-        
       }, (error) => {
         console.log('Error', error);
       });
