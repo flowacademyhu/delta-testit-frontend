@@ -12,7 +12,9 @@ import { AnswerModel } from 'src/app/models/answer.model';
 import { QuestionService } from 'src/app/services/question.service';
 import { TimerDirective } from '../../directives/timer.directive';
 import { ResultModel } from 'src/app/models/result.model';
-import { MatRadioChange, MatHorizontalStepper } from '@angular/material';
+import { MatRadioChange, MatHorizontalStepper, MatDialog } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
+import { StudentResultComponent } from '../student-result/student-result.component';
 
 @Component({
   selector: 'app-student-test',
@@ -84,7 +86,8 @@ export class StudentTestComponent implements OnInit {
     private route: ActivatedRoute,
     private questionService: QuestionService,
     private testService: TestService,
-    private authService: AuthService) {
+    private authService: AuthService,
+    public dialog: MatDialog) {
 
     this.authService.currentUser.subscribe(x => this.currentUser = x);
   }
@@ -128,8 +131,18 @@ export class StudentTestComponent implements OnInit {
 
     this.sent = true;
     console.log(stepper);
+
+    this.openTestResultDialog();
     // stepper.selectedIndex = this.testDTO.questions.length - 1;
     // stepper.next();
+  }
+
+  openTestResultDialog() {
+    const dialogRef = this.dialog.open(StudentResultComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
 }

@@ -1,3 +1,21 @@
+.step {
+  width: 100%;
+}
+
+.mat-step-label {
+  display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 50px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.element-align {
+  flex-direction: row;
+}
+
 .radio-group {
   display: inline-flex;
   flex-direction: column;
@@ -19,4 +37,8 @@
 // .mat-step-header-ripple
 .mat-ripple {
   width: 50px !important;
+}
+
+.example-card {
+  max-width: 400px;
 }

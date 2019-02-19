@@ -35,6 +35,14 @@
       <td mat-cell *matCellDef="let result"> </td>
     </ng-container>
 
+    <ng-container matColumnDef="result">
+        <th mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header> Result </th>
+        <td mat-cell
+          *matCellDef="let result"> </td>
+      </ng-container>
+
     <ng-container matColumnDef="start">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
       <td mat-cell *matCellDef="let result"> <button [routerLink]="'/tests/start/edit/' + result.id" mat-flat-button

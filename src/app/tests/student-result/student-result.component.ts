@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-student-result',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentResultComponent implements OnInit {
 
-  constructor() { }
+  constructor( public dialog: MatDialog,
+    public dialogRef: MatDialogRef<StudentResultComponent>) {
+    }
 
   ngOnInit() {
   }
