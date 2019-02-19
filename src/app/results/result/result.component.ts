@@ -77,6 +77,10 @@ export class ResultComponent implements OnInit {
     return this.currentUser && this.currentUser.role === Role.Student;
   }
 
+  get isRow() {
+    return this.result.userId === this.currentUser.id; 
+  }
+
   openTestDialog(test: TestModel) {
     const dialogRef = this.dialog.open(ResultCreateEditComponent, { data: test });
 
