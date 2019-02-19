@@ -5,11 +5,19 @@ import { GroupService } from 'src/app/services/group.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { GroupEditCreateComponent } from '../group-edit-create/group-edit-create.component';
 import { Router } from '@angular/router';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-group',
   templateUrl: './group.component.html',
-  styleUrls: ['./group.component.scss']
+  styleUrls: ['./group.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class GroupComponent implements OnInit {
 
@@ -21,6 +29,7 @@ export class GroupComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   public dataSource;
+  expandedElement: GroupModel;
 
   displayedColumns: string[] = ['id', 'name', 'description', 'edit'];
 
