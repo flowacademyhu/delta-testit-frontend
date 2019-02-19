@@ -8,17 +8,23 @@
   #stepper>
   <mat-step *ngFor="let question of testDTO.questions">
     <h3>{{question.text}}</h3>
-    <mat-radio-group class="radio-group">
+    <mat-radio-group class="radio-group" [(ngModel)]="choosenAnswers[question.id]">
       <mat-radio-button class="radio-button"
-        *ngFor="let answer of question.answers" [value]="selectedAnswers">
+        *ngFor="let answer of question.answers" [value]="answer">
         {{answer.text}}
       </mat-radio-button>
     </mat-radio-group>
+    <br>
+    <pre>
+      {{ choosenAnswers | json }}
+    </pre>
   </mat-step>
-  <mat-step>
-    <h2>Eredmény</h2>
-  </mat-step>
+   <mat-step *ngIf="sent">
+     <h2>Eredmény</h2>
+   </mat-step>
+
 </mat-horizontal-stepper>
 <button mat-flat-button
+  (click)="save(stepper)"
   color="primary">Send</button>
 </div>

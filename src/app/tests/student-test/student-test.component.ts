@@ -11,6 +11,8 @@ import { QuestionModel, Status } from 'src/app/models/question.model';
 import { AnswerModel } from 'src/app/models/answer.model';
 import { QuestionService } from 'src/app/services/question.service';
 import { TimerDirective } from '../../directives/timer.directive';
+import { ResultModel } from 'src/app/models/result.model';
+import { MatRadioChange, MatHorizontalStepper } from '@angular/material';
 
 @Component({
   selector: 'app-student-test',
@@ -19,11 +21,13 @@ import { TimerDirective } from '../../directives/timer.directive';
 })
 export class StudentTestComponent implements OnInit {
   public test: TestModel = {} as TestModel;
-  public selectedAnswers = [];
   currentUser: UserModel;
   timer: number;
 
   isLinear = false;
+  sent = false;
+
+  public choosenAnswers = {};
 
   questions: QuestionModel[] = [
     {
@@ -68,6 +72,13 @@ export class StudentTestComponent implements OnInit {
     questions: this.questions
   };
 
+  result: ResultModel = <ResultModel>{
+    id: 123,
+    status: 'PUBLISHED',
+    testId: 1,
+    userId: 8
+  };
+
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -84,6 +95,10 @@ export class StudentTestComponent implements OnInit {
         this.test = result;
       });
     });
+
+    this.questions.forEach(question => {
+      this.choosenAnswers[question.id] = null;
+    });
   }
 
   get isAdmin() {
@@ -97,5 +112,25 @@ export class StudentTestComponent implements OnInit {
   get isStudent() {
     return this.currentUser && this.currentUser.role === Role.Student;
   }
+
+  save(stepper: MatHorizontalStepper) {
+    console.log(stepper);
+
+    const results = [];
+    this.questions.forEach(question => {
+      if (this.choosenAnswers[question.id]) {
+        results.push({
+          resultId: this.result.id,
+          answerId: this.choosenAnswers[question.id].id
+        });
+      }
+    });
+
+    this.sent = true;
+    console.log(stepper);
+    // stepper.selectedIndex = this.testDTO.questions.length - 1;
+    // stepper.next();
+  }
+
 }
 
