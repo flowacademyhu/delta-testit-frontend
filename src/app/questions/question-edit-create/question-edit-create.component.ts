@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Optional, Inject } from '@angular/core';
 import { QuestionModel } from 'src/app/models/question.model';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { QuestionService } from 'src/app/services/question.service';
@@ -6,7 +6,7 @@ import { SubjectModel } from 'src/app/models/subject.model';
 import { AnswerService } from 'src/app/services/answer.service';
 import { AnswerModel } from 'src/app/models/answer.model';
 import { FormBuilder } from '@angular/forms';
-import { MatIconRegistry, MatDialog } from '@angular/material';
+import { MatIconRegistry, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SubjectService } from 'src/app/services/subject.service';
 
@@ -30,6 +30,7 @@ export class QuestionEditCreateComponent implements OnInit {
   public answers: AnswerModel[] = [];
 
   constructor(
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: QuestionModel,
     private router: Router,
     private route: ActivatedRoute,
     private questionService: QuestionService,
@@ -44,14 +45,17 @@ export class QuestionEditCreateComponent implements OnInit {
       'delete',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/delete_icon.svg')
     );
+
+    this.question = Object.assign({}, data);
   }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      if (params.id)
+      if (params.id) {
         this.questionService.getQuestion(params.id).subscribe((result: QuestionModel) => {
           this.question = result ? result : {} as QuestionModel;
         });
+      }
     });
 
     this.subjectService.getAll().subscribe(subjects => {

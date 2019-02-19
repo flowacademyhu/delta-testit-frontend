@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, Optional, Inject } from '@angular/core';
 import { QuestionModel } from 'src/app/models/question.model';
 import { QuestionService } from 'src/app/services/question.service';
 import { AnswerModel } from 'src/app/models/answer.model';
-import { MatIconRegistry, MatSort, MatDialog } from '@angular/material';
+import { MatIconRegistry, MatSort, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { QuestionEditCreateComponent } from '../question-edit-create/question-edit-create.component';
@@ -66,8 +66,8 @@ export class QuestionComponent implements OnInit {
     }, error => console.log('Error', error));
   }
 
-  openQuestionDialog() {
-    const dialogRef = this.dialog.open(QuestionEditCreateComponent);
+  openQuestionDialog(question: QuestionModel) {
+    const dialogRef = this.dialog.open(QuestionEditCreateComponent, { data: question });
 
     dialogRef.afterClosed().subscribe(result => {
       this.loadData();
