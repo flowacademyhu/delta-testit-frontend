@@ -19,7 +19,7 @@
         *matHeaderCellDef
         mat-sort-header> ID </th>
       <td mat-cell
-        *matCellDef="let result"><p *ngIf="result.userId === currentUser.id">{{result.id}}</p></td>
+        *matCellDef="let result">{{result.id}}</td>
     </ng-container>
 
     <ng-container matColumnDef="testname">
@@ -27,7 +27,7 @@
         *matHeaderCellDef
         mat-sort-header> Test name </th>
       <td mat-cell
-        *matCellDef="let result"><p *ngIf="result.userId === currentUser.id">{{result.Test.name}}</p></td>
+        *matCellDef="let result">{{result.Test.name}}</td>
     </ng-container>
 
     <ng-container matColumnDef="student">
@@ -35,7 +35,7 @@
         *matHeaderCellDef
         mat-sort-header> Student </th>
       <td mat-cell
-        *matCellDef="let result"><p *ngIf="result.userId === currentUser.id">{{result.User.firstName}} {{result.User.lastName}}</p></td>
+        *matCellDef="let result">{{result.User.firstName}} {{result.User.lastName}}</td>
     </ng-container>
 
     <ng-container matColumnDef="mentor">
@@ -59,7 +59,7 @@
         *matHeaderCellDef
         mat-sort-header> </th>
       <td mat-cell
-        *matCellDef="let result"> <button *ngIf="isStudent && result.userId === currentUser.id"
+        *matCellDef="let result"> <button
           [routerLink]="'/tests/start/edit/' + result.id"
           mat-flat-button
           color="primary">Start</button>

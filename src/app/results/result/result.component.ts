@@ -55,10 +55,14 @@ export class ResultComponent implements OnInit {
 
   private loadData() {
     this.resultService.getAll().subscribe(results => {
-      this.dataSource = new MatTableDataSource<ResultModel>(results) || null;
+      this.dataSource = new MatTableDataSource<ResultModel>(this.resultFilter(results)) || null;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
+  }
+
+  resultFilter(results: ResultModel[]) {
+    return this.isStudent ? results.filter(element => element.userId === this.currentUser.id) : results;
   }
 
   applyFilter(filterValue: string) {
