@@ -3,6 +3,10 @@ import { TestService } from 'src/app/services/test.service';
 import { TestModel } from 'src/app/models/test.model';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { MAT_DIALOG_DATA } from '@angular/material';
+import { GroupService } from 'src/app/services/group.service';
+import { GroupModel } from 'src/app/models/group.model';
+import { UserService } from 'src/app/services/user.service';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-result-create-edit',
@@ -12,12 +16,17 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 export class ResultCreateEditComponent implements OnInit {
 
   public test: TestModel = {} as TestModel;
+  public groups: GroupModel[] = [];
+  public students: UserModel[] = [];
+  public selectedGroupId: number;
 
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: TestModel,
     private route: ActivatedRoute,
     private router: Router,
-    private testService: TestService
+    private testService: TestService,
+    private groupService: GroupService,
+    private userService: UserService
   ) {
     this.test = Object.assign({}, data);
 
@@ -32,7 +41,13 @@ export class ResultCreateEditComponent implements OnInit {
       }
     });
 
+    this.groupService.getAll().subscribe(groups => {
+      this.groups = groups;
+    });
 
+    this.userService.getAll().subscribe(users => {
+      this.students = users;
+    });
   }
 
 

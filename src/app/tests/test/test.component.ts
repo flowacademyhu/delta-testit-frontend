@@ -8,12 +8,20 @@ import { UserModel } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Role } from 'src/app/models/role';
 import { ResultCreateEditComponent } from 'src/app/results/result-create-edit/result-create-edit.component';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
-  styleUrls: ['./test.component.scss']
+  styleUrls: ['./test.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class TestComponent implements OnInit {
 
@@ -22,12 +30,15 @@ export class TestComponent implements OnInit {
   @Output() testDelete = new EventEmitter<TestModel>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  // @ViewChild(MatSort) sort: MatSort;
+
+  @ViewChild(MatSort) sort;
 
   public dataSource;
-  displayedColumns: string[] = [];
+  columnsToDisplay: string[] = ['id', 'name', 'subject', 'mentor', 'edit'];
 
   currentUser: UserModel;
+  expandedElement: TestModel;
 
   // creatorId = this.currentUser.id;
 
@@ -53,8 +64,6 @@ export class TestComponent implements OnInit {
       this.dataSource = new MatTableDataSource<TestModel>(tests);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-
-      this.tableDisplayColumn();
     });
   }
 
@@ -78,10 +87,6 @@ export class TestComponent implements OnInit {
 
   get isStudent() {
     return this.currentUser && this.currentUser.role === Role.Student;
-  }
-
-  tableDisplayColumn() {
-    this.displayedColumns.push('id', 'name', 'subject', 'mentor', 'send', 'edit');
   }
 
   // filterTest(tests: TestModel[]) {
