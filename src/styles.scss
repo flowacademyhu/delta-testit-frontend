@@ -21,6 +21,13 @@ html, body {
   position: fixed;
 }
 
-// .cdk-overlay-pane {
-//   overflow-y: scroll;
-// }
+.mat-horizontal-stepper-header,
+.mat-step-header {
+//.ng-tns-c15-0 {
+//.ng-star-inserted {
+  width: 50px !important;
+}
+
+#cdk-step-label {
+  width: 50px !important;
+}
