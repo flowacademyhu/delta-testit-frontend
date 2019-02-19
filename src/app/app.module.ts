@@ -26,7 +26,8 @@ import { MatButtonModule,
   MatExpansionModule,
   MatStepperModule,
   MatRadioModule,
-  MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
+  MAT_DIALOG_DEFAULT_OPTIONS,
+  MatListModule} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -125,7 +126,8 @@ import { StudentResultComponent } from './tests/student-result/student-result.co
     BrowserAnimationsModule,
     MatNativeDateModule,
     MatStepperModule,
-    MatRadioModule
+    MatRadioModule,
+    MatListModule
   ],
   exports: [
     MatDatepickerModule,

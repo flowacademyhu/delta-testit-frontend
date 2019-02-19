@@ -69,12 +69,14 @@
                     <div class="example-element-detail"
                         [@detailExpand]="test == expandedElement ? 'expanded' : 'collapsed'">
                         <div class="example-element-position"> {{test.name}} </div>
-                        <div *ngFor="let testQuestion of test?.TestQuestions">
+                        <mat-list>
+                        <mat-list-item *ngFor="let testQuestion of test?.TestQuestions">
                             {{testQuestion?.Question.text}}
                             <p *ngFor="let answer of testQuestion.Question.Answers">
                                 {{answer.text}}
                             </p>
-                        </div>
+                        </mat-list-item>
+                    </mat-list>
                         <button *ngIf="isAdmin || isMentor"
                             (click)="openTestDialog(test)"
                             mat-flat-button
@@ -98,6 +100,6 @@
         </table>
     </div>
     <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-            showFirstLastButtons></mat-paginator>
+        showFirstLastButtons></mat-paginator>
 
 </div>

@@ -35,7 +35,7 @@ export class ResultComponent implements OnInit {
   currentUser: UserModel;
   
 
-  displayedColumns: string[] = ['id', 'testname', 'student', 'mentor', 'status', 'start', 'edit'];
+  displayedColumns: string[] = ['id', 'testname', 'student', 'mentor', 'status', 'result', 'start', 'edit'];
 
   constructor(
     private router: Router,
@@ -55,10 +55,14 @@ export class ResultComponent implements OnInit {
 
   private loadData() {
     this.resultService.getAll().subscribe(results => {
-      this.dataSource = new MatTableDataSource<ResultModel>(results) || null;
+      this.dataSource = new MatTableDataSource<ResultModel>(this.resultFilter(results)) || null;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
+  }
+
+  resultFilter(results: ResultModel[]) {
+    return this.isStudent ? results.filter(element => element.userId === this.currentUser.id) : results;
   }
 
   applyFilter(filterValue: string) {
@@ -75,6 +79,10 @@ export class ResultComponent implements OnInit {
 
   get isStudent() {
     return this.currentUser && this.currentUser.role === Role.Student;
+  }
+
+  get isRow() {
+    return this.result.userId === this.currentUser.id; 
   }
 
   openTestDialog(test: TestModel) {

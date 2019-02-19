@@ -1,37 +1,43 @@
 <ng-container [counter]="testDTO.time"
   [interval]="1000"
   (value)="count = $event">
-  <span> <h1> {{testDTO.name}} | {{count | time}} </h1> </span>
+  <span>
+    <h1> {{testDTO.name}} | {{count | time}} </h1>
+  </span>
 </ng-container>
-<div>
-<mat-horizontal-stepper class="step" [linear]="isLinear"
-  #stepper>
-  <mat-step *ngFor="let question of testDTO.questions">
+<div class="element-align">
+  <mat-horizontal-stepper [linear]="isLinear"
+    #stepper>
+    <mat-step *ngFor="let question of testDTO.questions">
 
 
 
-      <mat-card class="step">
-          <mat-card-header>
-            <mat-card-title><h3>{{question.text}}</h3></mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-              <mat-radio-group class="radio-group" [(ngModel)]="choosenAnswers[question.id]">
-                  <mat-radio-button class="radio-button"
-                    *ngFor="let answer of question.answers" [value]="answer">
-                    {{answer.text}}
-                  </mat-radio-button>
-                </mat-radio-group>
-          </mat-card-content>
-        </mat-card>
-  </mat-step>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <h3>{{question.text}}</h3>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-radio-group class="radio-group"
+            [(ngModel)]="choosenAnswers[question.id]">
+            <mat-radio-button class="radio-button"
+              *ngFor="let answer of question.answers"
+              [value]="answer">
+              {{answer.text}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-card-content>
+      </mat-card>
+    </mat-step>
 
-</mat-horizontal-stepper>
+  </mat-horizontal-stepper>
+</div>
 <button mat-flat-button
   (click)="save(stepper)"
   color="primary">Send</button>
-</div>
 
 <br>
-    <pre>
+<pre>
       {{ choosenAnswers | json }}
     </pre>
