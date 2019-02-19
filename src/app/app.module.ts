@@ -61,6 +61,7 @@ import { ResultComponent } from './results/result/result.component';
 import { ResultListComponent } from './results/result-list/result-list.component';
 import { ResultCreateEditComponent } from './results/result-create-edit/result-create-edit.component';
 import { ProfilEditComponent } from './profil/profil-edit/profil-edit.component';
+import { StudentResultComponent } from './tests/student-result/student-result.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,9 @@ import { ProfilEditComponent } from './profil/profil-edit/profil-edit.component'
     ResultComponent,
     ResultListComponent,
     ResultCreateEditComponent,
-    ProfilEditComponent
+    ProfilEditComponent,
+    StudentTestComponent,
+    StudentResultComponent
   ],
   imports: [
     BrowserModule,
@@ -133,7 +136,12 @@ import { ProfilEditComponent } from './profil/profil-edit/profil-edit.component'
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false} }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AppComponent, DialogContentComponent, UserEditCreateComponent, SubjectEditCreateComponent, ProfilEditComponent]
+  entryComponents: [AppComponent,
+    DialogContentComponent,
+    UserEditCreateComponent,
+    SubjectEditCreateComponent,
+    ProfilEditComponent,
+    StudentResultComponent]
 
 })
 export class AppModule { }
