@@ -70,6 +70,7 @@ export class QuestionComponent implements OnInit {
     const dialogRef = this.dialog.open(QuestionEditCreateComponent);
 
     dialogRef.afterClosed().subscribe(result => {
+      this.loadData();
       console.log(`Dialog result: ${result}`);
     });
   }

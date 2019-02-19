@@ -22,10 +22,10 @@ export class QuestionEditCreateComponent implements OnInit {
   @Output() answerDelete = new EventEmitter<AnswerModel>();
 
   public question: QuestionModel = {} as QuestionModel;
-  
+
   public subject: SubjectModel = {} as SubjectModel;
   public subjects: SubjectModel[] = [];
-  
+
   //public answer: AnswerModel = {} as AnswerModel;
   public answers: AnswerModel[] = [];
 
