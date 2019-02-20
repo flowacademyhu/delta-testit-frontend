@@ -30,12 +30,11 @@ export class TestEditCreateComponent implements OnInit {
   public selection;
 
   currentUser: UserModel;
-  // creatorId = this.currentUser.id;
 
   displayedColumns: string[] = ['select', 'id', 'text'];
-
+  
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -43,13 +42,13 @@ export class TestEditCreateComponent implements OnInit {
     private questionService: QuestionService,
     private authService: AuthService,
     public dialog: MatDialog,
-  ) {
-    this.authService.currentUser.subscribe(x => this.currentUser = x);
-
-  }
-
-  ngOnInit() {
-
+    ) {
+      this.authService.currentUser.subscribe(x => this.currentUser = x);
+      
+    }
+    
+    ngOnInit() {
+    this.test.userId = this.currentUser.id;
     this.questionService.getAll().subscribe(questions => {
       this.dataSource = new MatTableDataSource<QuestionModel>(questions);
       this.selection = new SelectionModel<QuestionModel>(true, []);

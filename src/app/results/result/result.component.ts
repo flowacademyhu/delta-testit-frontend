@@ -35,7 +35,7 @@ export class ResultComponent implements OnInit {
   currentUser: UserModel;
   
 
-  displayedColumns: string[] = ['id', 'testname', 'student', 'mentor', 'status', 'result', 'start', 'edit'];
+  displayedColumns: string[] = ['id', 'testname', 'student', 'creator', 'status', 'result', 'start', 'edit'];
 
   constructor(
     private router: Router,
