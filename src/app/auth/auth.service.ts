@@ -14,6 +14,7 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<UserModel>;
   public currentUser: Observable<UserModel>;
   private loggedIn = new BehaviorSubject<boolean>(false);
+  public token: string;
 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
@@ -28,6 +29,7 @@ export class AuthService {
     private httpClient: HttpClient
   ) {
     this.currentUserSubject = new BehaviorSubject<UserModel>(JSON.parse(localStorage.getItem('currentUser')));
+    this.token = localStorage.getItem('jwt');
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -41,7 +43,9 @@ export class AuthService {
           const helper = new JwtHelperService();
           const decodedToken = helper.decodeToken(user.token);
           if (user && user.token) {
+            this.token = user.token;
             localStorage.setItem('currentUser', JSON.stringify(decodedToken.data));
+            localStorage.setItem('jwt', user.token);
             this.currentUserSubject.next(decodedToken.data);
           }
           return decodedToken.data;
