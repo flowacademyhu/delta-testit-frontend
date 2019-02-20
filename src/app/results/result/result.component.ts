@@ -33,7 +33,6 @@ export class ResultComponent implements OnInit {
   public dataSource;
 
   currentUser: UserModel;
-  
 
   displayedColumns: string[] = ['id', 'testname', 'student', 'mentor', 'status', 'result', 'start', 'edit'];
 

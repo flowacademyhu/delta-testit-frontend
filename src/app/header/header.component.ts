@@ -11,6 +11,7 @@ import { UserEditCreateComponent } from '../users/user-edit-create/user-edit-cre
 import { SubjectEditCreateComponent } from '../subjects/subject-edit-create/subject-edit-create.component';
 import { SubjectComponent } from '../subjects/subject/subject.component';
 import { ProfilEditComponent } from '../profil/profil-edit/profil-edit.component';
+import { UserService } from '../services/user.service';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class HeaderComponent implements OnInit {
     private domSanitizer: DomSanitizer,
     private authService: AuthService,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private userService: UserService
     ) {
     this.matIconRegistry.addSvgIcon(
       'home',
@@ -50,7 +52,7 @@ export class HeaderComponent implements OnInit {
   get isAdmin() {
     return this.currentUser && this.currentUser.role === Role.Admin;
   }
-  
+
   get isMentor() {
     return this.currentUser && this.currentUser.role === Role.Mentor;
   }
@@ -68,7 +70,8 @@ export class HeaderComponent implements OnInit {
     const dialogRef = this.dialog.open(UserEditCreateComponent);
  
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.userService.dataEdited.next(true);
+      console.log(`User dialog result: ${result}`);
     });
   }
 
@@ -76,7 +79,7 @@ export class HeaderComponent implements OnInit {
     const dialogRef = this.dialog.open(ProfilEditComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      console.log(`Profile dialog result: ${result}`);
     });
   }
 

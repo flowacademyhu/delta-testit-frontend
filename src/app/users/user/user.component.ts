@@ -45,6 +45,9 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userService.dataEdited.subscribe(result => {
+      this.loadData();
+    });
     this.loadData();
   }
 

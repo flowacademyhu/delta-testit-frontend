@@ -14,7 +14,11 @@ export class ResultService {
     return this.httpClient.get('http://localhost:8080/results');
   }
 
-  getResult(id: number) {
+  getResult(userId: number, resultId: number) {
+    return this.httpClient.get('http://localhost:8080/users/' + userId + '/results/' + resultId + '/fill');
+  }
+
+  getStudentTest(id: number) {
     return this.httpClient.get('http://localhost:8080/results/' + id);
   }
 

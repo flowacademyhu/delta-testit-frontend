@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TestService } from 'src/app/services/test.service';
 import { TestModel } from 'src/app/models/test.model';
@@ -21,13 +21,14 @@ import { StudentResultComponent } from '../student-result/student-result.compone
   templateUrl: './student-test.component.html',
   styleUrls: ['./student-test.component.scss']
 })
-export class StudentTestComponent implements OnInit {
+export class StudentTestComponent implements OnInit, AfterViewInit {
   public test: TestModel = {} as TestModel;
   currentUser: UserModel;
   timer: number;
 
   isLinear = false;
   sent = false;
+  time;
 
   public choosenAnswers = {};
 
@@ -70,7 +71,7 @@ export class StudentTestComponent implements OnInit {
   testDTO: TestModel = <TestModel>{
     id: 1,
     name: 'Teszt',
-    time: 1000,
+    time: 30,
     questions: this.questions
   };
 
@@ -104,6 +105,10 @@ export class StudentTestComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+    this.time = setTimeout(() => this.save(), this.testDTO.time * 1000);
+  }
+
   get isAdmin() {
     return this.currentUser && this.currentUser.role === Role.Admin;
   }
@@ -116,8 +121,8 @@ export class StudentTestComponent implements OnInit {
     return this.currentUser && this.currentUser.role === Role.Student;
   }
 
-  save(stepper: MatHorizontalStepper) {
-    console.log(stepper);
+  save() {
+    // console.log(stepper);
 
     const results = [];
     this.questions.forEach(question => {
@@ -130,8 +135,9 @@ export class StudentTestComponent implements OnInit {
     });
 
     this.sent = true;
-    console.log(stepper);
-
+    // console.log(stepper);
+    clearTimeout(this.time);
+    this.testDTO.time = 0;
     this.openTestResultDialog();
     // stepper.selectedIndex = this.testDTO.questions.length - 1;
     // stepper.next();
