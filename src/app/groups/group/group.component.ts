@@ -6,6 +6,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { GroupEditCreateComponent } from '../group-edit-create/group-edit-create.component';
 import { Router } from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { UserService } from 'src/app/services/user.service';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-group',
@@ -23,6 +25,8 @@ export class GroupComponent implements OnInit {
 
   @Input() group: GroupModel;
 
+  public users: UserModel[] = [];
+
   @Output() groupDelete = new EventEmitter<GroupModel>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -36,6 +40,7 @@ export class GroupComponent implements OnInit {
   constructor(
     private router: Router,
     private groupService: GroupService,
+    private userService: UserService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
     public dialog: MatDialog) {
@@ -53,6 +58,11 @@ export class GroupComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
+
+    this.userService.getAll().subscribe(user => {
+      this.users.push(user);
+      console.log(this.users);
+    });
   }
 
   private loadData() {

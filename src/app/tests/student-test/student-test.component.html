@@ -3,28 +3,25 @@
     [interval]="1000"
     (value)="count = $event">
     <span>
-      <h1> {{result.Test.name}} | {{count | time}} </h1>
+      <h1> {{result.Test?.name}} | {{count | time}} </h1>
     </span>
   </ng-container>
-  <!-- <div class="element-align">
+  <div class="element-align">
     <mat-horizontal-stepper [linear]="isLinear"
       #stepper>
-      <mat-step *ngFor="let question of testDTO.questions">
-  
-  
-  
+      <mat-step *ngFor="let testQuestion of result.Test?.TestQuestions">
         <mat-card>
           <mat-card-header>
             <mat-card-title>
-              <h3>{{question.text}}</h3>
+              <h3>{{testQuestion.Question.text}}</h3>
             </mat-card-title>
           </mat-card-header>
           <mat-card-content>
             <mat-radio-group class="radio-group"
-              [(ngModel)]="choosenAnswers[question.id]">
+              [(ngModel)]="choosenAnswers[testQuestion.Question.id]">
               <mat-radio-button class="radio-button"
-                *ngFor="let answer of question.answers"
-                [value]="answer">
+                *ngFor="let answer of testQuestion.Question.Answers"
+                [value]="answer.id">
                 {{answer.text}}
               </mat-radio-button>
             </mat-radio-group>
@@ -33,9 +30,9 @@
       </mat-step>
   
     </mat-horizontal-stepper>
-  </div> -->
+  </div>
   <button mat-flat-button
-    (click)="save(stepper)"
+    (click)="save()"
     color="primary">Send</button>
   
   <br>

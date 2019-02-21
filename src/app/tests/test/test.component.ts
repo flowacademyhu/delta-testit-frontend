@@ -35,7 +35,7 @@ export class TestComponent implements OnInit {
   @ViewChild(MatSort) sort;
 
   public dataSource;
-  columnsToDisplay: string[] = ['id', 'name', 'subject', 'mentor', 'edit'];
+  columnsToDisplay: string[] = ['id', 'name', 'subject', 'mentor',  'edit'];
 
   currentUser: UserModel;
   expandedElement: TestModel;
