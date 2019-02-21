@@ -2,6 +2,7 @@ import { QuestionModel } from './question.model';
 import { SubjectModel } from './subject.model';
 import { TestQuestionModel } from './testquestion.model';
 import { UserModel } from './user.model';
+import { ResultModel } from './result.model';
 
 
 export class TestModel {
@@ -15,6 +16,7 @@ export class TestModel {
     public createdAt: Date,
     public updatedAt: Date,
     public questions?: QuestionModel[],
+    public userIds: number[] = [],
 
     public subject?: string,
     public TestQuestions?: TestQuestionModel[],

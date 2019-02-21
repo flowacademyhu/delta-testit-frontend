@@ -10,8 +10,8 @@ export class ResultService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAll(): Observable<any> {
-    return this.httpClient.get('http://localhost:8080/results');
+  getAll(): Observable<ResultModel[]> {
+    return this.httpClient.get<ResultModel[]>('http://localhost:8080/results');
   }
 
   getResult(userId: number, resultId: number) {

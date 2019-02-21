@@ -36,7 +36,7 @@
             *matHeaderCellDef
             mat-sort-header> Creator </th>
           <td mat-cell
-            *matCellDef="let result"> {{result.User.firstName}} {{result.User.lastName}} </td>
+            *matCellDef="let result"> {{result.Test.userId}}</td>
         </ng-container>
 
         <ng-container matColumnDef="status">
@@ -52,7 +52,7 @@
             *matHeaderCellDef
             mat-sort-header> Result </th>
           <td mat-cell
-            *matCellDef="let result"> </td>
+            *matCellDef="let result">{{ result.percent }}%</td>
         </ng-container>
 
         <ng-container matColumnDef="start">
@@ -61,7 +61,7 @@
             mat-sort-header> </th>
           <td mat-cell
             *matCellDef="let result"> <button *ngIf="result.status != resultClosed"
-              [routerLink]="'/users/' + currentUser.id + '/results/' + result.id + '/fill'"
+              [routerLink]="'/users/' + currentUser.id + '/results/' + result.id"
               mat-flat-button
               color="primary">Start</button>
           </td>
@@ -90,175 +90,25 @@
   </mat-tab>
   <mat-tab label="By Test">
 
+      <mat-expansion-panel *ngFor="let test of tests">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ test.id }}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ test.name }} | {{test.User.Group.name}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+        
+          <h2>Creator name: <u>{{test.User.firstName}} {{test.User.lastName}}</u></h2>
 
-    <!-- <table mat-table
-      [dataSource]="dataSource"
-      multiTemplateDataRows
-      class="mat-elevation-z8">
-
-      <ng-container matColumnDef="{{column}}"
-        *ngFor="let column of columnsToDisplay">
-        <th mat-header-cell
-          *matHeaderCellDef> {{column}} </th>
-        <td mat-cell
-          *matCellDef="let test"> {{test[column]}} </td>
-      </ng-container> -->
-
-      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-      <!-- <ng-container matColumnDef="expandedDetail">
-        <td mat-cell
-          *matCellDef="let test"
-          [attr.colspan]="columnsToDisplay.length">
-          <div class="example-element-detail"
-            [@detailExpand]="test == expandedElement ? 'expanded' : 'collapsed'">
-            {{ test == expandedElement }}
-            <div class="example-element-diagram">
-              <div class="example-element-position"> {{test.id}} </div>
-              <div class="example-element-symbol"> {{test.nam}} </div>
-
-            </div>
-            Teszt
-          </div>
-
-        </td>
-      </ng-container> -->
-
-      <!-- <ng-container matColumnDef="id">
-        <td mat-cell
-        *matCellDef="let test">
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    This is the expansion title
-                  </mat-panel-title>
-                  <mat-panel-description>
-                    This is a summary of the content
-                  </mat-panel-description>
-                </mat-expansion-panel-header>
-              
-                <p>This is the primary content of the panel.</p>
-              
-              </mat-expansion-panel>
-        </td>
-      </ng-container> -->
-      
-
-      <!-- <ng-container matColumnDef="{{column}}"
-        *ngFor="let column of columnsToDisplay">
-
-      <tr mat-header-row
-        *matHeaderRowDef="columnsToDisplay"></tr>
-      <tr mat-row
-        *matRowDef="let test; columns: columnsToDisplay;"
-        class="example-element-row"
-        [class.example-expanded-row]="expandedElement === test"
-        (click)="expandedElement = expandedElement === test ? null : test">
-      </tr>
-      <tr mat-row
-        *matRowDef="let row; columns: ['expandedDetail']"
-        class="example-detail-row"></tr>
-    </table> -->
-
-    <table mat-table
-        [dataSource]="dataSource"
-        matSort
-        class="mat-elevation-z8">
-
-        <!-- <ng-container matColumnDef="{{column}}"
-        *ngFor="let column of columnsToDisplay">
-        <th mat-header-cell
-          *matHeaderCellDef> {{column}} </th>
-        <td mat-cell
-          *matCellDef="let test"> {{test[column]}} </td>
-      </ng-container> -->
-
-        <ng-container matColumnDef="id">
-          <th mat-header-cell
-            *matHeaderCellDef></th>
-          <td mat-cell
-            class="by_test_td"
-            *matCellDef="let result">
-              <mat-expansion-panel>
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                      {{ result.id }}
-                    </mat-panel-title>
-                    <mat-panel-description>
-                      {{ result.Test.name }}
-                    </mat-panel-description>
-                  </mat-expansion-panel-header>
-                
-                  <p>This is the primary content of the panel.</p>
-                
-                </mat-expansion-panel>
-          </td>
-        </ng-container>
-
-        <!-- <ng-container matColumnDef="testname">
-          <th mat-header-cell
-            *matHeaderCellDef
-            mat-sort-header> Test name </th>
-          <td mat-cell
-            *matCellDef="let result">{{result.Test.name}}</td>
-        </ng-container> -->
-
-        <!-- <ng-container matColumnDef="student">
-          <th mat-header-cell
-            *matHeaderCellDef
-            mat-sort-header> Student </th>
-          <td mat-cell
-            *matCellDef="let result">{{result.User.firstName}} {{result.User.lastName}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="mentor">
-          <th mat-header-cell
-            *matHeaderCellDef
-            mat-sort-header> Mentor </th>
-          <td mat-cell
-            *matCellDef="let result"> </td>
-        </ng-container>
-
-        <ng-container matColumnDef="status">
-          <th mat-header-cell
-            *matHeaderCellDef
-            mat-sort-header> Status </th>
-          <td mat-cell
-            *matCellDef="let result"> {{result.status}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="result">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Result </th>
-          <td mat-cell *matCellDef="let result"> </td>
-        </ng-container>
-
-        <ng-container matColumnDef="start">
-          <th mat-header-cell
-            *matHeaderCellDef
-            mat-sort-header> </th>
-          <td mat-cell
-            *matCellDef="let result"> <button *ngIf="result.status != resultClosed"
-              [routerLink]="'/users/' + currentUser.id + '/results/' + result.id + '/fill'"
-              mat-flat-button
-              color="primary">Start</button>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="edit">
-          <th mat-header-cell
-            *matHeaderCellDef> </th>
-          <td mat-cell
-            *matCellDef="let result">
-
-          </td>
-        </ng-container> -->
-
-
-        <tr mat-header-row
-          *matHeaderRowDef="columnsToDisplay"></tr>
-        <tr mat-row
-          *matRowDef="let row; columns: columnsToDisplay;"></tr>
-
-      </table>
+          <ul>
+            <li *ngFor="let result of getTestsResults(test)">
+                {{result.User.firstName}} {{result.User.lastName}}
+            </li>
+          </ul>
+        
+        </mat-expansion-panel>
 
   </mat-tab>
   <mat-tab label="Templates">

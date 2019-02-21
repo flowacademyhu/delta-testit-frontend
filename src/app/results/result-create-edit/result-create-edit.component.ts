@@ -8,6 +8,7 @@ import { GroupModel } from 'src/app/models/group.model';
 import { UserService } from 'src/app/services/user.service';
 import { UserModel } from 'src/app/models/user.model';
 import { ResultService } from 'src/app/services/result.service';
+import { ResultModel } from 'src/app/models/result.model';
 
 @Component({
   selector: 'app-result-create-edit',
@@ -17,10 +18,12 @@ import { ResultService } from 'src/app/services/result.service';
 export class ResultCreateEditComponent implements OnInit {
 
   public test: TestModel = {} as TestModel;
+  public result: ResultModel = {} as ResultModel;
   public user: UserModel = {} as UserModel;
   public groups: GroupModel[] = [];
   public students: UserModel[] = [];
   public selectedGroupId: number;
+  public userId: number[] = [];
 
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: TestModel,
@@ -36,6 +39,7 @@ export class ResultCreateEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.userId);
     this.route.params.subscribe((params: Params) => {
       if (params.id) {
         this.testService.getTest(params.id).subscribe((result: TestModel) => {
@@ -54,7 +58,9 @@ export class ResultCreateEditComponent implements OnInit {
   }
 
   save() {
+    this.test.userIds = this.userId;
     this.testService.createResult(this.test).subscribe((result) => {
+      console.log(this.userId);
       alert('Mentés sikeres');
       this.router.navigate(['results/list']);
     }, (error) => {
@@ -63,8 +69,8 @@ export class ResultCreateEditComponent implements OnInit {
   }
 
   checkValue(event: any) {
-    console.log(event);
-    this.test.userId = event.source.value;
+    console.log(event.source.value);
+    this.userId.push(event.source.value);
   }
 
 

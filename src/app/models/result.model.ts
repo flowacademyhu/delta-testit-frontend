@@ -1,4 +1,5 @@
 import { TestQuestionModel } from './testquestion.model';
+import { TestModel } from './test.model';
 
 export class ResultModel {
   constructor(
@@ -9,7 +10,8 @@ export class ResultModel {
     public createdAt: Date,
     public updatedAt: Date,
 
-    public TestQuestions: TestQuestionModel[]
+    public TestQuestions: TestQuestionModel[],
+    public Test: TestModel
   ) {
   }
 }

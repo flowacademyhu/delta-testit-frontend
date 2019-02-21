@@ -24,7 +24,7 @@ export class TestService {
   }
 
   createResult(test: TestModel): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/tests/' + test.id, test);
+    return this.httpClient.post('http://localhost:8080/tests/' + test.id + '/create', {userIds: test.userIds});
   }
 
   editTest(test: TestModel): Observable<any> {

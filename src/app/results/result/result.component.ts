@@ -10,6 +10,8 @@ import { Role } from 'src/app/models/role';
 import { TestModel } from 'src/app/models/test.model';
 import { ResultCreateEditComponent } from '../result-create-edit/result-create-edit.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { TestService } from 'src/app/services/test.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-result',
@@ -32,17 +34,18 @@ export class ResultComponent implements OnInit {
 
   public dataSource;
 
+  public tests: TestModel[] = [] as TestModel[];
+
   currentUser: UserModel;
 
   displayedColumns: string[] = ['id', 'testname', 'student', 'creator', 'status', 'result', 'start', 'edit'];
-  columnsToDisplay = ['id'];
-  expandedElement: any;
   resultClosed = 'CLOSED';
 
   constructor(
     private resultService: ResultService,
     private authService: AuthService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private testService: TestService
     ) {
       this.authService.currentUser.subscribe(x => this.currentUser = x);
   }
@@ -52,10 +55,14 @@ export class ResultComponent implements OnInit {
   }
 
   private loadData() {
-    this.resultService.getAll().subscribe(results => {
+    forkJoin(
+      this.resultService.getAll(),
+      this.testService.getAll()
+    ).subscribe(([results, tests]) => {
       this.dataSource = new MatTableDataSource<ResultModel>(this.resultFilter(results)) || null;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.tests = this.isStudent ? tests.filter(test => test.User.id === this.currentUser.id) : tests;
     });
   }
 
@@ -65,6 +72,10 @@ export class ResultComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  getTestsResults(test: TestModel): ResultModel[] {
+    return this.dataSource.data.filter(result => result.Test.id === test.id);
   }
 
   get isAdmin() {

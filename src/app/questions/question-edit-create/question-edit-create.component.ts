@@ -26,7 +26,6 @@ export class QuestionEditCreateComponent implements OnInit {
   public subject: SubjectModel = {} as SubjectModel;
   public subjects: SubjectModel[] = [];
 
-  //public answer: AnswerModel = {} as AnswerModel;
   public answers: AnswerModel[] = [];
 
   constructor(
@@ -47,6 +46,7 @@ export class QuestionEditCreateComponent implements OnInit {
     );
 
     this.question = Object.assign({}, data);
+    this.answers = this.question.Answers;
   }
 
   ngOnInit() {
@@ -78,8 +78,8 @@ export class QuestionEditCreateComponent implements OnInit {
   }
 
   save() {
-    this.question.answers = this.answers;
-    console.log('Answer model: ' + JSON.stringify(this.question.answers));
+    this.question.Answers = this.answers;
+    console.log('Answer model: ' + JSON.stringify(this.question.Answers));
     if (!this.isCreateMode()) {
       this.questionService.editQuestion(this.question).subscribe((result) => {
         alert('Mentés sikeres');

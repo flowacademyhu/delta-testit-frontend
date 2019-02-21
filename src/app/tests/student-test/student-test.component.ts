@@ -23,10 +23,10 @@ import { TestQuestionModel } from 'src/app/models/testquestion.model';
   templateUrl: './student-test.component.html',
   styleUrls: ['./student-test.component.scss']
 })
-export class StudentTestComponent implements OnInit, AfterViewInit {
+export class StudentTestComponent implements OnInit {
   @ViewChild('stepper') stepper: MatStepper;
 
-  public test: TestModel = {} as TestModel;
+  // public test: TestModel = {} as TestModel;
   public result: ResultModel = {} as ResultModel;
   currentUser: UserModel;
   timer: number;
@@ -36,57 +36,6 @@ export class StudentTestComponent implements OnInit, AfterViewInit {
   time;
 
   public choosenAnswers = {};
-
-  questions: QuestionModel[] = [
-    {
-      id: 1, subjectId: 2, text: 'Question 1',
-      picture: '', type: 'FREE',
-      value: 12, status: Status.PUBLISHED,
-      answers: [
-        { id: 1, questionId: 1, subjectId: 2, text: 'answer 1', isCorrect: null },
-        { id: 2, questionId: 1, subjectId: 2, text: 'answer 2', isCorrect: null },
-        { id: 3, questionId: 1, subjectId: 2, text: 'answer 3', isCorrect: null },
-        { id: 4, questionId: 1, subjectId: 2, text: 'answer 4', isCorrect: null }
-      ]
-    },
-    {
-      id: 2, subjectId: 2, text: 'Question 2',
-      picture: '', type: 'FREE',
-      value: 12, status: Status.PUBLISHED,
-      answers: [
-        { id: 1, questionId: 1, subjectId: 2, text: 'answer 5', isCorrect: null },
-        { id: 2, questionId: 1, subjectId: 2, text: 'answer 6', isCorrect: null },
-        { id: 3, questionId: 1, subjectId: 2, text: 'answer 7', isCorrect: null },
-        { id: 4, questionId: 1, subjectId: 2, text: 'answer 8', isCorrect: null }
-      ]
-    },
-    {
-      id: 3, subjectId: 2, text: 'Question 3',
-      picture: '', type: 'FREE',
-      value: 12, status: Status.PUBLISHED,
-      answers: [
-        { id: 1, questionId: 1, subjectId: 2, text: 'answer 9', isCorrect: null },
-        { id: 2, questionId: 1, subjectId: 2, text: 'answer 10', isCorrect: null },
-        { id: 3, questionId: 1, subjectId: 2, text: 'answer 11', isCorrect: null },
-        { id: 4, questionId: 1, subjectId: 2, text: 'answer 12', isCorrect: null }
-      ]
-    }
-  ];
-
-  testDTO: TestModel = <TestModel>{
-    id: 1,
-    name: 'Teszt',
-    time: 30,
-    questions: this.questions
-  };
-
-  // result: ResultModel = <ResultModel>{
-  //   id: 123,
-  //   status: 'PUBLISHED',
-  //   testId: 1,
-  //   userId: 8
-  // };
-
 
   constructor(private route: ActivatedRoute,
     private questionService: QuestionService,
@@ -103,16 +52,17 @@ export class StudentTestComponent implements OnInit, AfterViewInit {
       console.log(params);
       this.resultService.getResult(params.userId, params.resultId).subscribe((result: ResultModel) => {
         this.result = result;
-        this.result.TestQuestions.forEach((testQuestions: TestQuestionModel) => {
+        console.log('result');
+        console.log(this.result);
+
+        this.time = setTimeout(() => this.save(), result.Test.time * 1000);
+
+        this.result.Test.TestQuestions.forEach((testQuestions: TestQuestionModel) => {
           this.choosenAnswers[testQuestions.Question.id] = null;
         });
       });
     });
 
-  }
-
-  ngAfterViewInit() {
-    this.time = setTimeout(() => this.save(), this.testDTO.time * 1000);
   }
 
   get isAdmin() {
@@ -140,13 +90,13 @@ export class StudentTestComponent implements OnInit, AfterViewInit {
     //   }
     // });
 
-    const answerIds = Object.keys(this.choosenAnswers).map(key => this.choosenAnswers[key]);
+    const answerIds = Object.keys(this.choosenAnswers).map(key => this.choosenAnswers[key]).filter(item => item);
 
     this.resultService.sendResult(this.result.userId, this.result.id, answerIds).subscribe((result) => {
       console.log('Gyozelem!');
       this.sent = true;
       clearTimeout(this.time);
-      this.testDTO.time = 0;
+      this.time = 0;
       this.openTestResultDialog();
     });
 

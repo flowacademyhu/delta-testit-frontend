@@ -7,7 +7,7 @@
 
     <mat-form-field>
       <mat-select placeholder="Subject" [(ngModel)]="question.subjectId">
-        <mat-option *ngFor="let subject of subjects; let index = i" value="{{subject.id}}">{{subject.name}}</mat-option>
+        <mat-option *ngFor="let subject of subjects; let index = i" [value]="subject.id">{{subject.name}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field>
@@ -42,9 +42,9 @@
     <br>
     <mat-form-field>
       <mat-select placeholder="Points" [(ngModel)]="question.value">
-        <mat-option value="1">1</mat-option>
-        <mat-option value="2">2</mat-option>
-        <mat-option value="3">3</mat-option>
+        <mat-option [value]="1">1</mat-option>
+        <mat-option [value]="2">2</mat-option>
+        <mat-option [value]="3">3</mat-option>
       </mat-select>
     </mat-form-field>
 

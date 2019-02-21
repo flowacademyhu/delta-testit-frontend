@@ -1,5 +1,5 @@
 <div class="container-header">
-    <ng-container [counter]="testDTO.time"
+    <ng-container [counter]="result.Test?.time"
     [interval]="1000"
     (value)="count = $event">
     <span>
@@ -34,9 +34,4 @@
   <button mat-flat-button
     (click)="save()"
     color="primary">Send</button>
-  
-  <br>
-  <pre>
-        {{ choosenAnswers | json }}
-      </pre>
 </div>

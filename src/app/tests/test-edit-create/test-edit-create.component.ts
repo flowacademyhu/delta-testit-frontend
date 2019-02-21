@@ -22,7 +22,7 @@ import { forkJoin } from 'rxjs';
 export class TestEditCreateComponent implements OnInit {
 
   @Input() question: QuestionModel = {} as QuestionModel;
-  
+
   public test: TestModel = {} as TestModel;
   public questions: QuestionModel[] = [];
 
@@ -30,11 +30,12 @@ export class TestEditCreateComponent implements OnInit {
   public selection;
 
   currentUser: UserModel;
+  // creatorId = this.currentUser.id;
 
   displayedColumns: string[] = ['select', 'id', 'text'];
-  
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -42,13 +43,14 @@ export class TestEditCreateComponent implements OnInit {
     private questionService: QuestionService,
     private authService: AuthService,
     public dialog: MatDialog,
-    ) {
-      this.authService.currentUser.subscribe(x => this.currentUser = x);
-      
-    }
-    
-    ngOnInit() {
+  ) {
+    this.authService.currentUser.subscribe(x => this.currentUser = x);
+
+  }
+
+  ngOnInit() {
     this.test.userId = this.currentUser.id;
+
     this.questionService.getAll().subscribe(questions => {
       this.dataSource = new MatTableDataSource<QuestionModel>(questions);
       this.selection = new SelectionModel<QuestionModel>(true, []);
@@ -59,6 +61,7 @@ export class TestEditCreateComponent implements OnInit {
       if (params.id) {
         this.testService.getTest(params.id).subscribe((result: TestModel) => {
           this.test = result ? result : {} as TestModel;
+          this.test.time = this.test.time / 60;
         });
       }
     });
@@ -83,6 +86,7 @@ export class TestEditCreateComponent implements OnInit {
   }
 
   save() {
+    this.test.time = this.test.time * 60;
     if (!this.isCreateMode()) {
       this.testService.editTest(this.test).subscribe((result) => {
         alert('Mentés sikeres');
@@ -176,5 +180,3 @@ export class DialogContentComponent implements OnInit {
   }
 
 }
-
-

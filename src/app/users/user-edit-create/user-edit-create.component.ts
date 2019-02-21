@@ -61,7 +61,7 @@ export class UserEditCreateComponent implements OnInit {
       });
     } else {
       this.userService.createUser(this.user).subscribe((result) => {
-        console.log('User ID: '+ result.id);
+        console.log('User ID: ' + result.id);
         alert('Mentés sikeres');
         this.router.navigate(['users/list']);
       }, (error) => {

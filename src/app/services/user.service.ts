@@ -10,7 +10,7 @@ export class UserService {
 
   public dataEdited = new Subject<boolean>();
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   getAll(): Observable<any> {
     return this.httpClient.get('http://localhost:8080/users');
@@ -25,7 +25,19 @@ export class UserService {
   }
 
   editUser(user: UserModel): Observable<any> {
-    return this.httpClient.put('http://localhost:8080/users/' + user.id, user);
+    const body = {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      password: user.password,
+      groupId: user.groupId,
+      role: user.role
+    };
+    if (!user.password) {
+      delete body.password;
+    }
+    console.log(body);
+    return this.httpClient.put('http://localhost:8080/users/' + user.id, body);
   }
 
   sendPassword(user: UserModel): Observable<any> {
