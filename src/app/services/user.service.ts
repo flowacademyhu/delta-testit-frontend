@@ -28,6 +28,10 @@ export class UserService {
     return this.httpClient.put('http://localhost:8080/users/' + user.id, user);
   }
 
+  sendPassword(user: UserModel): Observable<any> {
+    return this.httpClient.put('http://localhost:8080/users/login/password', user);
+  }
+
   deleteUser(id: number) {
     return this.httpClient.delete('http://localhost:8080/users/' + id);
   }

@@ -1,3 +1,4 @@
+import { ForgottenPasswordComponent } from './login/forgotten-password/forgotten-password.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -137,7 +138,7 @@ const routes: Routes = [
         path: 'users/:id/results/:id/fill',
         component: StudentTestComponent,
         canActivate: [AuthGuard],
-        data: {role: [Role.Student]}
+        data: {role: [Role.Student, Role.Admin]}
       },
       {
         path: 'results/list',
@@ -160,6 +161,10 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent
+      },
+      {
+        path: 'login/password',
+        component: ForgottenPasswordComponent
       }
     ]
   },

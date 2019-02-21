@@ -1,3 +1,4 @@
+import { ForgottenPasswordComponent } from './login/forgotten-password/forgotten-password.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { ErrorInterceptor } from './auth/error.interceptor';
 import { JwtInterceptor } from './auth/jwt.interceptor';
@@ -99,7 +100,8 @@ import { StudentResultComponent } from './tests/student-result/student-result.co
     ResultCreateEditComponent,
     ProfilEditComponent,
     StudentTestComponent,
-    StudentResultComponent
+    StudentResultComponent,
+    ForgottenPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -145,7 +147,8 @@ import { StudentResultComponent } from './tests/student-result/student-result.co
     UserEditCreateComponent,
     SubjectEditCreateComponent,
     ProfilEditComponent,
-    StudentResultComponent]
+    StudentResultComponent,
+    ForgottenPasswordComponent]
 
 })
 export class AppModule { }

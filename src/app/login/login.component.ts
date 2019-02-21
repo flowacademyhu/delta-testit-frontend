@@ -4,6 +4,7 @@ import { AuthService } from '../auth/auth.service';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { Role } from '../models/role';
 import { first } from 'rxjs/operators';
+import { MatDialog } from '@angular/material';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-  ) {}
+    ) {}
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -55,7 +56,6 @@ export class LoginComponent implements OnInit {
     }
     this.formSubmitAttempt = true;
   }
-
 }
 
 

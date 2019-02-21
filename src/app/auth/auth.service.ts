@@ -34,7 +34,7 @@ export class AuthService {
   }
 
   login(userLogin: UserModel) {
-    return this.httpClient.post<UserModel>('http://localhost:8080/users/login', {
+    return this.httpClient.post<UserModel>('http://localhost:8080/login', {
       email: userLogin.email,
       password: userLogin.password
     })
