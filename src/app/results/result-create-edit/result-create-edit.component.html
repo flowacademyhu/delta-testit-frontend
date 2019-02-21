@@ -7,7 +7,7 @@
 
   <div *ngFor="let student of students">
       <mat-card *ngIf="student.groupId === selectedGroupId">
-        <mat-checkbox [value]="student"
+        <mat-checkbox [value]="student.id"
           (change)="checkValue($event)">
         </mat-checkbox>{{student.firstName}} {{student.lastName}}
       </mat-card>
@@ -24,5 +24,5 @@
   </p>
 </div>
 
-<button mat-flat-button color="primary">Send</button>
+<button mat-flat-button color="primary" (click)="save()">Send</button>
 <button mat-dialog-close mat-flat-button color="primary">Back</button>

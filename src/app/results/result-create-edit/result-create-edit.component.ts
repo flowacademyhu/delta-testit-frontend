@@ -7,6 +7,7 @@ import { GroupService } from 'src/app/services/group.service';
 import { GroupModel } from 'src/app/models/group.model';
 import { UserService } from 'src/app/services/user.service';
 import { UserModel } from 'src/app/models/user.model';
+import { ResultService } from 'src/app/services/result.service';
 
 @Component({
   selector: 'app-result-create-edit',
@@ -16,6 +17,7 @@ import { UserModel } from 'src/app/models/user.model';
 export class ResultCreateEditComponent implements OnInit {
 
   public test: TestModel = {} as TestModel;
+  public user: UserModel = {} as UserModel;
   public groups: GroupModel[] = [];
   public students: UserModel[] = [];
   public selectedGroupId: number;
@@ -25,12 +27,13 @@ export class ResultCreateEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private testService: TestService,
+    private resultService: ResultService,
     private groupService: GroupService,
     private userService: UserService
   ) {
     this.test = Object.assign({}, data);
 
-   }
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -48,6 +51,20 @@ export class ResultCreateEditComponent implements OnInit {
     this.userService.getAll().subscribe(users => {
       this.students = users;
     });
+  }
+
+  save() {
+    this.testService.createResult(this.test).subscribe((result) => {
+      alert('Mentés sikeres');
+      this.router.navigate(['results/list']);
+    }, (error) => {
+      console.log('Error', error);
+    });
+  }
+
+  checkValue(event: any) {
+    console.log(event);
+    this.test.userId = event.source.value;
   }
 
 

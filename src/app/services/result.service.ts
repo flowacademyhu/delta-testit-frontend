@@ -15,15 +15,23 @@ export class ResultService {
   }
 
   getResult(userId: number, resultId: number) {
-    return this.httpClient.get('http://localhost:8080/users/' + userId + '/results/' + resultId + '/fill');
+    return this.httpClient.get('http://localhost:8080/users/' + userId + '/results/' + resultId);
   }
+
+  sendResult(userId: number, resultId: number, answerIds: number[]) {
+    return this.httpClient.post('http://localhost:8080/users/' + userId + '/results/' + resultId + '/fill', { answerIds: answerIds });
+  }
+
+  // getResult(id: number) {
+  //   return this.httpClient.get('http://localhost:8080/results/' + id);
+  // }
 
   getStudentTest(id: number) {
     return this.httpClient.get('http://localhost:8080/results/' + id);
   }
 
-  createResult(result: ResultModel): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/results', result);
+  createResult(result: ResultModel): Observable<any>{
+    return this.httpClient.post('http://localhost:8080/results/' + result.id, result);
   }
 
   editResult(result: ResultModel): Observable<any> {

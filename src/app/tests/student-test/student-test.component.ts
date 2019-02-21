@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TestService } from 'src/app/services/test.service';
 import { TestModel } from 'src/app/models/test.model';
@@ -12,9 +12,11 @@ import { AnswerModel } from 'src/app/models/answer.model';
 import { QuestionService } from 'src/app/services/question.service';
 import { TimerDirective } from '../../directives/timer.directive';
 import { ResultModel } from 'src/app/models/result.model';
-import { MatRadioChange, MatHorizontalStepper, MatDialog } from '@angular/material';
+import { MatRadioChange, MatHorizontalStepper, MatDialog, MatStepper } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { StudentResultComponent } from '../student-result/student-result.component';
+import { ResultService } from 'src/app/services/result.service';
+import { TestQuestionModel } from 'src/app/models/testquestion.model';
 
 @Component({
   selector: 'app-student-test',
@@ -22,7 +24,10 @@ import { StudentResultComponent } from '../student-result/student-result.compone
   styleUrls: ['./student-test.component.scss']
 })
 export class StudentTestComponent implements OnInit, AfterViewInit {
+  @ViewChild('stepper') stepper: MatStepper;
+
   public test: TestModel = {} as TestModel;
+  public result: ResultModel = {} as ResultModel;
   currentUser: UserModel;
   timer: number;
 
@@ -75,18 +80,18 @@ export class StudentTestComponent implements OnInit, AfterViewInit {
     questions: this.questions
   };
 
-  result: ResultModel = <ResultModel>{
-    id: 123,
-    status: 'PUBLISHED',
-    testId: 1,
-    userId: 8
-  };
+  // result: ResultModel = <ResultModel>{
+  //   id: 123,
+  //   status: 'PUBLISHED',
+  //   testId: 1,
+  //   userId: 8
+  // };
 
 
-  constructor(private router: Router,
-    private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
     private questionService: QuestionService,
     private testService: TestService,
+    private resultService: ResultService,
     private authService: AuthService,
     public dialog: MatDialog) {
 
@@ -95,14 +100,15 @@ export class StudentTestComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      this.testService.getTest(params.id).subscribe((result: TestModel) => {
-        this.test = result;
+      console.log(params);
+      this.resultService.getResult(params.userId, params.resultId).subscribe((result: ResultModel) => {
+        this.result = result;
+        this.result.TestQuestions.forEach((testQuestions: TestQuestionModel) => {
+          this.choosenAnswers[testQuestions.Question.id] = null;
+        });
       });
     });
 
-    this.questions.forEach(question => {
-      this.choosenAnswers[question.id] = null;
-    });
   }
 
   ngAfterViewInit() {
@@ -124,21 +130,27 @@ export class StudentTestComponent implements OnInit, AfterViewInit {
   save() {
     // console.log(stepper);
 
-    const results = [];
-    this.questions.forEach(question => {
-      if (this.choosenAnswers[question.id]) {
-        results.push({
-          resultId: this.result.id,
-          answerId: this.choosenAnswers[question.id].id
-        });
-      }
+    // const results = [];
+    // this.questions.forEach(question => {
+    //   if (this.choosenAnswers[question.id]) {
+    //     results.push({
+    //       resultId: this.result.id,
+    //       answerId: this.choosenAnswers[question.id].id
+    //     });
+    //   }
+    // });
+
+    const answerIds = Object.keys(this.choosenAnswers).map(key => this.choosenAnswers[key]);
+
+    this.resultService.sendResult(this.result.userId, this.result.id, answerIds).subscribe((result) => {
+      console.log('Gyozelem!');
+      this.sent = true;
+      clearTimeout(this.time);
+      this.testDTO.time = 0;
+      this.openTestResultDialog();
     });
 
-    this.sent = true;
     // console.log(stepper);
-    clearTimeout(this.time);
-    this.testDTO.time = 0;
-    this.openTestResultDialog();
     // stepper.selectedIndex = this.testDTO.questions.length - 1;
     // stepper.next();
   }

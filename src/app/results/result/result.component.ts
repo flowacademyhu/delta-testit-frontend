@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, ViewChild } from '@angular/core';
 import { ResultModel } from 'src/app/models/result.model';
 import { MatPaginator, MatSort, MatIconRegistry, MatTableDataSource, MatDialog } from '@angular/material';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ResultService } from 'src/app/services/result.service';
 import { UserModel } from 'src/app/models/user.model';
@@ -35,17 +35,16 @@ export class ResultComponent implements OnInit {
   currentUser: UserModel;
 
   displayedColumns: string[] = ['id', 'testname', 'student', 'creator', 'status', 'result', 'start', 'edit'];
+  columnsToDisplay = ['id'];
+  expandedElement: any;
+  resultClosed = 'CLOSED';
 
   constructor(
-    private router: Router,
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer,
     private resultService: ResultService,
     private authService: AuthService,
     public dialog: MatDialog
     ) {
       this.authService.currentUser.subscribe(x => this.currentUser = x);
-
   }
 
   ngOnInit() {
@@ -81,7 +80,7 @@ export class ResultComponent implements OnInit {
   }
 
   get isRow() {
-    return this.result.userId === this.currentUser.id; 
+    return this.result.userId === this.currentUser.id;
   }
 
   openTestDialog(test: TestModel) {

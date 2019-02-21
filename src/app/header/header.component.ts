@@ -61,14 +61,14 @@ export class HeaderComponent implements OnInit {
     return this.currentUser && this.currentUser.role === Role.Student;
   }
 
-  onLogout(){
+  onLogout() {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
 
   openUserDialog() {
     const dialogRef = this.dialog.open(UserEditCreateComponent);
- 
+
     dialogRef.afterClosed().subscribe(result => {
       this.userService.dataEdited.next(true);
       console.log(`User dialog result: ${result}`);

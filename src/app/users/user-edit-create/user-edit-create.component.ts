@@ -50,6 +50,8 @@ export class UserEditCreateComponent implements OnInit {
   }
 
   save() {
+    this.user.picture = '';
+    this.user.lastLoginAt = new Date();
     if (!this.isCreateMode()) {
       this.userService.editUser(this.user).subscribe((result) => {
         alert('Mentés sikeres');
