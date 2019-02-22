@@ -12,6 +12,16 @@ table {
   width: 100%;
 }
 
+.container-header {
+  margin: 25px 0 0 25px !important;
+}
+
+.grid-container {
+  display: inline-grid;
+  grid-template-columns: 100%;
+  padding: 0 0 0 20px;
+}
+
 .mat-form-field {
   font-size: 14px;
   width: 100%;

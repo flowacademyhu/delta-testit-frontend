@@ -10,6 +10,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
+
 import { MatButtonModule,
   MatMenuModule,
   MatToolbarModule,
@@ -148,7 +149,8 @@ import { StudentResultComponent } from './tests/student-result/student-result.co
     SubjectEditCreateComponent,
     ProfilEditComponent,
     StudentResultComponent,
-    ForgottenPasswordComponent]
+    ForgottenPasswordComponent,
+    LoginComponent]
 
 })
 export class AppModule { }

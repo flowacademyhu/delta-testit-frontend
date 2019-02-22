@@ -1,27 +1,25 @@
-<h2 mat-dialog-title>Questions</h2>
+<h1>Questions</h1>
+  <div class="container-dialog">
 
-
-<mat-dialog-content class="mat-typography">
-
-  <mat-select placeholder="Subject" [(ngModel)]="selectedSubjectId">
-    <mat-option *ngFor="let subject of subjects"
-      [value]="subject.id">{{subject.name}}</mat-option>
-  </mat-select>
+  <!-- <mat-dialog-content class="mat-typography"> -->
+  <mat-form-field>
+    <mat-select placeholder="Subject" [(ngModel)]="selectedSubjectId">
+      <mat-option *ngFor="let subject of subjects" [value]="subject.id">{{subject.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
   <div *ngFor="let question of questions">
-      <mat-card *ngIf="question.subjectId === selectedSubjectId">
-        <mat-checkbox [value]="question"
-          (change)="checkValue($event)">
-        </mat-checkbox>{{question.text}}
-      </mat-card>
+    <mat-card *ngIf="question.subjectId === selectedSubjectId">
+      <mat-checkbox [value]="question" (change)="checkValue($event)">
+      </mat-checkbox>{{question.text}}
+    </mat-card>
   </div>
+  <!-- </mat-dialog-content> -->
+</div>
 
-</mat-dialog-content>
-
-<mat-dialog-actions align="end">
-  <button mat-button
-    mat-dialog-close>Cancel</button>
-  <button mat-button
-    [mat-dialog-close]="selectedQuestions"
-    cdkFocusInitial>Save</button>
-</mat-dialog-actions>
+  <!-- <mat-dialog-actions align="end"> -->
+  <div class="button-align-row-nopadding">
+    <button mat-flat-button color="primary" [mat-dialog-close]="selectedQuestions" cdkFocusInitial>Save</button>
+    <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+  </div>
+  <!-- </mat-dialog-actions> -->

@@ -2,9 +2,9 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 h1 {
-  font-family: Arial, Helvetica, sans-serif;
-  color: gray;
-  font-size: 26px;
+  font-family: 'Monda', sans-serif;
+  color:#1f2633;
+  font-size: 27px;
 }
 
 html, body { 
@@ -21,13 +21,58 @@ html, body {
   position: fixed;
 }
 
-.mat-horizontal-stepper-header,
-.mat-step-header {
-//.ng-tns-c15-0 {
-//.ng-star-inserted {
-  width: 50px !important;
+.mat-flat-button.mat-warn {
+  background-color:#ff8b1e; 
 }
 
-#cdk-step-label {
-  width: 50px !important;
+.mat-flat-button.mat-accent {
+  background-color: #54bcb2; 
 }
+
+// .container {
+//   display: flex;
+//   flex-direction: column;
+//   padding: 15px 30px 0 30px;
+// }
+
+// .container > * {
+//   width: 100%;
+// }
+
+// .container-header {
+//   margin: 25px 0 0 25px !important;
+// }
+
+// .container-dialog {
+//   display: flex;
+//   flex-direction: column;
+//   min-width: 26vw;
+// }
+
+// .button-align {
+//   display: grid;
+//   flex-wrap: wrap;
+//   flex-direction: column;
+//   grid-template-columns: 100%;
+//   grid-gap: 10px;
+// }
+
+// .button-align-row {
+//   display: flex;
+//   flex-wrap: nowrap;
+//   display: inline-grid;
+//   grid-template-columns: 50% 50%;
+//   grid-gap: 10px;
+//   padding: 15px 30px 0 30px;
+// }
+
+// .mat-horizontal-stepper-header,
+// .mat-step-header {
+// //.ng-tns-c15-0 {
+// //.ng-star-inserted {
+//   width: 50px !important;
+// }
+
+// #cdk-step-label {
+//   width: 50px !important;
+// }

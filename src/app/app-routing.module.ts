@@ -138,7 +138,7 @@ const routes: Routes = [
         path: 'users/:userId/results/:resultId',
         component: StudentTestComponent,
         canActivate: [AuthGuard],
-        data: {role: [Role.Student, Role.Admin]}
+        data: {role: [Role.Student, Role.Mentor, Role.Admin]}
       },
       {
         path: 'results/list',

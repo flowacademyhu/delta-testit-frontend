@@ -4,7 +4,7 @@ import { AuthService } from '../auth/auth.service';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { Role } from '../models/role';
 import { first } from 'rxjs/operators';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private snackBar: MatSnackBar
     ) {}
 
   ngOnInit() {
@@ -44,18 +45,21 @@ export class LoginComponent implements OnInit {
         currentUser => {
           console.log(currentUser);
           if (currentUser.role === Role.Admin || currentUser.role === Role.Mentor) {
+            this.snackBar.open('Success authentication', 'X', { duration: 5000 } );
             this.router.navigate(['/user']);
           } else {
+            this.snackBar.open('Success authentication', 'X', { duration: 5000 } );
             this.router.navigate(['/student']);
           }
         },
         error => {
-          alert('Authentication failed');
+          this.snackBar.open('Authentication failed', 'X', { duration: 5000 } );
         }
       );
     }
     this.formSubmitAttempt = true;
   }
+
 }
 
 
