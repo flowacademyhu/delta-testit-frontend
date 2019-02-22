@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserModel } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
-import { MatDialogRef, MatDialog } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -20,7 +20,8 @@ export class ForgottenPasswordComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar
   ) {
     
   }
@@ -41,6 +42,7 @@ export class ForgottenPasswordComponent implements OnInit {
 
   save() {
     this.userService.sendPassword(this.user).subscribe((result) => {
+      this.snackBar.open('The new password has sent to your email', 'X', { duration: 5000 } );
       this.router.navigate(['/login']);
     }, (error) => {
       console.log('Error', error);

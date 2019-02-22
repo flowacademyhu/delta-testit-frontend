@@ -1,13 +1,12 @@
 .scroll {
-  width: 400px;
-  height: 500px;
+  height: 450px;
   overflow-y: scroll;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  min-width: 26vw;
 }
 
 .container > * {
@@ -30,9 +29,20 @@
   padding-bottom: 8px;
 }
 
-.button-container {
+.button-align {
+  display: grid;
+  flex-wrap: wrap;
+  flex-direction: column;
+  grid-template-columns: 100%;
+  grid-gap: 10px;
+}
+
+.button-align-row {
+  display: flex;
+  flex-wrap: nowrap;
   display: inline-grid;
   grid-template-columns: 50% 50%;
+  grid-gap: 10px;
 }
 
 .mat-mini-fab {
@@ -66,5 +76,16 @@
   &:last-child {
       margin-bottom: 0 !important;
   }
+}
 
+.mat-flat-button.mat-warn {
+  background-color:#ff8b1e; 
+}
+
+.mat-flat-button.mat-accent {
+  background-color: #54bcb2; 
+}
+
+.mat-mini-fab.mat-accent {
+  background-color:#ff8b1e; 
 }
