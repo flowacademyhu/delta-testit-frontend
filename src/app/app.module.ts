@@ -137,7 +137,7 @@ import { StudentResultComponent } from './tests/student-result/student-result.co
   exports: [
     MatDatepickerModule,
     MatNativeDateModule],
-  providers: [UserService, AuthService, AuthGuard,
+  providers: [UserService, AuthService, AuthGuard, ResultListComponent,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false} }

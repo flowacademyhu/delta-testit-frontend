@@ -28,7 +28,7 @@ import { forkJoin, Subject } from 'rxjs';
 export class ResultComponent implements OnInit {
 
   @Input() result: ResultModel;
-  @Input() testChanged: Subject<boolean>;
+  @Input() testChanged: Subject<boolean> = new Subject;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -39,7 +39,7 @@ export class ResultComponent implements OnInit {
 
   currentUser: UserModel;
 
-  displayedColumns: string[] = ['id', 'testname', 'student', 'creator', 'status', 'result', 'start', 'edit'];
+  displayedColumns: string[] = ['id', 'testname', 'student', 'status', 'result', 'start', 'edit'];
   resultClosed = 'CLOSED';
 
   constructor(

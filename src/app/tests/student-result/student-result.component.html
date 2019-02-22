@@ -1,7 +1,9 @@
-<h1>
-  Result
-</h1>
-<p>{{result.percent}}%</p>
-<button mat-dialog-close mat-flat-button
-        color="primary"
-        routerLink="/results/list">OK</button>
+<h1 *ngIf="result.percent >= succes; else unsuccessful">Congratulations For Passing the Exam</h1>
+<ng-template #unsuccessful>
+  <h1>We regret to inform you, that your exam was unsuccessful</h1>
+</ng-template>
+<h2>Your result: {{result.percent}}%</h2>
+<button mat-dialog-close
+  mat-flat-button
+  color="primary"
+  routerLink="/results/list">OK</button>

@@ -10,6 +10,7 @@ import { ResultModel } from 'src/app/models/result.model';
 export class StudentResultComponent implements OnInit {
 
   public result: ResultModel = {} as ResultModel;
+  public succes = 75;
 
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: ResultModel,

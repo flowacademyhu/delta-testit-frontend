@@ -90,14 +90,14 @@ export class TestEditCreateComponent implements OnInit {
     if (!this.isCreateMode()) {
       this.testService.editTest(this.test).subscribe((result) => {
         alert('Mentés sikeres');
-        this.router.navigate(['tests/list']);
+        this.router.navigate(['results/list']);
       }, (error) => {
         console.log('Error', error);
       });
     } else {
       this.testService.createTest(this.test).subscribe((result) => {
         alert('Mentés sikeres');
-        this.router.navigate(['tests/list']);
+        this.router.navigate(['results/list']);
       }, (error) => {
         console.log('Error', error);
       });
@@ -106,7 +106,7 @@ export class TestEditCreateComponent implements OnInit {
 
   delete() {
     this.testService.deleteTest(this.test.id).subscribe((result) => {
-      this.router.navigate(['tests/list']);
+      this.router.navigate(['results/list']);
     }, error => console.log('Error', error));
   }
 

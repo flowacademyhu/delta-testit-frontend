@@ -26,7 +26,7 @@ export class QuestionEditCreateComponent implements OnInit {
   public subject: SubjectModel = {} as SubjectModel;
   public subjects: SubjectModel[] = [];
 
-  public answers: AnswerModel[] = [];
+  public answers: AnswerModel[] = [] as AnswerModel[];
 
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: QuestionModel,
@@ -46,7 +46,8 @@ export class QuestionEditCreateComponent implements OnInit {
     );
 
     this.question = Object.assign({}, data);
-    this.answers = this.question.Answers;
+    this.answers = this.question.Answers ? this.question.Answers : [];
+    this.onAddNewAnswer();
   }
 
   ngOnInit() {
