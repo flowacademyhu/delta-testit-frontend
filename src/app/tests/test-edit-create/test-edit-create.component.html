@@ -3,9 +3,13 @@
   <mat-form-field>
     <input type="text" id="name" name="name" matInput placeholder="Testname" [(ngModel)]="test.name">
   </mat-form-field>
+</div>
 
-  <button mat-flat-button color="primary" (click)="openDialog()">Add question</button>
+<div class="button-align">
+<button mat-flat-button color="primary" (click)="openDialog()">Add question</button>
+</div>
 
+<div class="container">
   <mat-form-field>
     <input type="text" id="time" name="time" matInput placeholder="Minutes" [(ngModel)]="test.time">
   </mat-form-field>
