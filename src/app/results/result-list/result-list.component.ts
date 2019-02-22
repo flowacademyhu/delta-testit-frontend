@@ -3,12 +3,12 @@ import { TestModel } from 'src/app/models/test.model';
 import { ResultCreateEditComponent } from '../result-create-edit/result-create-edit.component';
 import { Role } from 'src/app/models/role';
 import { ResultModel } from 'src/app/models/result.model';
-import { MatTableDataSource, MatDialog, MatSort, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatDialog, MatSort, MatPaginator, MatTable } from '@angular/material';
 import { TestService } from 'src/app/services/test.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ResultService } from 'src/app/services/result.service';
 import { UserModel } from 'src/app/models/user.model';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-result-list',
@@ -22,6 +22,7 @@ export class ResultListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  public testChangeSubject: Subject<boolean> = new Subject<boolean>();
   public dataSource;
 
   public tests: TestModel[] = [] as TestModel[];
@@ -44,7 +45,7 @@ export class ResultListComponent implements OnInit {
     this.loadData();
   }
 
-  private loadData() {
+  public loadData() {
     forkJoin(
       this.resultService.getAll(),
       this.testService.getAll()
@@ -91,6 +92,10 @@ export class ResultListComponent implements OnInit {
       this.loadData();
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  testChanged() {
+    this.testChangeSubject.next(true);
   }
 
 }

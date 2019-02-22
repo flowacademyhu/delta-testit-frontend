@@ -28,6 +28,8 @@ export class TestComponent implements OnInit {
   @Input() test: TestModel;
 
   @Output() testDelete = new EventEmitter<TestModel>();
+  @Output() testSent = new EventEmitter<boolean>();
+
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ViewChild(MatSort) sort: MatSort;
@@ -98,6 +100,7 @@ export class TestComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.loadData();
+      this.testSent.emit(true);
       console.log(`Dialog result: ${result}`);
     });
   }

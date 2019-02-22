@@ -11,7 +11,7 @@ import { TestModel } from 'src/app/models/test.model';
 import { ResultCreateEditComponent } from '../result-create-edit/result-create-edit.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { TestService } from 'src/app/services/test.service';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-result',
@@ -28,6 +28,7 @@ import { forkJoin } from 'rxjs';
 export class ResultComponent implements OnInit {
 
   @Input() result: ResultModel;
+  @Input() testChanged: Subject<boolean>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -48,9 +49,13 @@ export class ResultComponent implements OnInit {
     private testService: TestService
     ) {
       this.authService.currentUser.subscribe(x => this.currentUser = x);
-  }
+    }
 
   ngOnInit() {
+    this.testChanged.subscribe((changed) => {
+      console.log('Test changed: ' + changed);
+      this.loadData();
+    });
     this.loadData();
   }
 
