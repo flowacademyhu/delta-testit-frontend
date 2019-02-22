@@ -29,7 +29,7 @@ export class ProfilEditComponent implements OnInit {
     public dialogRef: MatDialogRef<ProfilEditComponent>
   ) {
     this.authService.currentUser.subscribe(x => { this.currentUser = x;
-    console.log('kiscica'); });
+    });
   }
 
   ngOnInit() {

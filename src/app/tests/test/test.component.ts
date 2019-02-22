@@ -58,6 +58,10 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  private loadData() {
     this.testService.getAll().subscribe(tests => {
       console.log(tests);
 
@@ -89,27 +93,11 @@ export class TestComponent implements OnInit {
     return this.currentUser && this.currentUser.role === Role.Student;
   }
 
-  // filterTest(tests: TestModel[]) {
-  //   const filteredTests = [] as TestModel[];
-  //   tests.map(test => {
-  //     const filteredTest = {} as TestModel;
-
-  //     filteredTest.subject = test.TestQuestions[0] ? test.TestQuestions[0].Question.Subject.name : '';
-  //     filteredTest.id = test.id;
-  //     filteredTest.name = test.name;
-  //     filteredTest.userId = test.User ? test.User.name : null;
-
-  //     // filteredTest.creatorId = test.User.firstName;
-  //     filteredTest.status = test.status;
-  //     filteredTests.push(filteredTest);
-  //   });
-  //   return filteredTests;
-  // }
-
   openTestDialog(test: TestModel) {
     const dialogRef = this.dialog.open(ResultCreateEditComponent, { data: test });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.loadData();
       console.log(`Dialog result: ${result}`);
     });
   }

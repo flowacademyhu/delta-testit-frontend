@@ -1,28 +1,31 @@
-<h1>{{test.name}}</h1>
+<div class="scroll">
+    <h1>{{test.name}}</h1>
 
-<mat-select placeholder="To:" [(ngModel)]="selectedGroupId">
-    <mat-option *ngFor="let group of groups"
-      [value]="group.id">{{group.name}}</mat-option>
-  </mat-select>
-
-  <div *ngFor="let student of students">
-      <mat-card *ngIf="student.groupId === selectedGroupId">
-        <mat-checkbox [value]="student.id"
-          (change)="checkValue($event)">
-        </mat-checkbox>{{student.firstName}} {{student.lastName}}
-      </mat-card>
-  </div>
-
-<p>Time: {{test.time}} </p>
-
-<p>Subject: {{test.TestQuestions[0].Question.Subject.name}}</p>
-
-<div *ngFor="let testQuestion of test?.TestQuestions"> 
-  {{testQuestion?.Question.text}} 
-  <p *ngFor="let answer of testQuestion.Question.Answers"> 
-    {{answer.text}}
-  </p>
+    <mat-select placeholder="To:" [(ngModel)]="selectedGroupId">
+        <mat-option *ngFor="let group of groups"
+          [value]="group.id">{{group.name}}</mat-option>
+      </mat-select>
+    
+      <div *ngFor="let student of students">
+          <mat-card *ngIf="student.groupId === selectedGroupId">
+            <mat-checkbox [value]="student.id"
+              (change)="checkValue($event)">
+            </mat-checkbox>{{student.firstName}} {{student.lastName}}
+          </mat-card>
+      </div>
+    
+    <p>Time: {{test.time/60}} minutes </p>
+    
+    <p>Subject: {{test.TestQuestions[0].Question.Subject.name}}</p>
+    
+    <div *ngFor="let testQuestion of test?.TestQuestions"> 
+      {{testQuestion?.Question.text}} 
+      <p *ngFor="let answer of testQuestion.Question.Answers"> 
+        {{answer.text}}
+      </p>
+    </div>
+    
+    <button mat-dialog-close mat-flat-button color="primary" (click)="save()">Send</button>
+    <button mat-dialog-close mat-flat-button color="primary">Back</button>
+    
 </div>
-
-<button mat-flat-button color="primary" (click)="save()">Send</button>
-<button mat-dialog-close mat-flat-button color="primary">Back</button>

@@ -1,1 +1,33 @@
-<app-result [result]="result" ></app-result>
+<mat-tab-group *ngIf="isAdmin || isMentor">
+  <mat-tab label="All Tests">
+    <app-result></app-result>
+    </mat-tab>
+    <mat-tab label="By Test">
+  
+        <mat-expansion-panel *ngFor="let test of tests">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ test.id }}
+              </mat-panel-title>
+              <mat-panel-description>
+                {{ test.name }} | {{test.User.Group.name}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+          
+            <h2>Creator name: <u>{{test.User.firstName}} {{test.User.lastName}}</u></h2>
+  
+            <ul>
+              <li *ngFor="let result of getTestsResults(test)">
+                  {{result.User.firstName}} {{result.User.lastName}} - {{result.percant}}
+              </li>
+            </ul>
+          
+          </mat-expansion-panel>
+  
+    </mat-tab>
+    <mat-tab label="Templates">
+      <app-test></app-test>
+    </mat-tab>
+  </mat-tab-group>
+  
+  <app-result *ngIf="isStudent"></app-result>

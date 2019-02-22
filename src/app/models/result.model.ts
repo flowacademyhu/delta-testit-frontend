@@ -7,6 +7,7 @@ export class ResultModel {
     public testId: number,
     public userId: number,
     public status: string,
+    public percent: number,
     public createdAt: Date,
     public updatedAt: Date,
 

@@ -28,7 +28,7 @@
                     *matHeaderCellDef
                     mat-sort-header> Subject </th>
                 <td mat-cell
-                    *matCellDef="let test"> {{test.TestQuestions[0].Question.Subject.name}}</td>
+                    *matCellDef="let test"> {{test?.TestQuestions[0].Question.Subject.name}}</td>
             </ng-container>
 
             <ng-container matColumnDef="creator">

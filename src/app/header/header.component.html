@@ -5,13 +5,11 @@
       <mat-menu #users="matMenu">
         <button (click)="openUserDialog()" mat-menu-item >New User</button>
         <button routerLink="/users/list" mat-menu-item>Users list</button>
-        <button routerLink="/groups/list" mat-menu-item>Groups list</button>
       </mat-menu></span>
       <span *ngIf="isMentor || isAdmin"><button mat-button [matMenuTriggerFor]="tests" class="navbar-font">Tests</button>
         <mat-menu #tests="matMenu">
           <button routerLink="/subjects/list" mat-menu-item >Subject</button>
           <button routerLink="/questions/list" mat-menu-item>Question</button>
-          <button routerLink="/tests/list" mat-menu-item>Test template</button>
           <button routerLink="/results/list" mat-menu-item>Test</button>
         </mat-menu></span>
     <span class="spacer">

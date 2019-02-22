@@ -30,6 +30,7 @@ export class StudentTestComponent implements OnInit {
   public result: ResultModel = {} as ResultModel;
   currentUser: UserModel;
   timer: number;
+  percent;
 
   isLinear = false;
   sent = false;
@@ -56,6 +57,7 @@ export class StudentTestComponent implements OnInit {
         console.log(this.result);
 
         this.time = setTimeout(() => this.save(), result.Test.time * 1000);
+        this.result.percent = result.percent;
 
         this.result.Test.TestQuestions.forEach((testQuestions: TestQuestionModel) => {
           this.choosenAnswers[testQuestions.Question.id] = null;
@@ -92,12 +94,12 @@ export class StudentTestComponent implements OnInit {
 
     const answerIds = Object.keys(this.choosenAnswers).map(key => this.choosenAnswers[key]).filter(item => item);
 
-    this.resultService.sendResult(this.result.userId, this.result.id, answerIds).subscribe((result) => {
+    this.resultService.sendResult(this.result.userId, this.result.id, answerIds).subscribe((result: ResultModel) => {
       console.log('Gyozelem!');
       this.sent = true;
       clearTimeout(this.time);
       this.time = 0;
-      this.openTestResultDialog();
+      this.openTestResultDialog(result);
     });
 
     // console.log(stepper);
@@ -105,11 +107,11 @@ export class StudentTestComponent implements OnInit {
     // stepper.next();
   }
 
-  openTestResultDialog() {
-    const dialogRef = this.dialog.open(StudentResultComponent);
+  openTestResultDialog(result: ResultModel) {
+    const dialogRef = this.dialog.open(StudentResultComponent, { data: result });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+    dialogRef.afterClosed().subscribe(close => {
+      console.log(`Dialog result: ${close}`);
     });
   }
 
