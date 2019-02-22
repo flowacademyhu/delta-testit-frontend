@@ -1,14 +1,4 @@
-<h1>Tests</h1>
-
-<button mat-flat-button color="primary" routerLink="/tests/edit">New</button>
-<div class="grid-container">
-    <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
-</div>
-
 <div class="container">
-
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
         <ng-container matColumnDef="id">
@@ -44,11 +34,14 @@
         <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
         <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
     </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    <div class="container-button">
+        <button mat-flat-button color="primary" routerLink="/tests/edit">New</button>
+        <div class="grid-container">
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+        </div>
+    </div>
 </div>
-<button mat-flat-button color="primary" routerLink="/tests/edit">New</button>
-<div class="grid-container">
-    <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
-</div>
-<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

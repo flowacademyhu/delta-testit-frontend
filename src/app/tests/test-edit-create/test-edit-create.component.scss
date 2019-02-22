@@ -43,6 +43,12 @@ label {
   grid-gap: 10px;
 }
 
+.button-align {
+  display: flex;
+  flex-direction: row;
+  padding: 0 30px 0 30px;
+}
+
 .mat-flat-button.mat-warn {
   background-color:#ff8b1e; 
 }
